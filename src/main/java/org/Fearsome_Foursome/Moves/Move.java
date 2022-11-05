@@ -16,14 +16,19 @@
  *
  * *****************************************/
 
-package org.Fearsome_Foursome.Creatures;
+package org.Fearsome_Foursome.Moves;
+
+import org.Fearsome_Foursome.Creatures.Creature;
 
 /**
  * A functional interface that takes in a target {@link Creature} and does something to it
  */
 public interface Move {
 
-    /** Method that must be implemented by anything that implements the Move interface */
-    public void actOn(Creature target);
+    /**
+     *  Method that must be implemented by anything that implements the Move interface
+     *  Will the action help oneself or hurt another? We cannot be sure so provide both arguments
+     *  */
+    public void actOn(Creature self, Creature target);
 
 }

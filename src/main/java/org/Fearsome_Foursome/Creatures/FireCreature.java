@@ -12,7 +12,7 @@
  * Package: org.Fearsome_Foursome.Creatures
  * Class: FireCreature
  *
- * Description:
+ * Description: FireCreature abstract class implementation
  *
  * *****************************************/
 
@@ -23,8 +23,14 @@ package org.Fearsome_Foursome.Creatures;
  */
 public class FireCreature extends Creature {
 
-    public void move(int i){
-
+    /**
+     * Constructor for the {@link FireCreature} - this initializes the relevant maps if they have not already been initialized, and sets the name attribute
+     * @param nameIndex - which name to select from {@link FireCreature}'s possible names
+     */
+    public FireCreature(int nameIndex){
+        // run parent initialization to initialize the maps if need be
+        super();
+        name = Creature.CREATURE_NAME_MAP.get(this.getClass()).get(nameIndex);
     }
 
 }
