@@ -30,6 +30,7 @@ import java.util.HashMap;
 public abstract class Creature {
 
     /** Default attribute values */
+    protected static final int DEFAULT_MAX_HEALTH = 1000;
     protected static final int DEFAULT_HEALTH = 1000;
     protected static final int DEFAULT_SPEED = 100;
 
@@ -42,6 +43,7 @@ public abstract class Creature {
     // CONCLUDES THE STATIC MEMBERS
 
     /** The current attribute values of this particular {@link Creature} instance */
+    protected int maxHealth;
     protected int health;
     protected int speed;
 
@@ -56,6 +58,7 @@ public abstract class Creature {
      */
     protected Creature() {
         // FIRST, in terms of what we want to do for this specific creature
+        this.maxHealth = DEFAULT_MAX_HEALTH;
         this.health = DEFAULT_HEALTH;
         this.speed = DEFAULT_SPEED;
 
@@ -67,27 +70,32 @@ public abstract class Creature {
         addFireCreatureActions();
         addFireCreatureNames();
 
-        // establish ...
+        // establish the waterCreature actions and names
+        addWaterCreatureActions();
+        addWaterCreatureNames();
 
-        // establish ...
+        // establish the grassCreature actions and names
+        addGrassCreatureActions();
+        addGrassCreatureNames();
 
-        // establish ...
-
+        // establish the normalCreature actions and names
+        addNormalCreatureActions();
+        addNormalCreatureNames();
 
     }
 
     /**
-     * Private method to add all the turns the {@link FireCreature} class can do into the dictionary
+     * Private method to add all the moves the {@link FireCreature} class can do into the dictionary
      */
     private void addFireCreatureActions(){
         CREATURE_MOVE_MAP.put(FireCreature.class, new ArrayList<>());
         ArrayList<Move> fireCreatureMoves = CREATURE_MOVE_MAP.get(FireCreature.class);
 
         // now add all the Moves to the relevant list
+        fireCreatureMoves.add(Moves.Ember);
+        fireCreatureMoves.add(Moves.Flamethrower);
         fireCreatureMoves.add(Moves.Tackle);
         fireCreatureMoves.add(Moves.Agility);
-        // third move
-        // fourth move
     }
 
     /**
@@ -99,6 +107,84 @@ public abstract class Creature {
 
         fireCreatureNames.add("Charizard");
         fireCreatureNames.add("Volcarona");
+        // any other specific Pokémon names we are allowing
+    }
+
+    /**
+     * Private method to add all the moves the {@link WaterCreature} class can do into the dictionary
+     */
+    private void addWaterCreatureActions(){
+        CREATURE_MOVE_MAP.put(WaterCreature.class, new ArrayList<>());
+        ArrayList<Move> waterCreatureMoves = CREATURE_MOVE_MAP.get(WaterCreature.class);
+
+        // now add all the Moves to the relevant list
+        waterCreatureMoves.add(Moves.Watergun);
+        waterCreatureMoves.add(Moves.Surf);
+        waterCreatureMoves.add(Moves.Tackle);
+        waterCreatureMoves.add(Moves.Agility);
+    }
+
+    /**
+     * Private method to add all the names of the {@link WaterCreature} Pokémon
+     */
+    private void addWaterCreatureNames(){
+        CREATURE_NAME_MAP.put(WaterCreature.class, new ArrayList<>());
+        ArrayList<String> waterCreatureNames = CREATURE_NAME_MAP.get(WaterCreature.class);
+
+        waterCreatureNames.add("Blastoise");
+        waterCreatureNames.add("Gyarados");
+        // any other specific Pokémon names we are allowing
+    }
+
+    /**
+     * Private method to add all the moves the {@link GrassCreature} class can do into the dictionary
+     */
+    private void addGrassCreatureActions(){
+        CREATURE_MOVE_MAP.put(GrassCreature.class, new ArrayList<>());
+        ArrayList<Move> grassCreatureMoves = CREATURE_MOVE_MAP.get(GrassCreature.class);
+
+        // now add all the Moves to the relevant list
+        grassCreatureMoves.add(Moves.Vinewhip);
+        grassCreatureMoves.add(Moves.LeafBlade);
+        grassCreatureMoves.add(Moves.Tackle);
+        grassCreatureMoves.add(Moves.Agility);
+    }
+
+    /**
+     * Private method to add all the names of the {@link GrassCreature} Pokémon
+     */
+    private void addGrassCreatureNames(){
+        CREATURE_NAME_MAP.put(GrassCreature.class, new ArrayList<>());
+        ArrayList<String> grassCreatureNames = CREATURE_NAME_MAP.get(GrassCreature.class);
+
+        grassCreatureNames.add("Venusaur");
+        grassCreatureNames.add("Sceptile");
+        // any other specific Pokémon names we are allowing
+    }
+
+    /**
+     * Private method to add all the moves the {@link NormalCreature} class can do into the dictionary
+     */
+    private void addNormalCreatureActions(){
+        CREATURE_MOVE_MAP.put(NormalCreature.class, new ArrayList<>());
+        ArrayList<Move> normalCreatureMoves = CREATURE_MOVE_MAP.get(NormalCreature.class);
+
+        // now add all the Moves to the relevant list
+        normalCreatureMoves.add(Moves.Tackle);
+        normalCreatureMoves.add(Moves.Hyperbeam);
+        normalCreatureMoves.add(Moves.Recover);
+        normalCreatureMoves.add(Moves.Agility);
+    }
+
+    /**
+     * Private method to add all the names of the {@link NormalCreature} Pokémon
+     */
+    private void addNormalCreatureNames(){
+        CREATURE_NAME_MAP.put(NormalCreature.class, new ArrayList<>());
+        ArrayList<String> normalCreatureNames = CREATURE_NAME_MAP.get(NormalCreature.class);
+
+        normalCreatureNames.add("Snorlax");
+        normalCreatureNames.add("Staraptor");
         // any other specific Pokémon names we are allowing
     }
 
@@ -128,6 +214,17 @@ public abstract class Creature {
      */
     public void increaseSpeed(int amount){
         this.speed += amount;
+    }
+
+    /**
+     * Simple method to increase the health of a {@link Creature}
+     * @param amount
+     */
+    public void increaseHealth(int amount){
+        this.health += amount;
+        if (this.health > this.maxHealth) {
+            this.health = this.maxHealth;
+        }
     }
 
     /**

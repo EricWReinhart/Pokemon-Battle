@@ -70,7 +70,7 @@ class FireCreatureTest {
         // this should "Tackle" fireCreature2 over and over - make sure the health of fireCreature2 decreases around the expected amount of the time
         int numHits = 0;
         for (int i=0; i<NUM_TRIALS; i++) {
-            fireCreature0.move(0);
+            fireCreature0.move(2);
             if (fireCreature1OldHealth - Moves.TACKLE_DAMAGE == fireCreature1.getHealth()){
                 numHits++;
                 // refresh fireCreature1
@@ -82,7 +82,7 @@ class FireCreatureTest {
         assertTrue( Moves.TACKLE_ACCURACY*LOWER_BOUND_ON_EXPECTED_ACCURACY*NUM_TRIALS < numHits && numHits < Moves.TACKLE_ACCURACY*UPPER_BOUND_ON_EXPECTED_ACCURACY*NUM_TRIALS);
 
         // this should "Agility" fireCreature1
-        fireCreature0.move(1);
+        fireCreature0.move(3);
         assertTrue(fireCreature0OldSpeed < fireCreature0.getSpeed());
 
     }
