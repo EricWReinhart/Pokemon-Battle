@@ -1,0 +1,71 @@
+/* *****************************************
+ * CSCI205 -Software Engineering and Design
+ * Fall2022
+ * Instructor: Prof. Brian King
+ *
+ * Group: Fearsome Foursome
+ * Section: 02
+ * Date: 11/7/22
+ * Time: 1:32 PM
+ *
+ * Project: csci205_final_project
+ * Package: org.Fearsome_Foursome.Moves
+ * Class: StrongMove
+ *
+ * Description: Implementation of the StrongMove
+ *
+ * *****************************************/
+
+package org.Fearsome_Foursome.Moves;
+
+import org.Fearsome_Foursome.Creatures.Creature;
+
+public class AttackMove implements Move{
+
+    /** Probability that this attack will hit */
+    private final double accuracy;
+
+    /** Damage that this attack will inflict on a hit */
+    private final int damage;
+
+    /** Class which takes double damage from this move */
+    private final Class strongAgainst;
+
+    /** Class which takes half damage from this move */
+    private final Class weakAgainst;
+
+    /**
+     * Constructor for {@link AttackMove} class, which just initializes all the attributes
+     * @param accuracy
+     * @param damage
+     * @param strongAgainst
+     * @param weakAgainst
+     */
+    protected AttackMove(double accuracy, int damage, Class strongAgainst, Class weakAgainst){
+        this.accuracy = accuracy;
+        this.damage = damage;
+        this.strongAgainst = strongAgainst;
+        this.weakAgainst = weakAgainst;
+    }
+
+    /**
+     * Override for the required 'actOn' method which will do something to the creatures involved
+     * @param self
+     * @param target
+     */
+    @Override
+    public void actOn(Creature self, Creature target) {
+        if (Math.random() < accuracy) {
+            if (target.getClass().equals(strongAgainst)){
+                // target takes double damage
+                target.damage(2*damage);
+            } else if (target.getClass().equals(weakAgainst)){
+                // target takes half damage
+                target.damage((int)0.5*damage);
+            } else{
+                // target takes normal damage
+                target.damage(damage);
+            }
+        }
+    }
+}

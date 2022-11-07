@@ -205,7 +205,7 @@ public abstract class Creature {
      * @param amount
      */
     public void damage(int amount){
-        this.health -= amount;
+        this.health = Math.max(this.health - amount, 0);
     }
 
     /**
@@ -225,6 +225,14 @@ public abstract class Creature {
         if (this.health > this.maxHealth) {
             this.health = this.maxHealth;
         }
+    }
+
+    /**
+     * Simple method to increase the maximum health of a {@link Creature}
+     * @param amount
+     */
+    public void increaseMaxHealth(int amount){
+        this.maxHealth += amount;
     }
 
     /**
@@ -258,4 +266,10 @@ public abstract class Creature {
     public int getSpeed() {
         return speed;
     }
+
+    /**
+     * Simple method to determine if a {@link Creature} is alive
+     * @return boolean
+     */
+    public boolean isDead() { return !(health > 0); }
 }
