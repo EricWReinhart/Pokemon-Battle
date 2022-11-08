@@ -66,7 +66,7 @@ public class AttackMove implements Move{
                 target.damage(2*damage);
             } else if (weakAgainstList != null && weakAgainstList.contains(target.getClass())){
                 // target takes half damage
-                target.damage((int)0.5*damage);
+                target.damage((int)(0.5*damage));
             } else{
                 // target takes normal damage
                 target.damage(damage);
