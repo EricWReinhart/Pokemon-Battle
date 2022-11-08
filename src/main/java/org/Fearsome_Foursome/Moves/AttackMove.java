@@ -20,6 +20,9 @@ package org.Fearsome_Foursome.Moves;
 
 import org.Fearsome_Foursome.Creatures.Creature;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AttackMove implements Move{
 
     /** Probability that this attack will hit */
@@ -31,8 +34,8 @@ public class AttackMove implements Move{
     /** Class which takes double damage from this move */
     private final Class strongAgainst;
 
-    /** Class which takes half damage from this move */
-    private final Class weakAgainst;
+    /** List of classes which take half damage from this move */
+    private final List<Class> weakAgainstList;
 
     /**
      * Constructor for {@link AttackMove} class, which just initializes all the attributes
@@ -41,11 +44,11 @@ public class AttackMove implements Move{
      * @param strongAgainst
      * @param weakAgainst
      */
-    protected AttackMove(double accuracy, int damage, Class strongAgainst, Class weakAgainst){
+    protected AttackMove(double accuracy, int damage, Class strongAgainst, List weakAgainst){
         this.accuracy = accuracy;
         this.damage = damage;
         this.strongAgainst = strongAgainst;
-        this.weakAgainst = weakAgainst;
+        this.weakAgainstList = weakAgainst;
     }
 
     /**
@@ -59,7 +62,7 @@ public class AttackMove implements Move{
             if (target.getClass().equals(strongAgainst)){
                 // target takes double damage
                 target.damage(2*damage);
-            } else if (target.getClass().equals(weakAgainst)){
+            } else if (weakAgainstList.contains(target.getClass())){
                 // target takes half damage
                 target.damage((int)0.5*damage);
             } else{

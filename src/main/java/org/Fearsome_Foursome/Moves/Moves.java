@@ -23,63 +23,56 @@ import org.Fearsome_Foursome.Creatures.FireCreature;
 import org.Fearsome_Foursome.Creatures.GrassCreature;
 import org.Fearsome_Foursome.Creatures.WaterCreature;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * This class just has a bunch of static inner classes defined, each of which implement the Move interface.
  * Any move in our game is defined HERE
  */
 public class Moves {
-    // TODO: reformat moves either by type or by Strong / Weak / Support (change Tackle to 100% accuracy, Weak move)
+    // Set up damage and accuracy for strong and weak moves
+    public static final double STRONG_ACCURACY = 0.8;
+    public static final int STRONG_DAMAGE = 150;
+    public static final double WEAK_ACCURACY = 1.0;
+    public static final int WEAK_DAMAGE = 100;
 
-    // start with the Tackle move, which is an ATTACK move
-    // before defining each move, set up relevant constants
-    public static final double TACKLE_ACCURACY = 1.0;
-    public static final int TACKLE_DAMAGE = 100;
-    // not strong or weak against anything
-    public static final Move Tackle = new AttackMove(TACKLE_ACCURACY, TACKLE_DAMAGE, null, null);
-
-    // now let us implement Agility for an example of a SUPPORT move instead of an attack move
+    // SUPPORT move Agility to raise user's speed
     public static final int AGILITY_INCREASE = 50;
     public static final Move Agility = new SupportMove(CreatureAttribute.Speed, AGILITY_INCREASE);
 
-    // SUPPORT move
+    // SUPPORT move Recover to heal the user
     public static final int RECOVER_INCREASE = 50;
     public static final Move Recover = new SupportMove(CreatureAttribute.Health, RECOVER_INCREASE);
 
-    // Strong Water ATTACK move
-    public static final double SURF_ACCURACY = 0.8;
-    public static final int SURF_DAMAGE = 150;
-    public static final Move Surf = new AttackMove(SURF_ACCURACY, SURF_DAMAGE, FireCreature.class, WaterCreature.class);
+    // Strong Normal ATTACK move Hyperbeam
+    public static final Move Hyperbeam = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, null, null);
 
-    // Strong Grass ATTACK move
-    public static final double LEAFBLADE_ACCURACY = 0.8;
-    public static final int LEAFBLADE_DAMAGE = 150;
-    // Strong against???
-    public static final Move LeafBlade = new AttackMove(LEAFBLADE_ACCURACY, LEAFBLADE_DAMAGE, null, GrassCreature.class);
+    // Strong Water ATTACK move Surf
+    public static final Move Surf = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, FireCreature.class,
+                                                Arrays.asList(GrassCreature.class, WaterCreature.class));
 
-    // Strong Fire ATTACK move
-    public static final double FLAMETHROWER_ACCURACY = 0.8;
-    public static final int FLAMETHROWER_DAMAGE = 150;
-    public static final Move Flamethrower = new AttackMove(FLAMETHROWER_ACCURACY, FLAMETHROWER_DAMAGE, WaterCreature.class, FireCreature.class);
+    // Strong Grass ATTACK move LeafBlade
+    public static final Move LeafBlade = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, WaterCreature.class,
+                                                Arrays.asList(FireCreature.class, GrassCreature.class));
 
-    // Strong Normal ATTACK move
-    public static final double HYPERBEAM_ACCURACY = 0.8;
-    public static final int HYPERBEAM_DAMAGE = 150;
-    // not weak or strong against anything in particular (ERIC FEEL FREE TO CHANGE THAT - just wanted to demonstrate how that could be implemented)
-    public static final Move Hyperbeam = new AttackMove(HYPERBEAM_ACCURACY, HYPERBEAM_DAMAGE, null, null);
+    // Strong Fire ATTACK move Flamethrower
+    public static final Move Flamethrower = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, GrassCreature.class,
+                                                Arrays.asList(WaterCreature.class, FireCreature.class));
 
-    // Weak Water ATTACK move
-    public static final double WATERGUN_ACCURACY = 1.0;
-    public static final int WATERGUN_DAMAGE = 100;
-    public static final Move Watergun = new AttackMove(WATERGUN_ACCURACY, WATERGUN_DAMAGE, FireCreature.class, WaterCreature.class);
+    // Weak Normal ATTACK move Tackle
+    public static final Move Tackle = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, null, null);
 
-    // Weak Grass ATTACK move
-    public static final double VINEWHIP_ACCURACY = 1.0;
-    public static final int VINEWHIP_DAMAGE = 100;
-    public static final Move Vinewhip = new AttackMove(VINEWHIP_ACCURACY, VINEWHIP_DAMAGE, null, GrassCreature.class);
+    // Weak Water ATTACK move Watergun
+    public static final Move Watergun = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, FireCreature.class,
+                                                Arrays.asList(GrassCreature.class, WaterCreature.class));
 
-    // Weak Fire ATTACK move
-    public static final double EMBER_ACCURACY = 1.0;
-    public static final int EMBER_DAMAGE = 100;
-    public static final Move Ember = new AttackMove(EMBER_ACCURACY, EMBER_DAMAGE, WaterCreature.class, FireCreature.class);
+    // Weak Grass ATTACK move Vinewhip
+    public static final Move Vinewhip = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, WaterCreature.class,
+                                                Arrays.asList(FireCreature.class, GrassCreature.class));
+
+    // Weak Fire ATTACK move Ember
+    public static final Move Ember = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, GrassCreature.class,
+                                               Arrays.asList(WaterCreature.class, FireCreature.class));
 
 }
