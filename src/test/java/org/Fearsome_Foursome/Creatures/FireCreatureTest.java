@@ -18,6 +18,7 @@
 
 package org.Fearsome_Foursome.Creatures;
 
+import org.Fearsome_Foursome.Moves.AttackType;
 import org.Fearsome_Foursome.Moves.Moves;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,34 +58,42 @@ class FireCreatureTest {
     }
 
     /**
-     * A simple test to ensure that the Moves are behaving as expected
+     * A simple test to ensure that the Attack Moves are behaving as expected
      */
     @Test
-    void testMove() {
+    void testAttacking() {
+        // set up the targeting
         fireCreature0.setTarget(fireCreature1);
 
         // keep track of the old values
-        int fireCreature0OldSpeed = fireCreature1.getSpeed();
         int fireCreature1OldHealth = fireCreature1.getHealth();
 
         // this should "Tackle" fireCreature2 over and over - make sure the health of fireCreature2 decreases around the expected amount of the time
         int numHits = 0;
         for (int i=0; i<NUM_TRIALS; i++) {
             fireCreature0.move(2);
-            if (fireCreature1OldHealth - Moves.TACKLE_DAMAGE == fireCreature1.getHealth()){
+            if (fireCreature1OldHealth - AttackType.Weak.getDamage() == fireCreature1.getHealth()){
                 numHits++;
                 // refresh fireCreature1
                 fireCreature1 = new FireCreature(1);
                 fireCreature0.setTarget(fireCreature1);
             }
         }
-        System.out.println(numHits);
-        assertTrue( Moves.TACKLE_ACCURACY*LOWER_BOUND_ON_EXPECTED_ACCURACY*NUM_TRIALS < numHits && numHits < Moves.TACKLE_ACCURACY*UPPER_BOUND_ON_EXPECTED_ACCURACY*NUM_TRIALS);
 
+        // make sure the number of hits is within our expected range
+        assertTrue( AttackType.Weak.getAccuracy()*LOWER_BOUND_ON_EXPECTED_ACCURACY*NUM_TRIALS < numHits && numHits < AttackType.Weak.getAccuracy()*UPPER_BOUND_ON_EXPECTED_ACCURACY*NUM_TRIALS);
+
+    }
+
+    /**
+     * A simple test to ensure that the Support Moves are behaving as expected
+     */
+    @Test
+    void testSupport() {
         // this should "Agility" fireCreature1
+        int fireCreature0OldSpeed = fireCreature0.getSpeed();
         fireCreature0.move(3);
         assertTrue(fireCreature0OldSpeed < fireCreature0.getSpeed());
-
     }
 
 }

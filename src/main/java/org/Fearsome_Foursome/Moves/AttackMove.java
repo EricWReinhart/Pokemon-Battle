@@ -31,6 +31,9 @@ public class AttackMove implements Move{
     /** Damage that this attack will inflict on a hit */
     private final int damage;
 
+    /** Determination of whether this is a string or weak attack */
+    private final AttackType type;
+
     /** Class which takes double damage from this move */
     private final Class strongAgainst;
 
@@ -39,14 +42,13 @@ public class AttackMove implements Move{
 
     /**
      * Constructor for {@link AttackMove} class, which just initializes all the attributes
-     * @param accuracy
-     * @param damage
      * @param strongAgainst
      * @param weakAgainst
      */
-    protected AttackMove(double accuracy, int damage, Class strongAgainst, List weakAgainst){
-        this.accuracy = accuracy;
-        this.damage = damage;
+    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst){
+        this.type = type;
+        this.accuracy = type.getAccuracy();
+        this.damage = type.getDamage();
         this.strongAgainst = strongAgainst;
         this.weakAgainstList = weakAgainst;
     }
@@ -62,7 +64,7 @@ public class AttackMove implements Move{
             if (target.getClass().equals(strongAgainst)){
                 // target takes double damage
                 target.damage(2*damage);
-            } else if (weakAgainstList.contains(target.getClass())){
+            } else if (weakAgainstList != null && weakAgainstList.contains(target.getClass())){
                 // target takes half damage
                 target.damage((int)0.5*damage);
             } else{

@@ -30,12 +30,11 @@ public class SupportMove implements Move {
 
     /**
      * Constructor for the {@link SupportMove} class, which initializes attributeToChange and bonus
-     * @param attribute
-     * @param bonus
+     * @param type {@link SupportType}
      */
-    public SupportMove(CreatureAttribute attribute, int bonus){
-        this.attributeToChange = attribute;
-        this.bonus = bonus;
+    public SupportMove(SupportType type){
+        this.attributeToChange = type.getAttributeToModify();
+        this.bonus = type.getAmountToIncrease();
     }
 
     /**

@@ -31,48 +31,41 @@ import java.util.List;
  * Any move in our game is defined HERE
  */
 public class Moves {
-    // Set up damage and accuracy for strong and weak moves
-    public static final double STRONG_ACCURACY = 0.8;
-    public static final int STRONG_DAMAGE = 150;
-    public static final double WEAK_ACCURACY = 1.0;
-    public static final int WEAK_DAMAGE = 100;
 
     // SUPPORT move Agility to raise user's speed
-    public static final int AGILITY_INCREASE = 50;
-    public static final Move Agility = new SupportMove(CreatureAttribute.Speed, AGILITY_INCREASE);
+    public static final Move Agility = new SupportMove(SupportType.Speeding);
 
     // SUPPORT move Recover to heal the user
-    public static final int RECOVER_INCREASE = 50;
-    public static final Move Recover = new SupportMove(CreatureAttribute.Health, RECOVER_INCREASE);
+    public static final Move Recover = new SupportMove(SupportType.Healing);
 
     // Strong Normal ATTACK move Hyperbeam
-    public static final Move Hyperbeam = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, null, null);
+    public static final Move Hyperbeam = new AttackMove(AttackType.Strong, null, null);
 
     // Strong Water ATTACK move Surf
-    public static final Move Surf = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, FireCreature.class,
+    public static final Move Surf = new AttackMove(AttackType.Strong, FireCreature.class,
                                                 Arrays.asList(GrassCreature.class, WaterCreature.class));
 
     // Strong Grass ATTACK move LeafBlade
-    public static final Move LeafBlade = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, WaterCreature.class,
+    public static final Move LeafBlade = new AttackMove(AttackType.Strong, WaterCreature.class,
                                                 Arrays.asList(FireCreature.class, GrassCreature.class));
 
     // Strong Fire ATTACK move Flamethrower
-    public static final Move Flamethrower = new AttackMove(STRONG_ACCURACY, STRONG_DAMAGE, GrassCreature.class,
+    public static final Move Flamethrower = new AttackMove(AttackType.Strong, GrassCreature.class,
                                                 Arrays.asList(WaterCreature.class, FireCreature.class));
 
     // Weak Normal ATTACK move Tackle
-    public static final Move Tackle = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, null, null);
+    public static final Move Tackle = new AttackMove(AttackType.Weak, null, null);
 
     // Weak Water ATTACK move Watergun
-    public static final Move Watergun = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, FireCreature.class,
+    public static final Move Watergun = new AttackMove(AttackType.Weak, FireCreature.class,
                                                 Arrays.asList(GrassCreature.class, WaterCreature.class));
 
     // Weak Grass ATTACK move Vinewhip
-    public static final Move Vinewhip = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, WaterCreature.class,
+    public static final Move Vinewhip = new AttackMove(AttackType.Weak, WaterCreature.class,
                                                 Arrays.asList(FireCreature.class, GrassCreature.class));
 
     // Weak Fire ATTACK move Ember
-    public static final Move Ember = new AttackMove(WEAK_ACCURACY, WEAK_DAMAGE, GrassCreature.class,
+    public static final Move Ember = new AttackMove(AttackType.Weak, GrassCreature.class,
                                                Arrays.asList(WaterCreature.class, FireCreature.class));
 
 }

@@ -12,7 +12,7 @@
  * Package: org.Fearsome_Foursome.Moves
  * Class: SupportMove
  *
- * Description: Enumeration for the different types of creatures which could be increased with a support move
+ * Description: Enumeration for the different attributes of creatures which could be increased with a support move
  *
  * *****************************************/
 
