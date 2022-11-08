@@ -1,4 +1,4 @@
-/* *****************************************
+package org.Fearsome_Foursome;/* *****************************************
  * CSCI205 -Software Engineering and Design
  * Fall 2022
  * Instructor: Pro. Brian King
@@ -7,7 +7,7 @@
  * Time: 2:47 PM
  *
  * Project: csci205_final_project
- * Class: Player
+ * Class: org.Fearsome_Foursome.Player
  * Description:
  *
  * Responsible for creating and managing the team.
