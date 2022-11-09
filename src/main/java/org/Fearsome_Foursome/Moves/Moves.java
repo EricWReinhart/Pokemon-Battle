@@ -18,7 +18,6 @@
 
 package org.Fearsome_Foursome.Moves;
 
-import org.Fearsome_Foursome.Creatures.Creature;
 import org.Fearsome_Foursome.Creatures.FireCreature;
 import org.Fearsome_Foursome.Creatures.GrassCreature;
 import org.Fearsome_Foursome.Creatures.WaterCreature;
