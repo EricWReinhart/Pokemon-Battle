@@ -198,8 +198,17 @@ class CreatureTest {
             if (theSupport.getAttributeToChange().equals(CreatureAttribute.Health)){
                 int oldHealth = mover.getHealth();
                 mover.move(index);
-                if (!(mover.getHealth() == oldHealth + theSupport.getBonus()))
+                if (mover.getHealth() != oldHealth)
                     return false;
+                // now damage it
+                mover.damage(theSupport.getBonus());
+                if (!(mover.getHealth() == oldHealth - theSupport.getBonus()))
+                    return false;
+                // just for grins, that makes sure we got damaged
+                mover.move(index);
+                if (mover.getHealth() != oldHealth)
+                    return false;
+                // now we should be back at full health
             }
 
             // we are changing the speed
