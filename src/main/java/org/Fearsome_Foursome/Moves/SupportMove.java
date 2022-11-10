@@ -57,4 +57,20 @@ public class SupportMove implements Move {
                 break;
         }
     }
+
+    /**
+     * Simple getter for the attribute which is changed
+     * @return {@link CreatureAttribute}
+     */
+    public CreatureAttribute getAttributeToChange() {
+        return attributeToChange;
+    }
+
+    /**
+     * Simple getter for the bonus amount
+     * @return int
+     */
+    public int getBonus() {
+        return bonus;
+    }
 }

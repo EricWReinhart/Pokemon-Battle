@@ -272,4 +272,10 @@ public abstract class Creature {
      * @return boolean
      */
     public boolean isDead() { return !(health > 0); }
+
+    /**
+     * Simple getter for the maxHealth attribute
+     * @return int
+     */
+    public int getMaxHealth() { return maxHealth; }
 }

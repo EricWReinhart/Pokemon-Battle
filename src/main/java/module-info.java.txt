@@ -6,8 +6,12 @@ module csci205_final_project{
     requires javafx.controls;
     requires javafx.fxml;
 
+<<<<<<< HEAD:src/main/java/module-info.java
     //exports org.Fearsome_Foursome.Pokemons.Arena1;
     //opens org.Fearsome_Foursome.Pokemons.Arena1 to javafx.fxml;
     exports org.Fearsome_Foursome.Pokemons.Arena2;
     opens org.Fearsome_Foursome.Pokemons.Arena2 to javafx.fxml;
+=======
+    exports org.Fearsome_Foursome.Creatures;
+>>>>>>> f39a8bffcb5aad108f5e5cec0a5289bf06949982:src/main/java/module-info.java.txt
 }

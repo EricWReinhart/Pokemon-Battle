@@ -72,4 +72,42 @@ public class AttackMove implements Move{
             }
         }
     }
+
+    /**
+     * Simple getter for the accuracy
+     * @return double
+     */
+    public double getAccuracy() {
+        return accuracy;
+    }
+
+    /**
+     * Simple getter for the damage
+     * @return damage
+     */
+    public int getDamage() {
+        return damage;
+    }
+
+    /**
+     * Simple method to determine if a certain {@link Class} takes reduced damage from this {@link Move}
+     * @param className {@link Class}
+     * @return boolean
+     */
+    public boolean isWeakAgainst(Class className){
+        if (this.weakAgainstList == null)
+            return false;
+        return this.weakAgainstList.contains(className);
+    }
+
+    /**
+     * Simple method to determine if a certain {@link Class} takes extra damage from this {@link Move}
+     * @param className
+     * @return boolean
+     */
+    public boolean isStrongAgainst(Class className){
+        if (this.strongAgainst == null)
+            return false;
+        return this.strongAgainst.equals(className);
+    }
 }
