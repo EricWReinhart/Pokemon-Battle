@@ -19,7 +19,6 @@
 package org.Fearsome_Foursome.Creatures;
 
 import org.Fearsome_Foursome.Moves.AttackType;
-import org.Fearsome_Foursome.Moves.Moves;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

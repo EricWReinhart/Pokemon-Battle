@@ -20,7 +20,6 @@ package org.Fearsome_Foursome.Moves;
 
 import org.Fearsome_Foursome.Creatures.Creature;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AttackMove implements Move{

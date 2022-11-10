@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="662.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Pokemons.Arena1.pokemonArena">
+   <children>
+      <HBox alignment="CENTER" layoutX="-1.0" layoutY="3.0" prefHeight="70.0" prefWidth="713.0">
+         <children>
+            <Label text="Name: " />
+            <TextField fx:id="textFieldName" />
+         </children></HBox>
+      <Slider fx:id="sliderRed" layoutX="48.0" layoutY="118.0" majorTickUnit="0.25" max="1.0" orientation="VERTICAL" prefHeight="140.0" prefWidth="39.0" showTickLabels="true" showTickMarks="true" value="0.5" AnchorPane.topAnchor="110.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Slider>
+      <Label layoutX="42.0" layoutY="250.0" text="Red" textFill="#e11818" />
+      <Label layoutX="110.0" layoutY="250.0" text="Green" textFill="#11d037" />
+      <Label layoutX="194.0" layoutY="250.0" text="Blue" textFill="#2208d0" />
+      <FlowPane alignment="CENTER" layoutX="265.0" layoutY="85.0" prefHeight="304.0" prefWidth="469.0" style="-fx-border-color: BLACK;" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="75.0">
+         <children>
+            <Text fx:id="textName" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <effect>
+                  <DropShadow height="10.5" offsetX="5.0" offsetY="5.0" radius="4.625" width="10.0" />
+               </effect>
+            </Text>
+         </children>
+      </FlowPane>
+      <Slider fx:id="sliderSize" layoutX="429.0" layoutY="362.0" showTickLabels="true" showTickMarks="true" AnchorPane.bottomAnchor="98.0" AnchorPane.topAnchor="362.0" />
+      <Label layoutX="485.0" layoutY="500.0" text="Size" textFill="#2a0bda" />
+      <Slider fx:id="sliderGreen" layoutX="117.0" layoutY="130.0" majorTickUnit="0.25" max="1.0" orientation="VERTICAL" prefHeight="121.0" prefWidth="50.0" showTickLabels="true" showTickMarks="true" value="0.5" />
+      <Slider fx:id="sliderBlue" layoutX="201.0" layoutY="129.0" majorTickUnit="0.25" max="1.0" orientation="VERTICAL" prefHeight="121.0" prefWidth="50.0" showTickLabels="true" showTickMarks="true" value="0.5" />
+      <Label fx:id="lblStatusBar" layoutY="657.0" prefHeight="36.0" prefWidth="742.0" style="-fx-background-color: BLACK; -fx-text-fill: YELLOW;" text="Status Bar" AnchorPane.bottomAnchor="6.0" AnchorPane.topAnchor="657.0" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</AnchorPane>

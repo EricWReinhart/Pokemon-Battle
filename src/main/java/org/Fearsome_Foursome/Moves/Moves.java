@@ -18,13 +18,11 @@
 
 package org.Fearsome_Foursome.Moves;
 
-import org.Fearsome_Foursome.Creatures.Creature;
 import org.Fearsome_Foursome.Creatures.FireCreature;
 import org.Fearsome_Foursome.Creatures.GrassCreature;
 import org.Fearsome_Foursome.Creatures.WaterCreature;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * This class just has a bunch of static inner classes defined, each of which implement the Move interface.
