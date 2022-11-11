@@ -18,6 +18,7 @@
 
 package org.Fearsome_Foursome.Moves;
 
+import javafx.scene.paint.Color;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 import java.util.List;
@@ -42,28 +43,41 @@ public class AttackMove implements Move{
     /** Name of this {@link AttackMove} */
     private final String name;
 
+    /** Color associated with this move */
+    private final Color color;
+
     /**
      * Constructor for {@link AttackMove} class, which just initializes all the attributes
      * @param strongAgainst {@link Class}
      * @param weakAgainst {@link List}
      * @param name {@link String}
      */
-    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst, String name){
+    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst, String name, Color color){
         this.type = type;
         this.accuracy = type.getAccuracy();
         this.damage = type.getDamage();
         this.strongAgainst = strongAgainst;
         this.weakAgainstList = weakAgainst;
         this.name = name;
+        this.color = color;
     }
 
     /**
-     * Override for the required 'getName' method which will return the corresponding name of this {@link Move}
+     * Override for the required 'getName' method which will return the corresponding name of this {@link AttackMove}
      * @return {@link String}
      */
     @Override
     public String getName() {
         return name;
+    }
+
+    /**
+     * Override for the required 'getColor' method which will return the corresponding color of this {@link AttackMove}
+     * @return {@link Color}
+     */
+    @Override
+    public Color getColor() {
+        return color;
     }
 
     /**

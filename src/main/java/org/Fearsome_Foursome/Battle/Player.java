@@ -2,7 +2,7 @@ package org.Fearsome_Foursome.Battle;/* ****************************************
  * CSCI205 -Software Engineering and Design
  * Fall 2022
  * Instructor: Pro. Brian King
- * Name: Connor Coles
+ * Group: Fearsome Foursome
  * Date: 11/8/22
  * Time: 2:47 PM
  *

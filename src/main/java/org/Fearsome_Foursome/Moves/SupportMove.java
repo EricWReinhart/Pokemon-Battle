@@ -18,6 +18,7 @@
 
 package org.Fearsome_Foursome.Moves;
 
+import javafx.scene.paint.Color;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 public class SupportMove implements Move {
@@ -31,15 +32,19 @@ public class SupportMove implements Move {
     /** Name corresponding to this {@link Move} */
     private final String name;
 
+    /** {@link Color} corresponding to this {@link Move} */
+    private final Color color;
+
     /**
      * Constructor for the {@link SupportMove} class, which initializes attributeToChange and bonus
      * @param type {@link SupportType}
      * @param name {@link String}
      */
-    public SupportMove(SupportType type, String name){
+    public SupportMove(SupportType type, String name, Color color){
         this.attributeToChange = type.getAttributeToModify();
         this.bonus = type.getAmountToIncrease();
         this.name = name;
+        this.color = color;
     }
 
     /**
@@ -49,6 +54,15 @@ public class SupportMove implements Move {
     @Override
     public String getName() {
         return name;
+    }
+
+    /**
+     * Overriden method to return the {@link Color} of this {@link SupportMove}
+     * @return {@link Color}
+     */
+    @Override
+    public Color getColor() {
+        return color;
     }
 
     /**
