@@ -26,9 +26,14 @@ import org.Fearsome_Foursome.Creatures.Creature;
 public interface Move {
 
     /**
+     * Every {@link Move} implementation must have a method to return a {@link String} corresponding to its name
+     */
+    String getName();
+
+    /**
      *  Method that must be implemented by anything that implements the Move interface
      *  Will the action help oneself or hurt another? We cannot be sure so provide both arguments
      *  */
-    public void actOn(Creature self, Creature target);
+    void actOn(Creature self, Creature target);
 
 }

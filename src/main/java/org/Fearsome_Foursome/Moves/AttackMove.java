@@ -39,17 +39,31 @@ public class AttackMove implements Move{
     /** List of classes which take half damage from this move */
     private final List<Class> weakAgainstList;
 
+    /** Name of this {@link AttackMove} */
+    private final String name;
+
     /**
      * Constructor for {@link AttackMove} class, which just initializes all the attributes
-     * @param strongAgainst
-     * @param weakAgainst
+     * @param strongAgainst {@link Class}
+     * @param weakAgainst {@link List}
+     * @param name {@link String}
      */
-    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst){
+    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst, String name){
         this.type = type;
         this.accuracy = type.getAccuracy();
         this.damage = type.getDamage();
         this.strongAgainst = strongAgainst;
         this.weakAgainstList = weakAgainst;
+        this.name = name;
+    }
+
+    /**
+     * Override for the required 'getName' method which will return the corresponding name of this {@link Move}
+     * @return {@link String}
+     */
+    @Override
+    public String getName() {
+        return name;
     }
 
     /**

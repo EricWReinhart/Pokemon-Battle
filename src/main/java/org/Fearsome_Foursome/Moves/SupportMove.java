@@ -28,13 +28,27 @@ public class SupportMove implements Move {
     /** What bonus will this Move give to the relevant attribute? */
     private final int bonus;
 
+    /** Name corresponding to this {@link Move} */
+    private final String name;
+
     /**
      * Constructor for the {@link SupportMove} class, which initializes attributeToChange and bonus
      * @param type {@link SupportType}
+     * @param name {@link String}
      */
-    public SupportMove(SupportType type){
+    public SupportMove(SupportType type, String name){
         this.attributeToChange = type.getAttributeToModify();
         this.bonus = type.getAmountToIncrease();
+        this.name = name;
+    }
+
+    /**
+     * Overridden method to return the name of this {@link SupportMove}
+     * @return {@link String}
+     */
+    @Override
+    public String getName() {
+        return name;
     }
 
     /**
