@@ -67,5 +67,7 @@ public class Player {
         deadCount++;
     }
 
+    /** Getter for the amount of recorded dead {@link Creature}s */
+    public int getDeadCount() { return deadCount; }
 }
    
