@@ -2,7 +2,7 @@ package org.Fearsome_Foursome.Battle;/* ****************************************
  * CSCI205 -Software Engineering and Design
  * Fall 2022
  * Instructor: Pro. Brian King
- * Name: Connor Coles
+ * Group: Fearsome Foursome
  * Date: 11/8/22
  * Time: 2:47 PM
  *
@@ -29,6 +29,11 @@ public class Player {
     private Creature[] creatureArrayList = new Creature[6];
 
     /**
+     * Keeps track of how many of of the {@link Player}'s {@link Creature}s are dead
+     */
+    private int deadCount = 0;
+
+    /**
      * Creates a team
      */
     public Player(){
@@ -47,7 +52,22 @@ public class Player {
 
     /** Allows use to get a poke creature at array*/
     public Creature getPokeCreature(int i){
-        return creatureArrayList[i];
+        Creature potentialCreature = creatureArrayList[i];
+
+        // don't want to return a dead creature
+        if (potentialCreature.isDead())
+            return null;
+
+        // the creature is alive - that's fine
+        return potentialCreature;
     }
+
+    /** Allows incrementation of the number of dead {@link Creature}s */
+    public void incrementDead(){
+        deadCount++;
+    }
+
+    /** Getter for the amount of recorded dead {@link Creature}s */
+    public int getDeadCount() { return deadCount; }
 }
    

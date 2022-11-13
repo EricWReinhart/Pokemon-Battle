@@ -18,6 +18,7 @@
 
 package org.Fearsome_Foursome.Moves;
 
+import javafx.scene.paint.Color;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 /**
@@ -27,8 +28,15 @@ public interface Move {
 
     /**
      * Every {@link Move} implementation must have a method to return a {@link String} corresponding to its name
+     * @return {@link String}
      */
     String getName();
+
+    /**
+     * Every {@link Move} implementation must have a method to return a {@link Color} corresponding to its name
+     * @return {@link Color}
+     */
+    Color getColor();
 
     /**
      *  Method that must be implemented by anything that implements the Move interface
