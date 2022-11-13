@@ -87,12 +87,22 @@ public class Arena {
 
         //checking the speed to see who moves first
         if (playerCreatureUpFront.getSpeed() > enemyCreatureUpFront.getSpeed()){
-            playerCreatureUpFront.move(1);
-            enemyCreatureUpFront.move(1);
+            playerCreatureUpFront.move(playerMove);
+
+            if(!(enemyCreatureUpFront.isDead())){
+                enemyCreatureUpFront.move(enemyMove);
+            }
+
         }
         else{
-            enemyCreatureUpFront.move(1);
-            playerCreatureUpFront.move(1);
+            //enemy creature can move
+            enemyCreatureUpFront.move(enemyMove);
+
+            //if the creature is not dead it can move
+            if(!(playerCreatureUpFront.isDead())){
+                playerCreatureUpFront.move(enemyMove);
+            }
+
         }
     }
 
