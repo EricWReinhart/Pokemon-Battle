@@ -46,8 +46,8 @@ public class Player {
         creatureArrayList[3] = new WaterCreature(1);
 
         //Creating a water Creature for team
-        creatureArrayList[3] = new GrassCreature(0);
-        creatureArrayList[4] = new GrassCreature(1);
+        creatureArrayList[4] = new GrassCreature(0);
+        creatureArrayList[5] = new GrassCreature(1);
     }
 
     /** Allows use to get a poke creature at array*/
