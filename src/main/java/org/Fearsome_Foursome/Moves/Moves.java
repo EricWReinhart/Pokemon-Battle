@@ -32,10 +32,10 @@ import java.util.Arrays;
 public class Moves {
 
     // SUPPORT move Agility to raise user's speed
-    public static final Move Agility = new SupportMove(SupportType.Speeding, "AGILITY", "Raise user's speed by 50 points", Color.ORANGE);
+    public static final Move Agility = new SupportMove(SupportType.Speeding, "AGILITY", "Type: Normal\nAttribute: Speed\n Amount: 50", Color.ORANGE);
 
     // SUPPORT move Recover to heal the user
-    public static final Move Recover = new SupportMove(SupportType.Healing, "RECOVER", "Restore user's health by 150 points", Color.GREEN);
+    public static final Move Recover = new SupportMove(SupportType.Healing, "RECOVER", "Type: Normal\nAttribute: Health\n Amount: 150", Color.GREEN);
 
     // Strong Normal ATTACK move Hyperbeam
     public static final Move Hyperbeam = new AttackMove(AttackType.Strong, null, null,

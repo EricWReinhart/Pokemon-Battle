@@ -62,7 +62,7 @@
       </Text>
       <ImageView fx:id="dragonite" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Sprites/dragonite.png" />
+            <Image url="@Images/dragonite.png" />
          </image>
       </ImageView>
       <ImageView fx:id="pikachu" fitHeight="150.0" fitWidth="200.0" layoutX="86.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
