@@ -45,4 +45,15 @@ public class GameController {
     @FXML
     private Button swapPokemonButton;
 
+    void initialize() {
+        assert enemyHealthProgressBar != null : "fx:id=\"enemyHealthProgressBar\" was not injected: check your FXML file 'realPokemonArena.fxml'.";
+        assert moveButton1 != null : "fx:id=\"moveButton1\" was not injected: check your FXML file 'realPokemonArena.fxml'.";
+        assert moveButton2 != null : "fx:id=\"moveButton2\" was not injected: check your FXML file 'realPokemonArena.fxml'.";
+        assert moveButton3 != null : "fx:id=\"moveButton3\" was not injected: check your FXML file 'realPokemonArena.fxml'.";
+        assert moveButton4 != null : "fx:id=\"moveButton4\" was not injected: check your FXML file 'realPokemonArena.fxml'.";
+        assert selfHealthProgressBar1 != null : "fx:id=\"selfHealthProgressBar1\" was not injected: check your FXML file 'realPokemonArena.fxml'.";
+        assert swapPokemonButton != null : "fx:id=\"swapPokemonButton\" was not injected: check your FXML file 'realPokemonArena.fxml'.";
+
+    }
+
 }
