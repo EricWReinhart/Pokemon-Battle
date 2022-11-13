@@ -43,6 +43,9 @@ public class MenuController {
     private Button btnStart;
 
     @FXML
+    private ImageView bird;
+
+    @FXML
     private ImageView dragonite;
 
     @FXML
@@ -74,6 +77,7 @@ public class MenuController {
         assert Background != null : "fx:id=\"Background\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert author != null : "fx:id=\"author\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert btnStart != null : "fx:id=\"btnStart\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
+        assert bird != null : "fx:id=\"bird\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert dragonite != null : "fx:id=\"dragonite\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert grass1 != null : "fx:id=\"grass1\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert grass2 != null : "fx:id=\"grass2\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
