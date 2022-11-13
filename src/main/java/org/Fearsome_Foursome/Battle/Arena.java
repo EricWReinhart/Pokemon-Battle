@@ -78,8 +78,22 @@ public class Arena {
 
     }
 
-    private void turn(){
+    /**
+     *
+     * @param playerMove
+     * @param enemyMove
+     */
+    private void turn(int playerMove, int enemyMove){
 
+        //checking the speed to see who moves first
+        if (playerCreatureUpFront.getSpeed() > enemyCreatureUpFront.getSpeed()){
+            playerCreatureUpFront.move(1);
+            enemyCreatureUpFront.move(1);
+        }
+        else{
+            enemyCreatureUpFront.move(1);
+            playerCreatureUpFront.move(1);
+        }
     }
 
 
