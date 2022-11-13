@@ -79,34 +79,64 @@ public class Arena {
     }
 
     /**
-     *
-     * @param playerMove
-     * @param enemyMove
+     * A method that checks the speed of each Creature and has them move succesively.
+     * If either team is dead combat over becomes true.
+     * @param playerMove A move picked by the user
+     * @param enemyMove A move picked randomly
      */
     private void turn(int playerMove, int enemyMove){
 
         //checking the speed to see who moves first
         if (playerCreatureUpFront.getSpeed() > enemyCreatureUpFront.getSpeed()){
+            //player moves first
             playerCreatureUpFront.move(playerMove);
 
+            // If not dead after hit they can move
             if(!(enemyCreatureUpFront.isDead())){
                 enemyCreatureUpFront.move(enemyMove);
+            }
+            else{
+                //they are dead make sure to increment amount of dead pokemon
+                this.enemy.incrementDead();
             }
 
         }
         else{
-            //enemy creature can move
+            //enemy creature can move first
             enemyCreatureUpFront.move(enemyMove);
 
             //if the creature is not dead it can move
             if(!(playerCreatureUpFront.isDead())){
                 playerCreatureUpFront.move(enemyMove);
             }
+            else{
+                this.player.incrementDead();
+            }
 
         }
+        //Checking to if either team is dead, if so combat over is true
+        if( this.player.getDeadCount() == 6 || this.enemy.getDeadCount() == 6 )
+            combatOver = true;
     }
 
-
+    /**
+     * Allows controller to bring up two pokemon and pit them against each other.
+     * @param playerCreatureIndex Index for a pokemon chosen by user
+     * @param enemyCreatureIndex Index for a pokemon randomly chosen
+     * @param playerMoveIndex Move for a pokemon chosen by user
+     * @param enemyMoveIndex Move for a pokemon randomly chosen
+     */
+    public void playRound(int playerCreatureIndex, int enemyCreatureIndex, int playerMoveIndex, int enemyMoveIndex){
+        if(combatOver){
+            throw new IllegalStateException();
+        }
+        else{
+           //sets up combatants and if true you can call turn
+            if(setUpCombatants(playerCreatureIndex,enemyCreatureIndex)){
+                turn(playerMoveIndex,enemyMoveIndex);
+            }
+        }
+    }
 
 }
    
