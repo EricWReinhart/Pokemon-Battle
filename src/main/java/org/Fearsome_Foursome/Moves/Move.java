@@ -33,6 +33,12 @@ public interface Move {
     String getName();
 
     /**
+     * Every {@link Move} implementation must have a method to return a {@link String} corresponding to its description
+     * @return {@link String}
+     */
+    String getDescription();
+
+    /**
      * Every {@link Move} implementation must have a method to return a {@link Color} corresponding to its name
      * @return {@link Color}
      */

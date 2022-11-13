@@ -43,6 +43,9 @@ public class AttackMove implements Move{
     /** Name of this {@link AttackMove} */
     private final String name;
 
+    /** Description corresponding to this {@link Move} */
+    private final String description;
+
     /** Color associated with this move */
     private final Color color;
 
@@ -52,13 +55,14 @@ public class AttackMove implements Move{
      * @param weakAgainst {@link List}
      * @param name {@link String}
      */
-    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst, String name, Color color){
+    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst, String name, String description, Color color){
         this.type = type;
         this.accuracy = type.getAccuracy();
         this.damage = type.getDamage();
         this.strongAgainst = strongAgainst;
         this.weakAgainstList = weakAgainst;
         this.name = name;
+        this.description = description;
         this.color = color;
     }
 
@@ -68,6 +72,15 @@ public class AttackMove implements Move{
      */
     @Override
     public String getName() {
+        return name;
+    }
+
+    /**
+     * Override for the required 'getDescription' method which will return the corresponding description of this {@link AttackMove}
+     * @return {@link String}
+     */
+    @Override
+    public String getDescription() {
         return name;
     }
 

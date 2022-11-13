@@ -32,6 +32,9 @@ public class SupportMove implements Move {
     /** Name corresponding to this {@link Move} */
     private final String name;
 
+    /** Description corresponding to this {@link Move} */
+    private final String description;
+
     /** {@link Color} corresponding to this {@link Move} */
     private final Color color;
 
@@ -40,10 +43,11 @@ public class SupportMove implements Move {
      * @param type {@link SupportType}
      * @param name {@link String}
      */
-    public SupportMove(SupportType type, String name, Color color){
+    public SupportMove(SupportType type, String name, String description, Color color){
         this.attributeToChange = type.getAttributeToModify();
         this.bonus = type.getAmountToIncrease();
         this.name = name;
+        this.description = description;
         this.color = color;
     }
 
@@ -53,6 +57,15 @@ public class SupportMove implements Move {
      */
     @Override
     public String getName() {
+        return name;
+    }
+
+    /**
+     * Override for the required 'getDescription' method which will return the corresponding description of this {@link SupportMove}
+     * @return {@link String}
+     */
+    @Override
+    public String getDescription() {
         return name;
     }
 

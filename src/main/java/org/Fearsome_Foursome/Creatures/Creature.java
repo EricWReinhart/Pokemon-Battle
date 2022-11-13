@@ -23,6 +23,7 @@ import org.Fearsome_Foursome.Moves.Moves;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * An abstract class which has attributes and methods shared by all different types of creatures
@@ -30,8 +31,8 @@ import java.util.HashMap;
 public abstract class Creature {
 
     /** Default attribute values */
-    protected static final int DEFAULT_MAX_HEALTH = 1000;
-    protected static final int DEFAULT_HEALTH = 1000;
+    protected static final int DEFAULT_MAX_HEALTH = 500;
+    protected static final int DEFAULT_HEALTH = 500;
     protected static final int DEFAULT_SPEED = 100;
 
     /** We need a map of functional interfaces denoting 4 moves to a certain {@link Creature} class */
@@ -39,6 +40,9 @@ public abstract class Creature {
 
     /** A map of all the different possible Pokémon names our app will include*/
     public static final HashMap<Class, ArrayList<String>> CREATURE_NAME_MAP = new HashMap<>();
+
+    /** A map of the front and back sprites of each Pokemon by name */
+    public static final HashMap<String, String[]> CREATURE_SPRITE_MAP = new HashMap<>();
 
     // CONCLUDES THE STATIC MEMBERS
 
@@ -108,6 +112,9 @@ public abstract class Creature {
         fireCreatureNames.add("Charizard");
         fireCreatureNames.add("Volcarona");
         // any other specific Pokémon names we are allowing
+
+        CREATURE_SPRITE_MAP.put(fireCreatureNames.get(0), new String[]{"CharizardAlly.png", "CharizardEnemy.png"});
+        CREATURE_SPRITE_MAP.put(fireCreatureNames.get(1), new String[]{"VolcaronaAlly.png", "VolcaronaEnemy.png"});
     }
 
     /**
@@ -134,6 +141,9 @@ public abstract class Creature {
         waterCreatureNames.add("Blastoise");
         waterCreatureNames.add("Gyarados");
         // any other specific Pokémon names we are allowing
+
+        CREATURE_SPRITE_MAP.put(waterCreatureNames.get(0), new String[]{"BlastoiseAlly.png", "BlastoiseEnemy.png"});
+        CREATURE_SPRITE_MAP.put(waterCreatureNames.get(1), new String[]{"GyaradosAlly.png", "GyaradosEnemy.png"});
     }
 
     /**
@@ -160,6 +170,9 @@ public abstract class Creature {
         grassCreatureNames.add("Venusaur");
         grassCreatureNames.add("Sceptile");
         // any other specific Pokémon names we are allowing
+
+        CREATURE_SPRITE_MAP.put(grassCreatureNames.get(0), new String[]{"VenusaurAlly.png", "VenusaurEnemy.png"});
+        CREATURE_SPRITE_MAP.put(grassCreatureNames.get(1), new String[]{"SceptileAlly.png", "SceptileEnemy.png"});
     }
 
     /**
@@ -186,6 +199,9 @@ public abstract class Creature {
         normalCreatureNames.add("Snorlax");
         normalCreatureNames.add("Staraptor");
         // any other specific Pokémon names we are allowing
+
+        CREATURE_SPRITE_MAP.put(normalCreatureNames.get(0), new String[]{"SnorlaxAlly.png", "SnorlaxEnemy.png"});
+        CREATURE_SPRITE_MAP.put(normalCreatureNames.get(1), new String[]{"StaraptorAlly.png", "StaraptorEnemy.png"});
     }
 
     /**
