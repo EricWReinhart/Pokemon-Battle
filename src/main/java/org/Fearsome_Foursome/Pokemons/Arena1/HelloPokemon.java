@@ -18,7 +18,7 @@ public class HelloPokemon extends Application {
     public void start(Stage primaryStage) throws IOException {
         // Load the FXML file. Obtain the root of the scene graph
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/pokemonArena.fxml"));
+        loader.setLocation(getClass().getResource("/lab11/pokemonArena.fxml"));
         Parent root = loader.load();
 
         // Set up the stage and show it

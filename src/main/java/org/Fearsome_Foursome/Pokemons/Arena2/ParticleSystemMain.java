@@ -22,7 +22,7 @@ public class ParticleSystemMain extends Application {
         this.theModel = new ParticleSystemModel();
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/particlesim.fxml"));
+        loader.setLocation(getClass().getResource("/lab11/particlesim.fxml"));
         Parent root = loader.load();
         this.theController = loader.getController();
         this.theController.setModel(theModel);
