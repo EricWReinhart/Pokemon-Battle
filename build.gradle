@@ -45,7 +45,7 @@ dependencies {
 
 application {
     mainModule = "csci205_final_project"
-    mainClassName = "org.Fearsome_Foursome.Main"
+    mainClassName = "org.Fearsome_Foursome.Screens.Menu.HelloPokemon"
 
     if (project.hasProperty("mainClass")) {
         getMainClass().set(project.getProperty("mainClass"))
