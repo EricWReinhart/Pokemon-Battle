@@ -6,14 +6,23 @@ module csci205_final_project{
     requires javafx.controls;
     requires javafx.fxml;
 
-    //exports org.Fearsome_Foursome.Pokemons.Arena1;
-    //opens org.Fearsome_Foursome.Pokemons.Arena1 to javafx.fxml;
-    //exports org.Fearsome_Foursome.Pokemons.Arena2;
-    //opens org.Fearsome_Foursome.Pokemons.Arena2 to javafx.fxml;
+    exports org.Fearsome_Foursome.Creatures;
+    opens org.Fearsome_Foursome.Creatures to javafx.fxml;
 
-    //exports org.Fearsome_Foursome.GameMVC.Controller;
-    //opens org.Fearsome_Foursome.GameMVC.Controller to javafx.fxml;
+    exports org.Fearsome_Foursome.Battle;
+    opens org.Fearsome_Foursome.Battle to javafx.fxml;
+
+    exports org.Fearsome_Foursome.GameMVC.Controller;
+    opens org.Fearsome_Foursome.GameMVC.Controller to javafx.fxml;
+
+    exports org.Fearsome_Foursome.GameMVC.Model;
+    opens org.Fearsome_Foursome.GameMVC.Model to javafx.fxml;
+
+    exports org.Fearsome_Foursome.Moves;
+    opens org.Fearsome_Foursome.Moves to javafx.fxml;
 
     exports org.Fearsome_Foursome.Screens.Menu;
     opens org.Fearsome_Foursome.Screens.Menu to javafx.fxml;
+
+
 }
