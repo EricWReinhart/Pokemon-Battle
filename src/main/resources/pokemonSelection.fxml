@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonSelection">
+   <children>
+      <Text fill="#eb0707" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a Pokémon." wrappingWidth="399.0169219970703" AnchorPane.bottomAnchor="12.20556640625" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="358.79443359375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Button layoutX="506.0" layoutY="351.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="80.0" text="Cancel" />
+      <FlowPane layoutY="76.0" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <CheckBox mnemonicParsing="false" prefHeight="81.0" prefWidth="77.0" text="lv.100">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </CheckBox>
+            <ImageView fitHeight="117.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Sprites/CharizardEnemy.png" />
+               </image>
+            </ImageView>
+            <ProgressBar prefHeight="20.0" prefWidth="172.0" progress="0.0" />
+         </children>
+      </FlowPane>
+      <VBox layoutX="429.0" layoutY="76.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button layoutX="399.0" layoutY="351.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="80.0" text="Select" />
+   </children>
+</AnchorPane>
