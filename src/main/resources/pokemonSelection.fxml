@@ -6,113 +6,95 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PokemonSelection">
+<AnchorPane prefHeight="309.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Screens.View.ViewController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="background" fitHeight="309.0" fitWidth="615.0" layoutX="200.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@Images/forestBackGround.jpg" />
          </image>
       </ImageView>
-      <Text fill="#eb0707" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a Pokémon." wrappingWidth="399.0169219970703" AnchorPane.bottomAnchor="12.20556640625" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="358.79443359375">
+      <Text fx:id="textSelection" fill="#d90bb8" layoutX="22.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a Pokémon">
          <font>
-            <Font size="25.0" />
+            <Font size="28.0" />
          </font>
       </Text>
-      <Button layoutX="506.0" layoutY="351.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="80.0" text="Cancel" />
-      <FlowPane layoutY="76.0" prefHeight="81.0" prefWidth="300.0" AnchorPane.bottomAnchor="319.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="btnSelect" layoutX="374.0" layoutY="247.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="77.0" text="Select" AnchorPane.leftAnchor="374.0" AnchorPane.topAnchor="247.0" />
+      <Button fx:id="btnCancel" layoutX="475.0" layoutY="247.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="77.0" text="Cancel" />
+      <HBox fx:id="pokemon1" layoutX="8.0" layoutY="33.0" prefHeight="68.0" prefWidth="297.0" AnchorPane.leftAnchor="8.0">
          <children>
-            <CheckBox mnemonicParsing="false" prefHeight="81.0" prefWidth="77.0" text="lv.100" textFill="#d61a0b">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </CheckBox>
-            <ImageView fitHeight="117.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <CheckBox fx:id="checkBox1" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="lv.100" textFill="#d70707" />
+            <ImageView fx:id="sprite1" fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Sprites/CharizardEnemy.png" />
                </image>
             </ImageView>
-            <ProgressBar prefHeight="20.0" prefWidth="172.0" progress="1.0" />
+            <Text fx:id="health1" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" />
+            <ProgressBar fx:id="currentHealth1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="139.0" progress="0.0" style="-fx-background-color: RED;" />
          </children>
-      </FlowPane>
-      <Button layoutX="399.0" layoutY="351.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="80.0" text="Select" textFill="#eb1313" />
-      <FlowPane layoutY="90.0" prefHeight="81.0" prefWidth="300.0">
+      </HBox>
+      <HBox fx:id="pokemon3" layoutX="8.0" layoutY="101.0" prefHeight="68.0" prefWidth="297.0" AnchorPane.leftAnchor="8.0">
          <children>
-            <CheckBox mnemonicParsing="false" prefHeight="81.0" prefWidth="77.0" text="lv.100" textFill="#d70808">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </CheckBox>
-            <ImageView fitHeight="117.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <CheckBox fx:id="checkBox3" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="lv.100" textFill="#d70707" />
+            <ImageView fx:id="sprite3" fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Sprites/SnorlaxEnemy.png" />
+                  <Image url="@Sprites/BlastoiseEnemy.png" />
                </image>
             </ImageView>
-            <ProgressBar prefHeight="20.0" prefWidth="172.0" progress="1.0" />
+            <Text fx:id="health3" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" />
+            <ProgressBar fx:id="currentHealth3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="139.0" progress="0.0" style="-fx-background-color: RED;" />
          </children>
-      </FlowPane>
-      <FlowPane layoutX="7.0" layoutY="191.0" prefHeight="81.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0">
+      </HBox>
+      <HBox fx:id="pokemon5" layoutX="7.0" layoutY="169.0" prefHeight="68.0" prefWidth="297.0" AnchorPane.leftAnchor="8.0">
          <children>
-            <CheckBox mnemonicParsing="false" prefHeight="81.0" prefWidth="77.0" text="lv.100">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </CheckBox>
-            <ImageView fitHeight="117.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Sprites/VenusaurEnemy.png" />
-               </image>
-            </ImageView>
-            <ProgressBar prefHeight="20.0" prefWidth="172.0" progress="1.0" />
-         </children>
-      </FlowPane>
-      <FlowPane layoutX="289.0" layoutY="14.0" prefHeight="81.0" prefWidth="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <CheckBox mnemonicParsing="false" prefHeight="81.0" prefWidth="77.0" text="lv.100">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </CheckBox>
-            <ImageView fitHeight="117.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Sprites/VolcaronaEnemy.png" />
-               </image>
-            </ImageView>
-            <ProgressBar prefHeight="20.0" prefWidth="172.0" progress="1.0" />
-         </children>
-      </FlowPane>
-      <FlowPane layoutX="300.0" layoutY="90.0" prefHeight="81.0" prefWidth="300.0" AnchorPane.bottomAnchor="220.1015625" AnchorPane.rightAnchor="0.0169219970703125" AnchorPane.topAnchor="90.0">
-         <children>
-            <CheckBox mnemonicParsing="false" prefHeight="81.0" prefWidth="77.0" text="lv.100">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </CheckBox>
-            <ImageView fitHeight="117.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <CheckBox fx:id="checkBox5" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="lv.100" textFill="#d70707" />
+            <ImageView fx:id="sprite5" fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Sprites/GyaradosEnemy.png" />
                </image>
             </ImageView>
-            <ProgressBar prefHeight="20.0" prefWidth="172.0" progress="1.0" />
+            <Text fx:id="health5" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" />
+            <ProgressBar fx:id="currentHealth5" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="139.0" progress="0.0" style="-fx-background-color: RED;" />
          </children>
-      </FlowPane>
-      <FlowPane layoutX="310.0" layoutY="191.0" prefHeight="81.0" prefWidth="300.0">
+      </HBox>
+      <HBox fx:id="pokemon2" layoutX="303.0" layoutY="27.0" prefHeight="68.0" prefWidth="297.0">
          <children>
-            <CheckBox mnemonicParsing="false" prefHeight="81.0" prefWidth="77.0" text="lv.100">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </CheckBox>
-            <ImageView fitHeight="117.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <CheckBox fx:id="checkBox2" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="lv.100" textFill="#d70707" />
+            <ImageView fx:id="sprite2" fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Sprites/SceptileEnemy.png" />
                </image>
             </ImageView>
-            <ProgressBar prefHeight="20.0" prefWidth="172.0" progress="1.0" />
+            <Text fx:id="health2" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" />
+            <ProgressBar fx:id="currentHealth2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="139.0" progress="0.0" style="-fx-background-color: RED;" />
          </children>
-      </FlowPane>
+      </HBox>
+      <HBox fx:id="pokemon4" layoutX="303.0" layoutY="101.0" prefHeight="68.0" prefWidth="297.0">
+         <children>
+            <CheckBox fx:id="checkBox4" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" text="lv.100" textFill="#d70707" />
+            <ImageView fx:id="sprite4" fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Sprites/StaraptorEnemy.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="health4" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" />
+            <ProgressBar fx:id="currentHealth4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="139.0" progress="0.0" style="-fx-background-color: RED;" />
+         </children>
+      </HBox>
+      <HBox fx:id="pokemon6" layoutX="303.0" layoutY="163.0" prefHeight="68.0" prefWidth="297.0">
+         <children>
+            <CheckBox fx:id="checkBox6" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="lv.100" textFill="#d70707" />
+            <ImageView fx:id="sprite6" fitHeight="37.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Sprites/VolcaronaEnemy.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="health6" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" />
+            <ProgressBar fx:id="currentHealth6" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="139.0" progress="0.0" style="-fx-background-color: RED;" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

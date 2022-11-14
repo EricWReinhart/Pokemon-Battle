@@ -24,5 +24,6 @@ module csci205_final_project{
     exports org.Fearsome_Foursome.Screens.Menu;
     opens org.Fearsome_Foursome.Screens.Menu to javafx.fxml;
 
-
+    exports org.Fearsome_Foursome.Screens.View;
+    opens org.Fearsome_Foursome.Screens.View to javafx.fxml;
 }
