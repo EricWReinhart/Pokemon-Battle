@@ -14,7 +14,7 @@
  *
  * ****************************************
  */
-package org.Fearsome_Foursome.Screens.Selection;
+package org.Fearsome_Foursome.Application.Controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;

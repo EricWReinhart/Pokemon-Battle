@@ -16,7 +16,7 @@
  *
  * *****************************************/
 
-package org.Fearsome_Foursome.Screens.Arena;
+package org.Fearsome_Foursome.Application.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

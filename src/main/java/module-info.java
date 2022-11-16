@@ -15,12 +15,9 @@ module csci205_final_project{
     exports org.Fearsome_Foursome.Moves;
     opens org.Fearsome_Foursome.Moves to javafx.fxml;
 
-    exports org.Fearsome_Foursome.Screens.Menu;
-    opens org.Fearsome_Foursome.Screens.Menu to javafx.fxml;
+    exports org.Fearsome_Foursome.Application;
+    opens org.Fearsome_Foursome.Application to javafx.fxml;
 
-    exports org.Fearsome_Foursome.Screens.Selection;
-    opens org.Fearsome_Foursome.Screens.Selection to javafx.fxml;
-
-    exports org.Fearsome_Foursome.Screens.Arena;
-    opens org.Fearsome_Foursome.Screens.Arena to javafx.fxml;
+    exports org.Fearsome_Foursome.Application.Controllers;
+    opens org.Fearsome_Foursome.Application.Controllers to javafx.fxml;
 }
