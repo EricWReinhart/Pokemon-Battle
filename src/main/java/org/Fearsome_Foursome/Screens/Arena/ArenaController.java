@@ -16,13 +16,13 @@
  *
  * *****************************************/
 
-package org.Fearsome_Foursome.GameMVC.Controller;
+package org.Fearsome_Foursome.Screens.Arena;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 
-public class GameController {
+public class ArenaController {
 
     @FXML
     private ProgressBar enemyHealthProgressBar;

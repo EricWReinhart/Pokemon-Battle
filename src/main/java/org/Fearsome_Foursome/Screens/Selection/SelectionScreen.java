@@ -1,4 +1,4 @@
-package org.Fearsome_Foursome.Screens.View;
+package org.Fearsome_Foursome.Screens.Selection;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ViewScreen extends Application {
+public class SelectionScreen extends Application {
 
     public static void main(String[] args) {
         launch(args);

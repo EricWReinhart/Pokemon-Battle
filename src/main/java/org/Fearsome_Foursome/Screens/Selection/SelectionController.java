@@ -14,7 +14,7 @@
  *
  * ****************************************
  */
-package org.Fearsome_Foursome.Screens.View;
+package org.Fearsome_Foursome.Screens.Selection;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,7 +26,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-public class ViewController {
+public class SelectionController {
 
     @FXML
     private ResourceBundle resources;
