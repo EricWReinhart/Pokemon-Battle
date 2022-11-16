@@ -39,6 +39,15 @@
          <padding>
             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
          </padding></ProgressBar>
+      <ImageView fitHeight="103.0" fitWidth="110.0" layoutX="135.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Sprites/SceptileAlly.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="79.0" fitWidth="90.0" layoutX="342.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Sprites/SnorlaxEnemy.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
-
