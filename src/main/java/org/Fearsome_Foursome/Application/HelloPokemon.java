@@ -8,6 +8,33 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * We need an enumeration for all of our Scenes
+ */
+enum GameScenes {
+
+    /** There exist exactly 3 GameScenes objects - here they are */
+    PokemonArena("/pokemonArena.fxml"),
+    PokemonSelection("/pokemonSelection.fxml"),
+    PokemonMenu("/pokemonMenu.fxml");
+
+    /** Attribute for a string which can load the scene */
+    private String fileName;
+
+    /**
+     * Not just anyone can call this constructor - set the fileName attribute
+     * @param fileName
+     */
+    private GameScenes(String fileName){
+        this.fileName = fileName;
+    }
+
+    /** Simple method to return the file name of the scene */
+    public String getFileName() {
+        return fileName;
+    }
+}
+
 public class HelloPokemon extends Application {
 
     public static void main(String[] args) {
