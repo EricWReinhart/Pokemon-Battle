@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.Controllers.ArenaController;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 // SOURCE FOR SCENE SWITCHING METHOD:
 // https://github.com/bkingcs/MultiSceneTest

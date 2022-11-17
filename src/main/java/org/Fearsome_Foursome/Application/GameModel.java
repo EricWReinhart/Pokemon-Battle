@@ -19,6 +19,7 @@
 package org.Fearsome_Foursome.Application;
 
 import org.Fearsome_Foursome.Battle.Arena;
+import org.Fearsome_Foursome.Battle.Player;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 public class GameModel {
@@ -33,13 +34,15 @@ public class GameModel {
         arena = new Arena();
     }
 
-    public Creature getPlayerCreatureUpFront() {
-        return arena.getPlayerCreatureUpFront();
-    }
+    public Arena getArena() { return arena; }
 
-    public Creature getEnemyCreatureUpFront() {
-        return arena.getEnemyCreatureUpFront();
-    }
+    public Player getPlayer() { return arena.getPlayer(); }
+
+    public Player getEnemy() { return arena.getEnemy(); }
+
+    public Creature getPlayerCreatureUpFront() { return arena.getPlayerCreatureUpFront(); }
+
+    public Creature getEnemyCreatureUpFront() { return arena.getEnemyCreatureUpFront(); }
 
 
 }

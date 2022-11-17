@@ -44,29 +44,25 @@ public class Arena {
      * @param enemyTeamIdx an index for the enemy to choose
      * @return true or false depending on if the Pokemon is alive or dead
      */
-    private boolean setUpCombatants(int playerTeamIdx, int enemyTeamIdx){
+    public boolean setUpCombatants(int playerTeamIdx, int enemyTeamIdx){
         // setting up the current Pokémon at a specific index making sure the creature is alive
-        if(!(this.player.getPokeCreature(playerTeamIdx).equals(null))){
+        if(!this.player.potentialCreatureIsDead(playerTeamIdx)){
             this.playerCreatureUpFront = this.player.getPokeCreature(playerTeamIdx);
-
-            // setting the targets
-            this.playerCreatureUpFront.setTarget(this.enemyCreatureUpFront);
-            this.enemyCreatureUpFront.setTarget(this.playerCreatureUpFront);
         }
 
         // do the same for enemy creature
-        if(!(this.enemy.getPokeCreature(enemyTeamIdx).equals(null))){
+        if(!this.enemy.potentialCreatureIsDead(enemyTeamIdx)){
             this.enemyCreatureUpFront = this.enemy.getPokeCreature(enemyTeamIdx);
-
-            // setting the targets
-            this.enemyCreatureUpFront.setTarget(this.playerCreatureUpFront);
-            this.playerCreatureUpFront.setTarget(this.enemyCreatureUpFront);
         }
 
         // if either Pokemon is dead, return false
         else{
             return false;
         }
+
+        // setting the targets
+        this.enemyCreatureUpFront.setTarget(this.playerCreatureUpFront);
+        this.playerCreatureUpFront.setTarget(this.enemyCreatureUpFront);
 
         // If both creatures that you are trying to select are alive
        return true;
@@ -133,16 +129,14 @@ public class Arena {
         }
     }
 
-    public Arena getArena() {
-        return this;
-    }
+    public Arena getArena() { return this; }
 
-    public Creature getPlayerCreatureUpFront() {
-        return playerCreatureUpFront;
-    }
+    public Player getPlayer() { return player; }
 
-    public Creature getEnemyCreatureUpFront() {
-        return enemyCreatureUpFront;
-    }
+    public Player getEnemy() { return enemy; }
+
+    public Creature getPlayerCreatureUpFront() { return playerCreatureUpFront; }
+
+    public Creature getEnemyCreatureUpFront() { return enemyCreatureUpFront; }
 }
    
