@@ -8,46 +8,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.ArenaController">
-   <children>
-      <ImageView fitHeight="311.0" fitWidth="661.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-45.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@Images/forestBackGround.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="79.0" fitWidth="90.0" layoutX="342.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Sprites/SnorlaxEnemy.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="103.0" fitWidth="110.0" layoutX="135.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Sprites/SceptileAlly.png" />
-         </image>
-      </ImageView>
-      <ProgressBar fx:id="enemyHealthProgressBar" layoutX="23.0" layoutY="18.0" prefHeight="14.0" prefWidth="170.0" progress="1.0" style="-fx-accent: green;" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
-         <padding>
-            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-         </padding></ProgressBar>
-      <FlowPane layoutX="406.0" layoutY="230.0" prefHeight="156.0" prefWidth="246.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-28.0">
-         <children>
-            <ProgressBar fx:id="selfHealthProgressBar1" prefHeight="14.0" prefWidth="170.0" progress="1.0" style="-fx-accent: green;">
-               <FlowPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </FlowPane.margin>
-               <padding>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </padding>
-            </ProgressBar>
-            <Button fx:id="swapPokemonButton" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="198.0" text="Swap Pokemon" />
-            <Button fx:id="moveButton1" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 1" />
-            <Button fx:id="moveButton2" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 2" />
-            <Button fx:id="moveButton3" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
-            <Button fx:id="moveButton4" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </FlowPane>
-   </children>
+<AnchorPane prefHeight="311.0" prefWidth="161.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.ArenaController">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="1000.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@Images/forestBackGround.jpg" />
+            </image>
+        </ImageView>
+        <FlowPane layoutX="406.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <ProgressBar fx:id="selfHealthProgressBar1" prefHeight="14.0" prefWidth="170.0" progress="1.0" style="-fx-accent: green;">
+                    <FlowPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </FlowPane.margin>
+                    <padding>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                    </padding>
+                </ProgressBar>
+                <Button fx:id="swapPokemonButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#switchToSelection" text="Swap Pokemon" />
+                <Button fx:id="moveButton1" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 1" />
+                <Button fx:id="moveButton2" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 2" />
+                <Button fx:id="moveButton3" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
+                <Button fx:id="moveButton4" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </FlowPane>
+        <ProgressBar fx:id="enemyHealthProgressBar" layoutX="23.0" layoutY="18.0" prefHeight="14.0" prefWidth="170.0" progress="1.0" style="-fx-accent: green;" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
+            <padding>
+                <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+            </padding></ProgressBar>
+        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="218.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Sprites/SceptileAlly.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="background" fitHeight="110.0" fitWidth="175.0" layoutX="604.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-size: contain;">
+            <image>
+                <Image url="@Sprites/SnorlaxEnemy.png" />
+            </image>
+        </ImageView>
+    </children>
 </AnchorPane>
