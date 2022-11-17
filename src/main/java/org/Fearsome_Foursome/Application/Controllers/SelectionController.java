@@ -16,7 +16,6 @@
  */
 package org.Fearsome_Foursome.Application.Controllers;
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -197,6 +197,15 @@ public class SelectionController {
     public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
+    }
+
+    /**
+     * Method to return to the home screen
+     * @param mouseEvent
+     */
+    public void returnHome(MouseEvent mouseEvent) {
+        Stage stage = (Stage)background.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 }
 
