@@ -16,15 +16,21 @@
  */
 package org.Fearsome_Foursome.Application.Controllers;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.Fearsome_Foursome.Application.HelloPokemon;
 
 public class SelectionController {
 
@@ -175,5 +181,22 @@ public class SelectionController {
 
     }
 
+    /**
+     * Method to select the Pokemon and switch the arena
+     * @param mouseEvent
+     */
+    public void selectAndSwitchToArena(javafx.scene.input.MouseEvent mouseEvent) {
+        // something, something
+        this.switchToArena(mouseEvent);
+    }
+
+    /**
+     * Method to switch back to the arena
+     * @param mouseEvent
+     */
+    public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
+        Stage stage = (Stage)background.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
+    }
 }
 

@@ -12,14 +12,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.MenuController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.MenuController">
    <children>
-      <ImageView fx:id="bird" fitHeight="610.0" fitWidth="1001.0">
+      <ImageView fx:id="bird" fitHeight="600.0" fitWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@Images/background.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnStart" layoutX="446.0" layoutY="302.0" mnemonicParsing="false" text="Start" textAlignment="CENTER" textFill="#141414">
+      <Button fx:id="btnStart" layoutX="450.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#showArena" text="Start" textAlignment="CENTER" textFill="#141414">
          <font>
             <Font size="30.0" />
          </font>
@@ -53,14 +53,14 @@
             </RadialGradient>
          </stroke>
       </Text>
-      <Text fx:id="author" layoutX="382.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@2022 CSCI205 Fearsome Foursome" />
+      <Text fx:id="author" layoutX="382.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@2022 CSCI205 Fearsome Foursome" AnchorPane.bottomAnchor="0.0" />
       <Text fx:id="tm" fill="#e1b507" layoutX="646.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TM" />
       <Text fx:id="version" fill="#161617" layoutX="391.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gale of Darkness" textAlignment="CENTER" wrappingWidth="224.07763671875">
          <font>
             <Font size="23.0" />
          </font>
       </Text>
-      <ImageView fx:id="dragonite" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="dragonite" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@Images/dragonite.png" />
          </image>
@@ -70,7 +70,7 @@
             <Image url="@Images/pikachu.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="grass3" fitHeight="150.0" fitWidth="200.0" layoutX="861.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="grass3" fitHeight="150.0" fitWidth="200.0" layoutX="861.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0">
          <image>
             <Image url="@Images/grass3.png" />
          </image>

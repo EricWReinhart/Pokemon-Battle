@@ -16,6 +16,7 @@
  */
 package org.Fearsome_Foursome.Application.Controllers;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import org.Fearsome_Foursome.Application.HelloPokemon;
 
 public class MenuController {
 
@@ -90,6 +93,9 @@ public class MenuController {
 
     }
 
-
-
+    public void showArena(javafx.scene.input.MouseEvent mouseEvent) {
+        // Get the Stage object of this button
+        Stage stage = (Stage) btnStart.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
+    }
 }

@@ -21,6 +21,9 @@ package org.Fearsome_Foursome.Application.Controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import org.Fearsome_Foursome.Application.HelloPokemon;
 
 public class ArenaController {
 
@@ -56,4 +59,12 @@ public class ArenaController {
 
     }
 
+    /**
+     * Switch to the Pokemon Selection screen
+     * @param mouseEvent
+     */
+    public void switchToSelection(MouseEvent mouseEvent) {
+        Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_SELECTION);
+    }
 }
