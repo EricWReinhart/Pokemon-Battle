@@ -133,5 +133,16 @@ public class Arena {
         }
     }
 
+    public Arena getArena() {
+        return this;
+    }
+
+    public Creature getPlayerCreatureUpFront() {
+        return playerCreatureUpFront;
+    }
+
+    public Creature getEnemyCreatureUpFront() {
+        return enemyCreatureUpFront;
+    }
 }
    

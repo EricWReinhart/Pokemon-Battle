@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.Fearsome_Foursome.Application.Controllers.ArenaController;
 
 import java.io.IOException;
 
@@ -15,6 +16,9 @@ public class HelloPokemon extends Application {
 
     /** Static model to be used by MenuController, ArenaController, SelectionController */
     public static GameModel globalModel;
+
+    /** Stores a reference to the Arena Controller */
+    private ArenaController arenaController;
 
     /**
      * We need an enumeration for all of our Scenes - a public inner class
@@ -52,8 +56,15 @@ public class HelloPokemon extends Application {
         // initialize the global model
         globalModel = new GameModel();
 
+        // initialize the Arena Controller
+        arenaController = new ArenaController(globalModel);
+
         // Load the FXML file. Obtain the root of the scene graph
         loadScene(primaryStage, GameScenes.POKEMON_MENU);
+
+        // Set up both Pokemon on the Arena
+        arenaController.setUpPokemon();
+            // TODO: this same method is called whenever you swap in a new Pokemon
 
         // Set up the stage and show it
         primaryStage.setTitle("The Amazing Pokemon!");

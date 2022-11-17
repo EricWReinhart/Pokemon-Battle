@@ -23,12 +23,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.Fearsome_Foursome.Application.GameModel;
 import org.Fearsome_Foursome.Application.HelloPokemon;
+import org.Fearsome_Foursome.Creatures.Creature;
+import org.Fearsome_Foursome.Moves.Move;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ArenaController {
 
     @FXML
     private ProgressBar enemyHealthProgressBar;
+    @FXML
+    private Button btnQuit;
 
     @FXML
     private Button moveButton1;
@@ -56,15 +64,40 @@ public class ArenaController {
         assert moveButton4 != null : "fx:id=\"moveButton4\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert selfHealthProgressBar1 != null : "fx:id=\"selfHealthProgressBar1\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert swapPokemonButton != null : "fx:id=\"swapPokemonButton\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert btnQuit != null : "fx:id=\"btnQuit\" was not injected: check your FXML file 'pokemonArena.fxml'.";
 
     }
 
+    /** Reference to the gameModel */
+    private GameModel gameModel;
+
+    private Creature playerCreatureUpFront;
+    private Creature enemyCreatureUpFront;
+
     /**
-     * Switch to the Pokemon Selection screen
+     * Constructor for Arena Controller that stores a reference to the gameModel
+     * @param gameModel the game model
+     */
+    public ArenaController(GameModel gameModel) {
+        gameModel = gameModel;
+        playerCreatureUpFront = gameModel.getPlayerCreatureUpFront();
+        enemyCreatureUpFront = gameModel.getEnemyCreatureUpFront();
+    }
+
+    public void setUpPokemon() {
+        moveButton1.setText(playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(0).getName());
+//        moveButton1.
+
+
+        }
+
+    /**
+     * Switch to the Pokemon Selection screen and set up the current Pokemon on the arena
      * @param mouseEvent
      */
     public void switchToSelection(MouseEvent mouseEvent) {
         Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
+        setUpPokemon();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_SELECTION);
     }
 
@@ -73,7 +106,7 @@ public class ArenaController {
      * @param mouseEvent
      */
     public void goHome(MouseEvent mouseEvent) {
-        Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
+        Stage stage = (Stage)btnQuit.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 }
