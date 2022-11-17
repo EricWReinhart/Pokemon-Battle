@@ -13,6 +13,9 @@ import java.io.IOException;
 
 public class HelloPokemon extends Application {
 
+    /** Static model to be used by MenuController, ArenaController, SelectionController */
+    public static GameModel globalModel;
+
     /**
      * We need an enumeration for all of our Scenes - a public inner class
      */
@@ -46,6 +49,9 @@ public class HelloPokemon extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        // initialize the global model
+        globalModel = new GameModel();
+
         // Load the FXML file. Obtain the root of the scene graph
         loadScene(primaryStage, GameScenes.POKEMON_MENU);
 
