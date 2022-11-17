@@ -67,4 +67,13 @@ public class ArenaController {
         Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_SELECTION);
     }
+
+    /**
+     * Return to home screen
+     * @param mouseEvent
+     */
+    public void goHome(MouseEvent mouseEvent) {
+        Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
+    }
 }

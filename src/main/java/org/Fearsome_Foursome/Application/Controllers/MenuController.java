@@ -93,6 +93,10 @@ public class MenuController {
 
     }
 
+    /**
+     * Go to the arena
+     * @param mouseEvent
+     */
     public void showArena(javafx.scene.input.MouseEvent mouseEvent) {
         // Get the Stage object of this button
         Stage stage = (Stage) btnStart.getScene().getWindow();
