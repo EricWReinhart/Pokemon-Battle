@@ -22,8 +22,8 @@ package org.Fearsome_Foursome.Moves;
 public enum SupportType {
 
     /** Create the only {@link SupportType} objects in existence */
-    Healing(CreatureAttribute.Health, 50),
-    Speeding(CreatureAttribute.Speed, 50);
+    Healing(CreatureAttribute.Health, 150),
+    Speeding(CreatureAttribute.Speed, 100);
 
     /** Which attribute will this {@link SupportType} correspond to increasing, and by how much? */
     private CreatureAttribute attributeToModify;
