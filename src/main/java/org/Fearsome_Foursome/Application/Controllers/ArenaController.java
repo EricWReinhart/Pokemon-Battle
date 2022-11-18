@@ -23,12 +23,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.Fearsome_Foursome.Application.GameModel;
 import org.Fearsome_Foursome.Application.HelloPokemon;
+import org.Fearsome_Foursome.Battle.Arena;
+import org.Fearsome_Foursome.Battle.Player;
+import org.Fearsome_Foursome.Creatures.Creature;
+import org.Fearsome_Foursome.Moves.Move;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ArenaController {
 
     @FXML
     private ProgressBar enemyHealthProgressBar;
+    @FXML
+    private Button btnQuit;
 
     @FXML
     private Button moveButton1;
@@ -56,11 +66,64 @@ public class ArenaController {
         assert moveButton4 != null : "fx:id=\"moveButton4\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert selfHealthProgressBar1 != null : "fx:id=\"selfHealthProgressBar1\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert swapPokemonButton != null : "fx:id=\"swapPokemonButton\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert btnQuit != null : "fx:id=\"btnQuit\" was not injected: check your FXML file 'pokemonArena.fxml'.";
 
     }
 
     /**
-     * Switch to the Pokemon Selection screen
+     * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
+     */
+    public void setUpPokemon(GameModel gameModel, int playerTeamidx, int enemyTeamidx) {
+        Arena arena = gameModel.getArena();
+        Player player = gameModel.getPlayer();
+        Player enemy = gameModel.getEnemy();
+
+        // Reference to player & enemy Pokemon up front for the first turn
+        Creature playerCreatureUpFront = player.getCreatureArray()[playerTeamidx];
+        Creature enemyCreatureUpFront = enemy.getCreatureArray()[enemyTeamidx];
+
+        // Set up combatants for battle
+        arena.getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
+
+
+        // Reference to the current 2 Pokemon up front
+        // TODO: make sure that whenever pokemon are swapped out, the Arena object updates the correct
+            // TODO: Pokemon before this is called:
+    //        playerCreatureUpFront = arena.getPlayerCreatureUpFront();
+    //        enemyCreatureUpFront = arena.getEnemyCreatureUpFront();
+
+        // Display the correct name, sprite, and health of both the player's and the enemy's Pokemon
+//        setUpNameSpriteHealth();
+
+        // Display the correct moves of the player's Pokemon
+        setUpMoves(playerCreatureUpFront);
+    }
+
+
+    public void setUpNameSpriteHealth() {
+    }
+
+    /**
+     * Set up the name, color, and description for each of the 4 moves of that Pokemon
+     */
+    public void setUpMoves(Creature playerCreatureUpFront) {
+        // TODO: add tooltips for each move
+        moveButton1.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getName());
+        moveButton1.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getColor());
+
+        moveButton2.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(1).getName());
+        moveButton2.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(1).getColor());
+
+        moveButton3.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(2).getName());
+        moveButton3.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(2).getColor());
+
+        moveButton4.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(3).getName());
+        moveButton4.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(3).getColor());
+    }
+
+
+    /**
+     * Switch to the Pokemon Selection screen and set up the current Pokemon on the arena
      * @param mouseEvent
      */
     public void switchToSelection(MouseEvent mouseEvent) {
@@ -73,7 +136,7 @@ public class ArenaController {
      * @param mouseEvent
      */
     public void goHome(MouseEvent mouseEvent) {
-        Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
+        Stage stage = (Stage)btnQuit.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 }

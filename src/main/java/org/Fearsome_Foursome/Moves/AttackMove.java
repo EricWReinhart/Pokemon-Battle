@@ -47,7 +47,7 @@ public class AttackMove implements Move{
     private final String description;
 
     /** Color associated with this move */
-    private final Color color;
+    private final String color;
 
     /**
      * Constructor for {@link AttackMove} class, which just initializes all the attributes
@@ -55,7 +55,7 @@ public class AttackMove implements Move{
      * @param weakAgainst {@link List}
      * @param name {@link String}
      */
-    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst, String name, String description, Color color){
+    protected AttackMove(AttackType type, Class strongAgainst, List weakAgainst, String name, String description, String color){
         this.type = type;
         this.accuracy = type.getAccuracy();
         this.damage = type.getDamage();
@@ -86,10 +86,10 @@ public class AttackMove implements Move{
 
     /**
      * Override for the required 'getColor' method which will return the corresponding color of this {@link AttackMove}
-     * @return {@link Color}
+     * @return {@link String}
      */
     @Override
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 

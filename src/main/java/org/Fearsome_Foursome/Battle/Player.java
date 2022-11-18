@@ -26,7 +26,7 @@ public class Player {
     /**
      * An ArrayList of Creatures
      */
-    private Creature[] creatureArrayList = new Creature[6];
+    private Creature[] creatureArray = new Creature[6];
 
     /**
      * Keeps track of how many of of the {@link Player}'s {@link Creature}s are dead
@@ -38,28 +38,34 @@ public class Player {
      */
     public Player(){
         //Creating a Fire creature for team
-        creatureArrayList[0] = new FireCreature(0);
-        creatureArrayList[1] = new FireCreature(1);
+        creatureArray[0] = new FireCreature(0);
+        creatureArray[1] = new FireCreature(1);
 
         //Creating a water Creature for team
-        creatureArrayList[2] = new WaterCreature(0);
-        creatureArrayList[3] = new WaterCreature(1);
+        creatureArray[2] = new WaterCreature(0);
+        creatureArray[3] = new WaterCreature(1);
 
         //Creating a water Creature for team
-        creatureArrayList[4] = new GrassCreature(0);
-        creatureArrayList[5] = new GrassCreature(1);
+        creatureArray[4] = new GrassCreature(0);
+        creatureArray[5] = new GrassCreature(1);
     }
 
     /** Allows use to get a poke creature at array*/
     public Creature getPokeCreature(int i){
-        Creature potentialCreature = creatureArrayList[i];
+        Creature potentialCreature = creatureArray[i];
 
-        // don't want to return a dead creature
-        if (potentialCreature.isDead())
-            return null;
+//        // don't want to return a dead creature
+//        if (potentialCreature.isDead()) {
+//            return null;
+//        }
 
         // the creature is alive - that's fine
         return potentialCreature;
+    }
+    // TODO: added this and changed that ^
+    public boolean potentialCreatureIsDead(int i) {
+        Creature potentialCreature = creatureArray[i];
+        return potentialCreature.isDead();
     }
 
     /** Allows incrementation of the number of dead {@link Creature}s */
@@ -69,5 +75,9 @@ public class Player {
 
     /** Getter for the amount of recorded dead {@link Creature}s */
     public int getDeadCount() { return deadCount; }
+
+    public Creature[] getCreatureArray() {
+        return creatureArray;
+    }
 }
    

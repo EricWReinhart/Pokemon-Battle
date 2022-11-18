@@ -32,47 +32,47 @@ import java.util.Arrays;
 public class Moves {
 
     // SUPPORT move Agility to raise user's speed
-    public static final Move Agility = new SupportMove(SupportType.Speeding, "AGILITY", "Type: Normal\nAttribute: Speed\n Amount: 100", Color.ORANGE);
+    public static final Move Agility = new SupportMove(SupportType.Speeding, "AGILITY", "Type: Normal\nAttribute: Speed\n Amount: 100", "orange");
 
     // SUPPORT move Recover to heal the user
-    public static final Move Recover = new SupportMove(SupportType.Healing, "RECOVER", "Type: Normal\nAttribute: Health\n Amount: 150", Color.GREEN);
+    public static final Move Recover = new SupportMove(SupportType.Healing, "RECOVER", "Type: Normal\nAttribute: Health\n Amount: 150", "orange");
 
     // Strong Normal ATTACK move Hyperbeam
     public static final Move Hyperbeam = new AttackMove(AttackType.Strong, null, null,
-                                                    "HYPERBEAM", "Type: Normal\nDamage: 150\nAccuracy: 80", Color.YELLOW);
+                                                    "HYPERBEAM", "Type: Normal\nDamage: 150\nAccuracy: 80", "white");
 
     // Strong Water ATTACK move Surf
     public static final Move Surf = new AttackMove(AttackType.Strong, FireCreature.class,
                                                 Arrays.asList(GrassCreature.class, WaterCreature.class),
-                                            "SURF", "Type: Water\nDamage: 150\nAccuracy: 80", Color.AQUAMARINE);
+                                            "SURF", "Type: Water\nDamage: 150\nAccuracy: 80", "blue");
 
     // Strong Grass ATTACK move LeafBlade
     public static final Move LeafBlade = new AttackMove(AttackType.Strong, WaterCreature.class,
                                                 Arrays.asList(FireCreature.class, GrassCreature.class),
-                                                    "LEAFBLADE", "Type: Grass\nDamage: 150\nAccuracy: 80", Color.GREENYELLOW);
+                                                    "LEAFBLADE", "Type: Grass\nDamage: 150\nAccuracy: 80", "green");
 
     // Strong Fire ATTACK move Flamethrower
     public static final Move Flamethrower = new AttackMove(AttackType.Strong, GrassCreature.class,
                                                 Arrays.asList(WaterCreature.class, FireCreature.class),
-                                                    "FLAMETHROWER", "Type: Fire\nDamage: 150\nAccuracy: 80", Color.RED);
+                                                    "FLAMETHROWER", "Type: Fire\nDamage: 150\nAccuracy: 80", "red");
 
     // Weak Normal ATTACK move Tackle
     public static final Move Tackle = new AttackMove(AttackType.Weak, null, null,
-                                                "Type: Normal\nDamage: 100\nAccuracy: 100", "TACKLE", Color.YELLOW);
+                                                    "TACKLE","Type: Normal\nDamage: 100\nAccuracy: 100",  "white");
 
     // Weak Water ATTACK move Watergun
     public static final Move Watergun = new AttackMove(AttackType.Weak, FireCreature.class,
                                                 Arrays.asList(GrassCreature.class, WaterCreature.class),
-                                                "Type: Water\nDamage: 100\nAccuracy: 100", "WATERGUN", Color.AQUAMARINE);
+                                                "WATERGUN", "Type: Water\nDamage: 100\nAccuracy: 100", "blue");
 
     // Weak Grass ATTACK move Vinewhip
     public static final Move Vinewhip = new AttackMove(AttackType.Weak, WaterCreature.class,
                                                 Arrays.asList(FireCreature.class, GrassCreature.class),
-                                                "Type: Grass\nDamage: 100\nAccuracy: 100", "VINEWHIP", Color.YELLOWGREEN);
+                                                "VINEWHIP", "Type: Grass\nDamage: 100\nAccuracy: 100", "green");
 
     // Weak Fire ATTACK move Ember
     public static final Move Ember = new AttackMove(AttackType.Weak, GrassCreature.class,
                                                Arrays.asList(WaterCreature.class, FireCreature.class),
-                                                "Type: Fire\nDamage: 100\nAccuracy: 100", "EMBER", Color.RED);
+                                                "EMBER", "Type: Fire\nDamage: 100\nAccuracy: 100",  "red");
 
 }
