@@ -70,69 +70,55 @@ public class ArenaController {
 
     }
 
-    private Arena arena;
-    private Player player;
-    private Player enemy;
-    private Creature playerCreatureUpFront;
-    private Creature enemyCreatureUpFront;
-
-    /**
-     * Constructor for Arena Controller that creates references to the player and the enemy, their respective Pokemon
-     * up front, and set the 2 Pokemon up for battle
-     * @param gameModel the game model
-     */
-    public ArenaController(GameModel gameModel) {
-        arena = gameModel.getArena();
-        player = gameModel.getPlayer();
-        enemy = gameModel.getEnemy();
-
-        // Reference to player & enemy Pokemon up front for the first turn
-        playerCreatureUpFront = player.getCreatureArray()[0];
-        enemyCreatureUpFront = enemy.getCreatureArray()[0];
-
-        // Set up combatants for battle
-        // TODO: changed setupcombatants to public instead of private
-        arena.getArena().setUpCombatants(0,0);
-    }
-
     /**
      * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
      */
-    public void setUpPokemon() {
+    public void setUpPokemon(GameModel gameModel, int playerTeamidx, int enemyTeamidx) {
+        Arena arena = gameModel.getArena();
+        Player player = gameModel.getPlayer();
+        Player enemy = gameModel.getEnemy();
+
+        // Reference to player & enemy Pokemon up front for the first turn
+        Creature playerCreatureUpFront = player.getCreatureArray()[playerTeamidx];
+        Creature enemyCreatureUpFront = enemy.getCreatureArray()[enemyTeamidx];
+
+        // Set up combatants for battle
+        arena.getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
+
+
         // Reference to the current 2 Pokemon up front
         // TODO: make sure that whenever pokemon are swapped out, the Arena object updates the correct
             // TODO: Pokemon before this is called:
-        playerCreatureUpFront = arena.getPlayerCreatureUpFront();
-        enemyCreatureUpFront = arena.getEnemyCreatureUpFront();
+    //        playerCreatureUpFront = arena.getPlayerCreatureUpFront();
+    //        enemyCreatureUpFront = arena.getEnemyCreatureUpFront();
 
         // Display the correct name, sprite, and health of both the player's and the enemy's Pokemon
 //        setUpNameSpriteHealth();
 
         // Display the correct moves of the player's Pokemon
-        setUpMoves();
+        setUpMoves(playerCreatureUpFront);
     }
 
 
     public void setUpNameSpriteHealth() {
-
     }
 
     /**
-     * Set up the move name, color, and description
+     * Set up the name, color, and description for each of the 4 moves of that Pokemon
      */
-    public void setUpMoves() {
+    public void setUpMoves(Creature playerCreatureUpFront) {
         // TODO: add tooltips for each move
-        moveButton1.setText(playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(0).getName());
-        moveButton1.setStyle("-fx-background-color: " + playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(0).getColor());
+        moveButton1.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getName());
+        moveButton1.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getColor());
 
-        moveButton2.setText(playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(1).getName());
-        moveButton2.setStyle("-fx-background-color: " + playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(1).getColor());
+        moveButton2.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(1).getName());
+        moveButton2.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(1).getColor());
 
-        moveButton3.setText(playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(2).getName());
-        moveButton3.setStyle("-fx-background-color: " + playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(2).getColor());
+        moveButton3.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(2).getName());
+        moveButton3.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(2).getColor());
 
-        moveButton4.setText(playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(3).getName());
-        moveButton4.setStyle("-fx-background-color: " + playerCreatureUpFront.getCREATURE_MOVE_MAP().get(Creature.class).get(3).getColor());
+        moveButton4.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(3).getName());
+        moveButton4.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(3).getColor());
     }
 
 
@@ -142,7 +128,6 @@ public class ArenaController {
      */
     public void switchToSelection(MouseEvent mouseEvent) {
         Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
-        setUpPokemon();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_SELECTION);
     }
 

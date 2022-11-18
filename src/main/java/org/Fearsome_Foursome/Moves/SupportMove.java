@@ -35,15 +35,15 @@ public class SupportMove implements Move {
     /** Description corresponding to this {@link Move} */
     private final String description;
 
-    /** {@link Color} corresponding to this {@link Move} */
-    private final Color color;
+    /** {@link String} corresponding to this {@link Move} */
+    private final String color;
 
     /**
      * Constructor for the {@link SupportMove} class, which initializes attributeToChange and bonus
      * @param type {@link SupportType}
      * @param name {@link String}
      */
-    public SupportMove(SupportType type, String name, String description, Color color){
+    public SupportMove(SupportType type, String name, String description, String color){
         this.attributeToChange = type.getAttributeToModify();
         this.bonus = type.getAmountToIncrease();
         this.name = name;
@@ -70,13 +70,11 @@ public class SupportMove implements Move {
     }
 
     /**
-     * Overriden method to return the {@link Color} of this {@link SupportMove}
-     * @return {@link Color}
+     * Overridden method to return the {@link String} of this {@link SupportMove}
+     * @return {@link String}
      */
     @Override
-    public Color getColor() {
-        return color;
-    }
+    public String getColor() { return color; }
 
     /**
      * What does this move DO to all parties involved?

@@ -39,10 +39,10 @@ public interface Move {
     String getDescription();
 
     /**
-     * Every {@link Move} implementation must have a method to return a {@link Color} corresponding to its name
-     * @return {@link Color}
+     * Every {@link Move} implementation must have a method to return a {@link String} corresponding to its name
+     * @return {@link String}
      */
-    Color getColor();
+    String getColor();
 
     /**
      *  Method that must be implemented by anything that implements the Move interface
