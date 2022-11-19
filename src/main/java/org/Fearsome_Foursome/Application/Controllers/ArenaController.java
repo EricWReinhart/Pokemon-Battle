@@ -127,8 +127,8 @@ public class ArenaController {
 
         // Adjust the progress bar to the remaining health for both Pokemon
         // TODO: test code for progress bar colors
-            enemyCreatureUpFront.damage(250); // half health enemy: yellow
-            playerCreatureUpFront.damage(400); // nearly dead player: red
+//            enemyCreatureUpFront.damage(250); // half health enemy: yellow
+//            playerCreatureUpFront.damage(400); // nearly dead player: red
         playerHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
         enemyHealthProgressBar.setProgress(1.0 * enemyCreatureUpFront.getHealth() / enemyCreatureUpFront.getMaxHealth());
 
