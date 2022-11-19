@@ -62,7 +62,7 @@ public class Player {
         // the creature is alive - that's fine
         return potentialCreature;
     }
-    // TODO: added this and changed that ^
+    // TODO: added this method commented out some of getPokeCreature method to fix an issue when setting up combatants
     public boolean potentialCreatureIsDead(int i) {
         Creature potentialCreature = creatureArray[i];
         return potentialCreature.isDead();

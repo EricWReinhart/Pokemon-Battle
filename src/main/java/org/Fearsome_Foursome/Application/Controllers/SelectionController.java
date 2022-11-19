@@ -186,6 +186,7 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void selectAndSwitchToArena(javafx.scene.input.MouseEvent mouseEvent) {
+        // TODO: finish javadoc?
         // something, something
         this.switchToArena(mouseEvent);
     }
@@ -197,6 +198,8 @@ public class SelectionController {
     public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
+        // TODO: update to the correct indices
+        HelloPokemon.arenaController.setUpPokemon(HelloPokemon.globalModel, 0, 0);
     }
 
     /**

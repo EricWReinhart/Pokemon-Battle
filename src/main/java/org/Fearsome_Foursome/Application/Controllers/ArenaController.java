@@ -53,7 +53,7 @@ public class ArenaController {
     private Button moveButton4;
 
     @FXML
-    private ProgressBar selfHealthProgressBar1;
+    private ProgressBar playerHealthProgressBar;
 
     @FXML
     private Button swapPokemonButton;
@@ -64,7 +64,7 @@ public class ArenaController {
         assert moveButton2 != null : "fx:id=\"moveButton2\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert moveButton3 != null : "fx:id=\"moveButton3\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert moveButton4 != null : "fx:id=\"moveButton4\" was not injected: check your FXML file 'pokemonArena.fxml'.";
-        assert selfHealthProgressBar1 != null : "fx:id=\"selfHealthProgressBar1\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert playerHealthProgressBar != null : "fx:id=\"selfHealthProgressBar1\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert swapPokemonButton != null : "fx:id=\"swapPokemonButton\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert btnQuit != null : "fx:id=\"btnQuit\" was not injected: check your FXML file 'pokemonArena.fxml'.";
 
@@ -74,30 +74,65 @@ public class ArenaController {
      * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
      */
     public void setUpPokemon(GameModel gameModel, int playerTeamidx, int enemyTeamidx) {
-        // Reference to player & enemy Pokemon up front for the first turn
-        Creature playerCreatureUpFront = gameModel.getPlayer().getCreatureArray()[playerTeamidx];
-        Creature enemyCreatureUpFront = gameModel.getEnemy().getCreatureArray()[enemyTeamidx];
-
-        // Set up combatants for battle
+        // Set up combatants for battle by setting the targets
         gameModel.getArena().getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
 
-        // TODO: may not need all of that ^^ think through the logic first
-
-        // Reference to the current 2 Pokemon up front
-        // TODO: make sure that whenever pokemon are swapped out, the Arena object updates the correct
-            // TODO: Pokemon before this is called:
-    //        playerCreatureUpFront = arena.getPlayerCreatureUpFront();
-    //        enemyCreatureUpFront = arena.getEnemyCreatureUpFront();
+        // Store a reference to the player & enemy Pokemon up front
+        Creature playerCreatureUpFront = gameModel.getPlayerCreatureUpFront();
+        Creature enemyCreatureUpFront = gameModel.getEnemyCreatureUpFront();
 
         // Display the correct name, sprite, and health of both the player's and the enemy's Pokemon
-//        setUpNameSpriteHealth();
+        setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
 
         // Display the correct moves of the player's Pokemon
         setUpMoves(playerCreatureUpFront);
     }
 
+    /**
+     * Set up the name, sprite, and health bar of the current Pokemon in the Arena
+     * @param playerCreatureUpFront player's current Pokemon
+     * @param enemyCreatureUpFront enemy's current Pokemon
+     */
+    public void setUpNameSpriteHealth(Creature playerCreatureUpFront, Creature enemyCreatureUpFront) {
+        // Set up the name for both Pokemon
+        // TODO: double check methods to use
+        // playerName.setText(playerCreatureUpFront.
+        // enemyName.setText(enemyCreatureUpFront.
 
-    public void setUpNameSpriteHealth() {
+        // Set up the sprite for both Pokemon
+        // TODO: how to access sprite object on the scene itself
+
+
+        // Adjust the numerical display of health for both Pokemon (example: 500/500)
+        // TODO: this
+
+        // Adjust the progress bar to the remaining health for both Pokemon
+        // TODO: test code for progress bar colors
+//            playerCreatureUpFront.damage(250); // half health: yellow
+//            playerCreatureUpFront.damage(200); // health bar < 33%: red
+        playerHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
+        enemyHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
+
+        // Change the color of the progress bar depending on the percent health remaining for both Pokemon
+        progressBarColor(playerHealthProgressBar);
+        progressBarColor(enemyHealthProgressBar);
+    }
+
+    /**
+     * Changes the color of the progress bar depending on the percent health remaining.
+     * Green: health > 67%, Yellow: 33% < health < 67%, Red: health < 33%
+     * @param progressBar player or enemy progress bar
+     */
+    public void progressBarColor(ProgressBar progressBar) {
+        if (progressBar.getProgress() > 0.67) {
+            progressBar.setStyle("-fx-accent: " + "green");
+        }
+        else if (progressBar.getProgress() > 0.33 && progressBar.getProgress() < 0.67) {
+            progressBar.setStyle("-fx-accent: " + "yellow");
+        }
+        else if (progressBar.getProgress() < 0.33) {
+            progressBar.setStyle("-fx-accent: " + "red");
+        }
     }
 
     /**
@@ -105,6 +140,7 @@ public class ArenaController {
      */
     public void setUpMoves(Creature playerCreatureUpFront) {
         // TODO: add tooltips for each move
+        // Set up the text and color of each move
         moveButton1.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getName());
         moveButton1.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getColor());
 
