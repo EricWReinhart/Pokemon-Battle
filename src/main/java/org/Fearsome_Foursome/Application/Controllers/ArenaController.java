@@ -74,17 +74,14 @@ public class ArenaController {
      * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
      */
     public void setUpPokemon(GameModel gameModel, int playerTeamidx, int enemyTeamidx) {
-        Arena arena = gameModel.getArena();
-        Player player = gameModel.getPlayer();
-        Player enemy = gameModel.getEnemy();
-
         // Reference to player & enemy Pokemon up front for the first turn
-        Creature playerCreatureUpFront = player.getCreatureArray()[playerTeamidx];
-        Creature enemyCreatureUpFront = enemy.getCreatureArray()[enemyTeamidx];
+        Creature playerCreatureUpFront = gameModel.getPlayer().getCreatureArray()[playerTeamidx];
+        Creature enemyCreatureUpFront = gameModel.getEnemy().getCreatureArray()[enemyTeamidx];
 
         // Set up combatants for battle
-        arena.getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
+        gameModel.getArena().getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
 
+        // TODO: may not need all of that ^^ think through the logic first
 
         // Reference to the current 2 Pokemon up front
         // TODO: make sure that whenever pokemon are swapped out, the Arena object updates the correct
