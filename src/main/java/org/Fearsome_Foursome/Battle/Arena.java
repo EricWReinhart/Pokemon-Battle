@@ -77,7 +77,7 @@ public class Arena {
      */
     private void turn(int playerMove, int enemyMove){
         // checking the speed to see who moves first
-        if (playerCreatureUpFront.getSpeed() > enemyCreatureUpFront.getSpeed()){
+        if (playerCreatureUpFront.getSpeed() >= enemyCreatureUpFront.getSpeed()){
             // player moves first
             playerCreatureUpFront.move(playerMove);
 

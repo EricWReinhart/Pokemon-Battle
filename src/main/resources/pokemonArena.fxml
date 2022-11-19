@@ -28,10 +28,10 @@
                     </padding>
                 </ProgressBar>
                 <Button fx:id="swapPokemonButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#switchToSelection" text="Swap Pokemon" />
-                <Button fx:id="moveButton1" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 1" />
-                <Button fx:id="moveButton2" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 2" />
-                <Button fx:id="moveButton3" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
-                <Button fx:id="moveButton4" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
+                <Button fx:id="moveButton1" mnemonicParsing="false" onMouseClicked="#chooseMoveOne" prefHeight="25.0" prefWidth="99.0" text="Move 1" />
+                <Button fx:id="moveButton2" mnemonicParsing="false" onMouseClicked="#chooseMoveTwo" prefHeight="25.0" prefWidth="99.0" text="Move 2" />
+                <Button fx:id="moveButton3" mnemonicParsing="false" onMouseClicked="#chooseMoveThree" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
+                <Button fx:id="moveButton4" mnemonicParsing="false" onMouseClicked="#chooseMoveFour" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
             </children>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

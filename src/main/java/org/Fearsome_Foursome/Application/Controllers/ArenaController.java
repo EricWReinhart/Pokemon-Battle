@@ -37,6 +37,7 @@ import org.Fearsome_Foursome.Moves.Move;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
 public class ArenaController {
 
@@ -202,24 +203,39 @@ public class ArenaController {
     // just use indexof the creature istelf in the player's array
 //        player.getPokeCreature(playerTeamIdx);
 
-    public void temp(MouseEvent mouseEvent) {
-//        int playerCreatureIndex = Arrays.asList(arena.getPlayer().getCreatureArray()).stream()
+    /**
+     * When a move is clicked, a round is started. Both Pokemon up front target each other and attack in order of
+     * speed. The player's Pokemon uses the selected move and the enemy's Pokemon uses a random move.
+     * @param mouseEvent
+     * @param playerMoveIndex index of the move that the player selects
+     */
+    public void playARound(MouseEvent mouseEvent, int playerMoveIndex) {
+        // Obtain the index of the player's and enemy's Pokemon up front in their respective teams of 6
+        int playerCreatureIndex = Arrays.asList(arena.getPlayer().getCreatureArray()).indexOf(playerCreatureUpFront);
+        int enemyCreatureIndex = Arrays.asList(arena.getEnemy().getCreatureArray()).indexOf(enemyCreatureUpFront);
 
+        // Generate a random move slot for the enemy to use
+        Random rand = new Random();
+        int enemyRandomMoveIndex = rand.nextInt(4);
 
-//                Arrays.stream(arena.getPlayer().getCreatureArray()).toArray().
-//
-//                // cars is an arraylist
-//                cars.stream()
-//                .filter(c -> c.getCylinders() == 4)
-//                .count();
-
-
-
-
-//        arena.getPlayer().getPokeCreature(playerCreatureIndex);
-
-
+        // Play a round
+        arena.playRound(playerCreatureIndex, enemyCreatureIndex, playerMoveIndex, enemyRandomMoveIndex);
+        System.out.println("Player's health: " + playerCreatureUpFront.getHealth() + "Player's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName());
+        System.out.println("Enemy's health: " + enemyCreatureUpFront.getHealth() + "Enemy's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(enemyRandomMoveIndex).getName());
+        // TODO: health is updated but not shown on view
     }
+// TODO: add the same javadoc for chooseMove methods even though all that changes is the number?
+    /**
+     * User chooses Move 1
+     * @param mouseEvent
+     */
+    public void chooseMoveOne(MouseEvent mouseEvent) { playARound(mouseEvent, 0); }
+
+    public void chooseMoveTwo(MouseEvent mouseEvent) { playARound(mouseEvent, 1); }
+
+    public void chooseMoveThree(MouseEvent mouseEvent) { playARound(mouseEvent, 2); }
+
+    public void chooseMoveFour(MouseEvent mouseEvent) { playARound(mouseEvent, 3); }
 
     /**
      * Switch to the Pokemon Selection screen and set up the current Pokemon on the arena
