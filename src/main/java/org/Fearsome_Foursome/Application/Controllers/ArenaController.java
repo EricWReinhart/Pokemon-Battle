@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,7 @@ import org.Fearsome_Foursome.Creatures.Creature;
 import org.Fearsome_Foursome.Moves.Move;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ArenaController {
@@ -88,16 +90,25 @@ public class ArenaController {
 
     }
 
+    // TODO: temp, write javadoc
+    private Arena arena;
+    private Creature playerCreatureUpFront;
+    private Creature enemyCreatureUpFront;
+
     /**
      * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
      */
     public void setUpPokemon(GameModel gameModel, int playerTeamidx, int enemyTeamidx) {
+        //TODO: temp
+        arena = gameModel.getArena();
+        arena.setUpCombatants(playerTeamidx, enemyTeamidx);
+
         // Set up combatants for battle by setting the targets
-        gameModel.getArena().getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
+// TODO: remove this(original):        gameModel.getArena().getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
 
         // Store a reference to the player & enemy Pokemon up front
-        Creature playerCreatureUpFront = gameModel.getPlayerCreatureUpFront();
-        Creature enemyCreatureUpFront = gameModel.getEnemyCreatureUpFront();
+        playerCreatureUpFront = gameModel.getPlayerCreatureUpFront();
+        enemyCreatureUpFront = gameModel.getEnemyCreatureUpFront();
 
         // Display the correct name, sprite, and health of both the player's and the enemy's Pokemon
         setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
@@ -113,17 +124,19 @@ public class ArenaController {
      */
     public void setUpNameSpriteHealth(Creature playerCreatureUpFront, Creature enemyCreatureUpFront) {
         // Display the name for both Pokemon
-         playerName.setText(playerCreatureUpFront.getName());
-         enemyName.setText(enemyCreatureUpFront.getName());
-         playerName.setEditable(false);
-         enemyName.setEditable(false);
+        playerName.setText(playerCreatureUpFront.getName());
+        enemyName.setText(enemyCreatureUpFront.getName());
+        playerName.setEditable(false);
+        enemyName.setEditable(false);
 
         // Set up the sprite for both Pokemon
         playerSprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(playerCreatureUpFront.getName())[0]));
         enemySprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(enemyCreatureUpFront.getName())[1]));
 
         // Adjust the numerical display of health for both Pokemon (example: 500/500)
-        // TODO: this
+        // TODO: add these text fields to SceneBuilder, define them above, then uncomment next 2 lines
+        // playerHealthNumeric.setText(playerCreatureUpFront.getHealth() + "/" + playerCreatureUpFront.getMaxHealth());
+        // enemyHealthNumeric.setText(enemyCreatureUpFront.getHealth() + "/" + enemyCreatureUpFront.getMaxHealth());
 
         // Adjust the progress bar to the remaining health for both Pokemon
         // TODO: test code for progress bar colors
@@ -155,24 +168,58 @@ public class ArenaController {
     }
 
     /**
-     * Set up the name, color, and description for each of the 4 moves of that Pokemon
+     * Set up the name, color, and tooltip description for each of the 4 moves of the player's Pokemon
      */
     public void setUpMoves(Creature playerCreatureUpFront) {
-        // TODO: add tooltips for each move
-        // Set up the text and color of each move
+        // Set the text, color, and tooltip with a description of each move
         moveButton1.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getName());
         moveButton1.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getColor());
+        Tooltip moveTooltip1 = new Tooltip(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(0).getDescription());
+        moveButton1.setTooltip(moveTooltip1);
 
         moveButton2.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(1).getName());
         moveButton2.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(1).getColor());
+        Tooltip moveTooltip2 = new Tooltip(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(1).getDescription());
+        moveButton2.setTooltip(moveTooltip2);
 
         moveButton3.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(2).getName());
         moveButton3.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(2).getColor());
+        Tooltip moveTooltip3 = new Tooltip(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(2).getDescription());
+        moveButton3.setTooltip(moveTooltip3);
 
         moveButton4.setText(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(3).getName());
         moveButton4.setStyle("-fx-background-color: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(3).getColor());
+        Tooltip moveTooltip4 = new Tooltip(Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(3).getDescription());
+        moveButton4.setTooltip(moveTooltip4);
     }
 
+
+
+    // TODO:on mouse click of move button, call playRound method with the index. For now, Enemy always chooses move1
+        // Must setupcombatants after every move
+
+    // first get index of the 2 Pokemon on the field
+    // just use indexof the creature istelf in the player's array
+//        player.getPokeCreature(playerTeamIdx);
+
+    public void temp(MouseEvent mouseEvent) {
+//        int playerCreatureIndex = Arrays.asList(arena.getPlayer().getCreatureArray()).stream()
+
+
+//                Arrays.stream(arena.getPlayer().getCreatureArray()).toArray().
+//
+//                // cars is an arraylist
+//                cars.stream()
+//                .filter(c -> c.getCylinders() == 4)
+//                .count();
+
+
+
+
+//        arena.getPlayer().getPokeCreature(playerCreatureIndex);
+
+
+    }
 
     /**
      * Switch to the Pokemon Selection screen and set up the current Pokemon on the arena

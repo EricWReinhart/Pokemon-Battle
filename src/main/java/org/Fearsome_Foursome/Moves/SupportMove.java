@@ -66,7 +66,7 @@ public class SupportMove implements Move {
      */
     @Override
     public String getDescription() {
-        return name;
+        return description;
     }
 
     /**

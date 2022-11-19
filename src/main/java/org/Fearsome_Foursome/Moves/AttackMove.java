@@ -81,7 +81,7 @@ public class AttackMove implements Move{
      */
     @Override
     public String getDescription() {
-        return name;
+        return description;
     }
 
     /**
