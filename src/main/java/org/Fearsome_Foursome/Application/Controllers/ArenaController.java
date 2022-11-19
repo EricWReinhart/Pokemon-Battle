@@ -21,6 +21,9 @@ package org.Fearsome_Foursome.Application.Controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.GameModel;
@@ -36,7 +39,17 @@ import java.util.HashMap;
 public class ArenaController {
 
     @FXML
-    private ProgressBar enemyHealthProgressBar;
+    private ImageView playerSprite;
+
+    @FXML
+    private ImageView enemySprite;
+
+    @FXML
+    private TextField playerName;
+
+    @FXML
+    private TextField enemyName;
+
     @FXML
     private Button btnQuit;
 
@@ -56,6 +69,9 @@ public class ArenaController {
     private ProgressBar playerHealthProgressBar;
 
     @FXML
+    private ProgressBar enemyHealthProgressBar;
+
+    @FXML
     private Button swapPokemonButton;
 
     void initialize() {
@@ -67,6 +83,8 @@ public class ArenaController {
         assert playerHealthProgressBar != null : "fx:id=\"selfHealthProgressBar1\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert swapPokemonButton != null : "fx:id=\"swapPokemonButton\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert btnQuit != null : "fx:id=\"btnQuit\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert playerName != null : "fx:id=\"playerName\" was not injected: no injectable field found in FXML Controller class for the id 'playerName'";
+        assert enemyName != null : "fx:id=\"playerName\" was not injected: no injectable field found in FXML Controller class for the id 'playerName'";
 
     }
 
@@ -94,24 +112,25 @@ public class ArenaController {
      * @param enemyCreatureUpFront enemy's current Pokemon
      */
     public void setUpNameSpriteHealth(Creature playerCreatureUpFront, Creature enemyCreatureUpFront) {
-        // Set up the name for both Pokemon
-        // TODO: double check methods to use
-        // playerName.setText(playerCreatureUpFront.
-        // enemyName.setText(enemyCreatureUpFront.
+        // Display the name for both Pokemon
+         playerName.setText(playerCreatureUpFront.getName());
+         enemyName.setText(enemyCreatureUpFront.getName());
+         playerName.setEditable(false);
+         enemyName.setEditable(false);
 
         // Set up the sprite for both Pokemon
-        // TODO: how to access sprite object on the scene itself
-
+        playerSprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(playerCreatureUpFront.getName())[0]));
+        enemySprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(enemyCreatureUpFront.getName())[1]));
 
         // Adjust the numerical display of health for both Pokemon (example: 500/500)
         // TODO: this
 
         // Adjust the progress bar to the remaining health for both Pokemon
         // TODO: test code for progress bar colors
-//            playerCreatureUpFront.damage(250); // half health: yellow
-//            playerCreatureUpFront.damage(200); // health bar < 33%: red
+            enemyCreatureUpFront.damage(250); // half health enemy: yellow
+            playerCreatureUpFront.damage(400); // nearly dead player: red
         playerHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
-        enemyHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
+        enemyHealthProgressBar.setProgress(1.0 * enemyCreatureUpFront.getHealth() / enemyCreatureUpFront.getMaxHealth());
 
         // Change the color of the progress bar depending on the percent health remaining for both Pokemon
         progressBarColor(playerHealthProgressBar);

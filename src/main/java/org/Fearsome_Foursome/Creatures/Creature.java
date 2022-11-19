@@ -295,7 +295,4 @@ public abstract class Creature {
      */
     public int getMaxHealth() { return maxHealth; }
 
-    public HashMap<Class, ArrayList<Move>> getCREATURE_MOVE_MAP() {
-        return CREATURE_MOVE_MAP;
-    }
 }
