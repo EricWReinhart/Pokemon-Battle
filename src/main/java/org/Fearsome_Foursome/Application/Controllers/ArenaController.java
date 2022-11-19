@@ -75,6 +75,12 @@ public class ArenaController {
     private ProgressBar enemyHealthProgressBar;
 
     @FXML
+    private TextField playerHealthNumeric;
+
+    @FXML
+    private TextField enemyHealthNumeric;
+
+    @FXML
     private Button swapPokemonButton;
 
     void initialize() {
@@ -91,25 +97,30 @@ public class ArenaController {
 
     }
 
-    // TODO: temp, write javadoc
+    /** The active Arena */
     private Arena arena;
+    /** Player's Pokemon currently in battle */
     private Creature playerCreatureUpFront;
+    /** Enemy's Pokemon currently in battle */
     private Creature enemyCreatureUpFront;
+    /** Index of the player's current Pokemon in the Arena */
+    private int playerTeamIndex;
+    /** Index of the enemy's current Pokemon in the Arena */
+    private int enemyTeamIndex;
 
     /**
      * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
      */
-    public void setUpPokemon(GameModel gameModel, int playerTeamidx, int enemyTeamidx) {
-        //TODO: temp
-        arena = gameModel.getArena();
-        arena.setUpCombatants(playerTeamidx, enemyTeamidx);
-
+    public void setUpPokemon(GameModel gameModel, int playerTeamIdx, int enemyTeamIdx) {
         // Set up combatants for battle by setting the targets
-// TODO: remove this(original):        gameModel.getArena().getArena().setUpCombatants(playerTeamidx, enemyTeamidx);
+        arena = gameModel.getArena();
+        arena.setUpCombatants(playerTeamIdx, enemyTeamIdx);
 
-        // Store a reference to the player & enemy Pokemon up front
+        // Store a reference to the player & enemy Pokemon up front and their indices in each team
         playerCreatureUpFront = gameModel.getPlayerCreatureUpFront();
         enemyCreatureUpFront = gameModel.getEnemyCreatureUpFront();
+        playerTeamIndex = playerTeamIdx;
+        enemyTeamIndex = enemyTeamIdx;
 
         // Display the correct name, sprite, and health of both the player's and the enemy's Pokemon
         setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
@@ -135,14 +146,11 @@ public class ArenaController {
         enemySprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(enemyCreatureUpFront.getName())[1]));
 
         // Adjust the numerical display of health for both Pokemon (example: 500/500)
-        // TODO: add these text fields to SceneBuilder, define them above, then uncomment next 2 lines
-        // playerHealthNumeric.setText(playerCreatureUpFront.getHealth() + "/" + playerCreatureUpFront.getMaxHealth());
-        // enemyHealthNumeric.setText(enemyCreatureUpFront.getHealth() + "/" + enemyCreatureUpFront.getMaxHealth());
+        // TODO: add these text fields to SceneBuilder
+//         playerHealthNumeric.setText(playerCreatureUpFront.getHealth() + "/" + playerCreatureUpFront.getMaxHealth());
+//         enemyHealthNumeric.setText(enemyCreatureUpFront.getHealth() + "/" + enemyCreatureUpFront.getMaxHealth());
 
         // Adjust the progress bar to the remaining health for both Pokemon
-        // TODO: test code for progress bar colors
-//            enemyCreatureUpFront.damage(250); // half health enemy: yellow
-//            playerCreatureUpFront.damage(400); // nearly dead player: red
         playerHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
         enemyHealthProgressBar.setProgress(1.0 * enemyCreatureUpFront.getHealth() / enemyCreatureUpFront.getMaxHealth());
 
@@ -194,15 +202,6 @@ public class ArenaController {
         moveButton4.setTooltip(moveTooltip4);
     }
 
-
-
-    // TODO:on mouse click of move button, call playRound method with the index. For now, Enemy always chooses move1
-        // Must setupcombatants after every move
-
-    // first get index of the 2 Pokemon on the field
-    // just use indexof the creature istelf in the player's array
-//        player.getPokeCreature(playerTeamIdx);
-
     /**
      * When a move is clicked, a round is started. Both Pokemon up front target each other and attack in order of
      * speed. The player's Pokemon uses the selected move and the enemy's Pokemon uses a random move.
@@ -211,18 +210,42 @@ public class ArenaController {
      */
     public void playARound(MouseEvent mouseEvent, int playerMoveIndex) {
         // Obtain the index of the player's and enemy's Pokemon up front in their respective teams of 6
-        int playerCreatureIndex = Arrays.asList(arena.getPlayer().getCreatureArray()).indexOf(playerCreatureUpFront);
-        int enemyCreatureIndex = Arrays.asList(arena.getEnemy().getCreatureArray()).indexOf(enemyCreatureUpFront);
+//        int playerCreatureIndex = playerTeamIndex;
+//        int enemyCreatureIndex = enemyTeamIndex;
+        // TODO: old way of getting enemyTeamIndex, probs can delete but leave it for now
+            //  int enemyCreatureIndex = Arrays.asList(arena.getEnemy().getCreatureArray()).indexOf(enemyCreatureUpFront);
 
         // Generate a random move slot for the enemy to use
         Random rand = new Random();
         int enemyRandomMoveIndex = rand.nextInt(4);
 
-        // Play a round
-        arena.playRound(playerCreatureIndex, enemyCreatureIndex, playerMoveIndex, enemyRandomMoveIndex);
-        System.out.println("Player's health: " + playerCreatureUpFront.getHealth() + "Player's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName());
-        System.out.println("Enemy's health: " + enemyCreatureUpFront.getHealth() + "Enemy's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(enemyRandomMoveIndex).getName());
-        // TODO: health is updated but not shown on view
+        // Play a round by having both Pokemon on the Arena use a move
+        arena.playRound(playerTeamIndex, enemyTeamIndex, playerMoveIndex, enemyRandomMoveIndex);
+        // TODO: temporary print statements to show selected move & damage
+        if (playerCreatureUpFront.getHealth() > 0) {
+            System.out.println("Player's health: " + playerCreatureUpFront.getHealth() + " Player's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName());
+        }
+        if (enemyCreatureUpFront.getHealth() > 0) {
+            System.out.println("Enemy's health: " + enemyCreatureUpFront.getHealth() + " Enemy's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(enemyRandomMoveIndex).getName());
+        }
+
+        // Must call setUpCombatants after every move to reassign targets in case a Pokemon in the Arena dies
+        // Check if at least 1 Pokemon in the Arena is dead
+        if (!(arena.setUpCombatants(playerTeamIndex, enemyTeamIndex))) {
+            // TODO: send player to selection screen if your Pokemon dies
+                // you do not have to call setUpPokemon in here because that is done in SelectionController
+        }
+        // If both Pokemon in the Arena are alive
+        else {
+            arena.setUpCombatants(playerTeamIndex, enemyTeamIndex);
+        }
+
+        // At the end of each turn, set up the health bar of the Pokemon again
+        setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
+
+        // Explain the move made by the player and the enemy
+        // TODO: call a method here that sets text of a TextField to messages like
+            // “Charizard used Flamethrower! It’s super effective!" & “Charizard used Flamethrower! It’s not very effective…”
     }
 // TODO: add the same javadoc for chooseMove methods even though all that changes is the number?
     /**
