@@ -45,17 +45,16 @@ public class Arena {
      * @return true or false depending on if the Pokemon is alive or dead
      */
     public boolean setUpCombatants(int playerTeamIdx, int enemyTeamIdx){
-        // setting up the current Pokémon at a specific index making sure the creature is alive
-        if(!this.player.potentialCreatureIsDead(playerTeamIdx)){
-            this.playerCreatureUpFront = this.player.getPokeCreature(playerTeamIdx);
-        }
-
-        // do the same for enemy creature
+        // set up the enemy creature Pokemon
         if(!this.enemy.potentialCreatureIsDead(enemyTeamIdx)){
             this.enemyCreatureUpFront = this.enemy.getPokeCreature(enemyTeamIdx);
         }
 
-        // if either Pokemon is dead, return false
+        // setting up the current Pokémon at a specific index making sure the creature is alive
+        if(!this.player.potentialCreatureIsDead(playerTeamIdx)){
+            this.playerCreatureUpFront = this.player.getPokeCreature(playerTeamIdx);
+        }
+        // if the player tries to load a dead Pokemon, return false
         else{
             return false;
         }
@@ -64,8 +63,8 @@ public class Arena {
         this.enemyCreatureUpFront.setTarget(this.playerCreatureUpFront);
         this.playerCreatureUpFront.setTarget(this.enemyCreatureUpFront);
 
-        // If both creatures that you are trying to select are alive
-       return true;
+        // If the player selected a live creature
+        return true;
 
     }
 
@@ -129,14 +128,26 @@ public class Arena {
         }
     }
 
-    public Arena getArena() { return this; }
-
+    /** Simple getter for the player up front */
     public Player getPlayer() { return player; }
 
+    /** Simple getter for the enemy */
     public Player getEnemy() { return enemy; }
 
+    /** Simple getter for a certain friendly {@link Creature} */
     public Creature getPlayerCreatureUpFront() { return playerCreatureUpFront; }
 
+    /** Simple getter for a certain enemy {@link Creature} */
     public Creature getEnemyCreatureUpFront() { return enemyCreatureUpFront; }
+
+    /** Refresh both the Player and Enemy teams */
+    public void refreshAll() {
+        for (Creature creature : this.player.getCreatureArray()){
+            creature.refresh();
+        }
+        for (Creature creature : this.enemy.getCreatureArray()){
+            creature.refresh();
+        }
+    }
 }
    

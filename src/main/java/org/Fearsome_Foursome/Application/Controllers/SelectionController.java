@@ -19,11 +19,8 @@ package org.Fearsome_Foursome.Application.Controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -47,25 +44,25 @@ public class SelectionController {
     private Button btnCancel;
 
     @FXML
-    private Button btnSelect;
+    private Button btnHome;
 
     @FXML
-    private CheckBox checkBox1;
+    private Button btnSelect1;
 
     @FXML
-    private CheckBox checkBox2;
+    private Button btnSelect2;
 
     @FXML
-    private CheckBox checkBox3;
+    private Button btnSelect3;
 
     @FXML
-    private CheckBox checkBox4;
+    private Button btnSelect4;
 
     @FXML
-    private CheckBox checkBox5;
+    private Button btnSelect5;
 
     @FXML
-    private CheckBox checkBox6;
+    private Button btnSelect6;
 
     @FXML
     private ProgressBar currentHealth1;
@@ -146,13 +143,13 @@ public class SelectionController {
     void initialize() {
         assert background != null : "fx:id=\"background\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert btnSelect != null : "fx:id=\"btnSelect\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert checkBox1 != null : "fx:id=\"checkBox1\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert checkBox2 != null : "fx:id=\"checkBox2\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert checkBox3 != null : "fx:id=\"checkBox3\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert checkBox4 != null : "fx:id=\"checkBox4\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert checkBox5 != null : "fx:id=\"checkBox5\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert checkBox6 != null : "fx:id=\"checkBox6\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
+        assert btnHome != null : "fx:id=\"btnSelect\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
+        assert btnSelect1 != null : "fx:id=\"checkBox1\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
+        assert btnSelect2 != null : "fx:id=\"checkBox2\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
+        assert btnSelect3 != null : "fx:id=\"checkBox3\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
+        assert btnSelect4 != null : "fx:id=\"checkBox4\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
+        assert btnSelect5 != null : "fx:id=\"checkBox5\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
+        assert btnSelect6 != null : "fx:id=\"checkBox6\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert currentHealth1 != null : "fx:id=\"currentHealth1\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert currentHealth2 != null : "fx:id=\"currentHealth2\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert currentHealth3 != null : "fx:id=\"currentHealth3\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
@@ -181,25 +178,17 @@ public class SelectionController {
 
     }
 
-    /**
-     * Method to select the Pokemon and switch the arena
-     * @param mouseEvent
-     */
-    public void selectAndSwitchToArena(javafx.scene.input.MouseEvent mouseEvent) {
-        // TODO: finish javadoc?
-        // something, something
-        this.switchToArena(mouseEvent);
-    }
+
 
     /**
      * Method to switch back to the arena
      * @param mouseEvent
      */
-    public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
+    public void switchToArena(javafx.scene.input.MouseEvent mouseEvent, int playerIdx, int enemyIdx) {
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         // TODO: update to the correct indices
-        HelloPokemon.arenaController.setUpPokemon(HelloPokemon.globalModel, 0, 0);
+        HelloPokemon.arenaController.setUpPokemon(playerIdx, enemyIdx);
     }
 
     /**
@@ -207,8 +196,63 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void returnHome(MouseEvent mouseEvent) {
+        HelloPokemon.globalModel.getArena().refreshAll();
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
+    }
+
+    /**
+     * Sets the {@link org.Fearsome_Foursome.Creatures.Creature} up front for the player to be the first {@link org.Fearsome_Foursome.Creatures.Creature}, if that {@link org.Fearsome_Foursome.Creatures.Creature} is alive
+     * @param mouseEvent
+     */
+    public void pick1(MouseEvent mouseEvent) {
+        int enemyIdx = (int)(Math.random()*6);
+        this.switchToArena(mouseEvent, 0, enemyIdx);
+    }
+
+    /**
+     * Self-explanatory what this method should do
+     * @param mouseEvent
+     */
+    public void pick3(MouseEvent mouseEvent) {
+        int enemyIdx = (int)(Math.random()*6);
+        this.switchToArena(mouseEvent, 2, enemyIdx);
+    }
+
+    /**
+     * Self-explanatory what this method should do
+     * @param mouseEvent
+     */
+    public void pick5(MouseEvent mouseEvent) {
+        int enemyIdx = (int)(Math.random()*6);
+        this.switchToArena(mouseEvent, 4, enemyIdx);
+    }
+
+    /**
+     * Self-explanatory what this method should do
+     * @param mouseEvent
+     */
+    public void pick2(MouseEvent mouseEvent) {
+        int enemyIdx = (int)(Math.random()*6);
+        this.switchToArena(mouseEvent, 1, enemyIdx);
+    }
+
+    /**
+     * Self-explanatory what this method should do
+     * @param mouseEvent
+     */
+    public void pick4(MouseEvent mouseEvent) {
+        int enemyIdx = (int)(Math.random()*6);
+        this.switchToArena(mouseEvent, 3, enemyIdx);
+    }
+
+    /**
+     * Self-explanatory what this method should do
+     * @param mouseEvent
+     */
+    public void pick6(MouseEvent mouseEvent) {
+        int enemyIdx = (int)(Math.random()*6);
+        this.switchToArena(mouseEvent, 5, enemyIdx);
     }
 }
 

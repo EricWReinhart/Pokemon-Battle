@@ -295,4 +295,13 @@ public abstract class Creature {
      */
     public int getMaxHealth() { return maxHealth; }
 
+    /**
+     * Method to reset the {@link Creature} to whatever state it was at the beginning
+     */
+    public void refresh() {
+        this.maxHealth = Creature.DEFAULT_MAX_HEALTH;
+        this.health = this.maxHealth;
+        this.speed = Creature.DEFAULT_SPEED;
+    }
+
 }

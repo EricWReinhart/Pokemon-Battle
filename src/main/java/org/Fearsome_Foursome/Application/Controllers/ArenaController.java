@@ -111,14 +111,14 @@ public class ArenaController {
     /**
      * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
      */
-    public void setUpPokemon(GameModel gameModel, int playerTeamIdx, int enemyTeamIdx) {
+    public void setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
         // Set up combatants for battle by setting the targets
-        arena = gameModel.getArena();
+        arena = HelloPokemon.globalModel.getArena();
         arena.setUpCombatants(playerTeamIdx, enemyTeamIdx);
 
         // Store a reference to the player & enemy Pokemon up front and their indices in each team
-        playerCreatureUpFront = gameModel.getPlayerCreatureUpFront();
-        enemyCreatureUpFront = gameModel.getEnemyCreatureUpFront();
+        playerCreatureUpFront = HelloPokemon.globalModel.getPlayerCreatureUpFront();
+        enemyCreatureUpFront = HelloPokemon.globalModel.getEnemyCreatureUpFront();
         playerTeamIndex = playerTeamIdx;
         enemyTeamIndex = enemyTeamIdx;
 
