@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.Controllers.ArenaController;
 import org.Fearsome_Foursome.Application.Controllers.MenuController;
@@ -101,4 +102,22 @@ public class HelloPokemon extends Application {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Changes the color of the progress bar depending on the percent health remaining.
+     * Green: health > 67%, Yellow: 33% < health < 67%, Red: health < 33%
+     * @param progressBar player or enemy progress bar
+     */
+    public static void progressBarColor(ProgressBar progressBar) {
+        if (progressBar.getProgress() > 0.67) {
+            progressBar.setStyle("-fx-accent: " + "green");
+        }
+        else if (progressBar.getProgress() > 0.33 && progressBar.getProgress() < 0.67) {
+            progressBar.setStyle("-fx-accent: " + "yellow");
+        }
+        else {
+            progressBar.setStyle("-fx-accent: " + "red");
+        }
+    }
+
 }

@@ -22,12 +22,14 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.HelloPokemon;
+import org.Fearsome_Foursome.Creatures.Creature;
 
 public class SelectionController {
 
@@ -185,7 +187,7 @@ public class SelectionController {
     public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
-        // TODO: update to the correct indices
+        HelloPokemon.arenaController.setUpPokemon(HelloPokemon.globalModel.getArena().getPlayerUpFrontIndex(), HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex());
     }
 
     /**
@@ -204,8 +206,8 @@ public class SelectionController {
      */
     public void pick1(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        HelloPokemon.arenaController.setUpPokemon(0, enemyIdx);
         this.switchToArena(mouseEvent);
+        HelloPokemon.arenaController.setUpPokemon(0, enemyIdx);
     }
 
     /**
@@ -214,8 +216,8 @@ public class SelectionController {
      */
     public void pick3(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        HelloPokemon.arenaController.setUpPokemon(2, enemyIdx);
         this.switchToArena(mouseEvent);
+        HelloPokemon.arenaController.setUpPokemon(2, enemyIdx);
     }
 
     /**
@@ -224,8 +226,8 @@ public class SelectionController {
      */
     public void pick5(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        HelloPokemon.arenaController.setUpPokemon(4, enemyIdx);
         this.switchToArena(mouseEvent);
+        HelloPokemon.arenaController.setUpPokemon(4, enemyIdx);
     }
 
     /**
@@ -234,8 +236,8 @@ public class SelectionController {
      */
     public void pick2(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        HelloPokemon.arenaController.setUpPokemon(1, enemyIdx);
         this.switchToArena(mouseEvent);
+        HelloPokemon.arenaController.setUpPokemon(1, enemyIdx);
     }
 
     /**
@@ -244,8 +246,8 @@ public class SelectionController {
      */
     public void pick4(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        HelloPokemon.arenaController.setUpPokemon(3, enemyIdx);
         this.switchToArena(mouseEvent);
+        HelloPokemon.arenaController.setUpPokemon(3, enemyIdx);
     }
 
     /**
@@ -254,8 +256,48 @@ public class SelectionController {
      */
     public void pick6(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        HelloPokemon.arenaController.setUpPokemon(5, enemyIdx);
         this.switchToArena(mouseEvent);
+        HelloPokemon.arenaController.setUpPokemon(5, enemyIdx);
+    }
+
+    /**
+     * Method to show the correct Pokémon for the given team
+     */
+    public void showPokemon() {
+        sprite1.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[0].getName())[1]));
+        sprite2.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[1].getName())[1]));
+        sprite3.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[2].getName())[1]));
+        sprite4.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[3].getName())[1]));
+        sprite5.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[4].getName())[1]));
+        sprite6.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[5].getName())[1]));
+        this.showProgressBars();
+    }
+
+    /**
+     * Method to show the health of each of the Pokémon available for the player to select
+     */
+    public void showProgressBars() {
+        // get a hold of all the different creatures
+        Creature creature1 = HelloPokemon.globalModel.getPlayer().getPokeCreature(0);
+        Creature creature2 = HelloPokemon.globalModel.getPlayer().getPokeCreature(1);
+        Creature creature3 = HelloPokemon.globalModel.getPlayer().getPokeCreature(2);
+        Creature creature4 = HelloPokemon.globalModel.getPlayer().getPokeCreature(3);
+        Creature creature5 = HelloPokemon.globalModel.getPlayer().getPokeCreature(4);
+        Creature creature6 = HelloPokemon.globalModel.getPlayer().getPokeCreature(5);
+
+        // Adjust the progress bar to the remaining health for both Pokémon
+        currentHealth1.setProgress(1.0 * creature1.getHealth() / creature1.getMaxHealth());
+        HelloPokemon.progressBarColor(currentHealth1);
+        currentHealth2.setProgress(1.0 * creature2.getHealth() / creature2.getMaxHealth());
+        HelloPokemon.progressBarColor(currentHealth2);
+        currentHealth3.setProgress(1.0 * creature3.getHealth() / creature3.getMaxHealth());
+        HelloPokemon.progressBarColor(currentHealth3);
+        currentHealth4.setProgress(1.0 * creature4.getHealth() / creature4.getMaxHealth());
+        HelloPokemon.progressBarColor(currentHealth4);
+        currentHealth5.setProgress(1.0 * creature5.getHealth() / creature5.getMaxHealth());
+        HelloPokemon.progressBarColor(currentHealth5);
+        currentHealth6.setProgress(1.0 * creature6.getHealth() / creature6.getMaxHealth());
+        HelloPokemon.progressBarColor(currentHealth6);
     }
 }
 

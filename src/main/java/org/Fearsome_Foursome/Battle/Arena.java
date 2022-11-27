@@ -20,14 +20,24 @@ import org.Fearsome_Foursome.Creatures.Creature;
 public class Arena {
     /** The player you control */
     private Player player;
+
     /** An AI enemy*/
     private Player enemy;
+
     /** Current Creature in play for player */
     private Creature playerCreatureUpFront;
+
     /** Current Enemy Creature in play */
     private Creature enemyCreatureUpFront;
+
     /** Whether the combat is over or not */
     private boolean combatOver = false;
+
+    /** Corresponding indices of the two {@link Creature}s for the player who are up front to move */
+    private int playerCreatureUpFrontIndex;
+
+    /** Corresponding indices of the two {@link Creature}s for the enemy who are up front to move */
+    private int enemyCreatureUpFrontIndex;
 
     /** Initializes the players*/
     public Arena(){
@@ -38,30 +48,32 @@ public class Arena {
 
     /**
      * Method that sets up the combatants. It takes in an index to select a Creature to place
-     * into battle. It sets up the target to the opposite Pokemon as well.
+     * into battle. It sets up the target to the opposite Pokémon as well.
      *
-     * @param playerTeamIdx an index of a Pokemon to choose
+     * @param playerTeamIdx an index of a Pokémon to choose
      * @param enemyTeamIdx an index for the enemy to choose
-     * @return true or false depending on if the Pokemon is alive or dead
+     * @return true or false depending on if the Pokémon is alive or dead
      */
     public boolean setUpCombatants(int playerTeamIdx, int enemyTeamIdx){
-        // set up the enemy creature Pokemon
+        // set up the enemy creature Pokémon
         if(!this.enemy.potentialCreatureIsDead(enemyTeamIdx)){
             this.enemyCreatureUpFront = this.enemy.getPokeCreature(enemyTeamIdx);
+            this.enemyCreatureUpFrontIndex = enemyTeamIdx;
         }
 
         // setting up the current Pokémon at a specific index making sure the creature is alive
         if(!this.player.potentialCreatureIsDead(playerTeamIdx)){
             this.playerCreatureUpFront = this.player.getPokeCreature(playerTeamIdx);
+            this.playerCreatureUpFrontIndex = playerTeamIdx;
+
+            // setting the targets
+            this.enemyCreatureUpFront.setTarget(this.playerCreatureUpFront);
+            this.playerCreatureUpFront.setTarget(this.enemyCreatureUpFront);
         }
-        // if the player tries to load a dead Pokemon, return false
+        // if the player tries to load a dead Pokémon, return false
         else{
             return false;
         }
-
-        // setting the targets
-        this.enemyCreatureUpFront.setTarget(this.playerCreatureUpFront);
-        this.playerCreatureUpFront.setTarget(this.enemyCreatureUpFront);
 
         // If the player selected a live creature
         return true;
@@ -148,6 +160,22 @@ public class Arena {
         for (Creature creature : this.enemy.getCreatureArray()){
             creature.refresh();
         }
+    }
+
+    /**
+     * Simple getter for the player's up front {@link Creature} index
+     * @return int
+     */
+    public int getPlayerUpFrontIndex() {
+        return playerCreatureUpFrontIndex;
+    }
+
+    /**
+     * Simple getter for the enemy's up front {@link Creature} index
+     * @return int
+     */
+    public int getEnemyUpFrontIndex() {
+        return enemyCreatureUpFrontIndex;
     }
 }
    

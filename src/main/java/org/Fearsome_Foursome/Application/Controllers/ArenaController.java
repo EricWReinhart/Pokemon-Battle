@@ -99,49 +99,49 @@ public class ArenaController {
 
     /** The active Arena */
     private Arena arena;
-    /** Player's Pokemon currently in battle */
+    /** Player's Pokémon currently in battle */
     private Creature playerCreatureUpFront;
-    /** Enemy's Pokemon currently in battle */
+    /** Enemy's Pokémon currently in battle */
     private Creature enemyCreatureUpFront;
-    /** Index of the player's current Pokemon in the Arena */
+    /** Index of the player's current Pokémon in the Arena */
     private int playerTeamIndex;
-    /** Index of the enemy's current Pokemon in the Arena */
+    /** Index of the enemy's current Pokémon in the Arena */
     private int enemyTeamIndex;
 
     /**
-     * Set up the 2 current Pokemon up front by displaying their associated name, health, sprite, and moves
+     * Set up the 2 current Pokémon up front by displaying their associated name, health, sprite, and moves
      */
     public void setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
         // Set up combatants for battle by setting the targets
         arena = HelloPokemon.globalModel.getArena();
         arena.setUpCombatants(playerTeamIdx, enemyTeamIdx);
 
-        // Store a reference to the player & enemy Pokemon up front and their indices in each team
+        // Store a reference to the player & enemy Pokémon up front and their indices in each team
         playerCreatureUpFront = HelloPokemon.globalModel.getPlayerCreatureUpFront();
         enemyCreatureUpFront = HelloPokemon.globalModel.getEnemyCreatureUpFront();
         playerTeamIndex = playerTeamIdx;
         enemyTeamIndex = enemyTeamIdx;
 
-        // Display the correct name, sprite, and health of both the player's and the enemy's Pokemon
+        // Display the correct name, sprite, and health of both the player's and the enemy's Pokémon
         setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
 
-        // Display the correct moves of the player's Pokemon
+        // Display the correct moves of the player's Pokémon
         setUpMoves(playerCreatureUpFront);
     }
 
     /**
-     * Set up the name, sprite, and health bar of the current Pokemon in the Arena
-     * @param playerCreatureUpFront player's current Pokemon
-     * @param enemyCreatureUpFront enemy's current Pokemon
+     * Set up the name, sprite, and health bar of the current Pokémon in the Arena
+     * @param playerCreatureUpFront player's current Pokémon
+     * @param enemyCreatureUpFront enemy's current Pokémon
      */
     public void setUpNameSpriteHealth(Creature playerCreatureUpFront, Creature enemyCreatureUpFront) {
-        // Display the name for both Pokemon
+        // Display the name for both Pokémon
         playerName.setText(playerCreatureUpFront.getName());
         enemyName.setText(enemyCreatureUpFront.getName());
         playerName.setEditable(false);
         enemyName.setEditable(false);
 
-        // Set up the sprite for both Pokemon
+        // Set up the sprite for both Pokémon
         playerSprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(playerCreatureUpFront.getName())[0]));
         enemySprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(enemyCreatureUpFront.getName())[1]));
 
@@ -150,34 +150,17 @@ public class ArenaController {
 //         playerHealthNumeric.setText(playerCreatureUpFront.getHealth() + "/" + playerCreatureUpFront.getMaxHealth());
 //         enemyHealthNumeric.setText(enemyCreatureUpFront.getHealth() + "/" + enemyCreatureUpFront.getMaxHealth());
 
-        // Adjust the progress bar to the remaining health for both Pokemon
+        // Adjust the progress bar to the remaining health for both Pokémon
         playerHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
         enemyHealthProgressBar.setProgress(1.0 * enemyCreatureUpFront.getHealth() / enemyCreatureUpFront.getMaxHealth());
 
-        // Change the color of the progress bar depending on the percent health remaining for both Pokemon
-        progressBarColor(playerHealthProgressBar);
-        progressBarColor(enemyHealthProgressBar);
+        // Change the color of the progress bar depending on the percent health remaining for both Pokémon
+        HelloPokemon.progressBarColor(playerHealthProgressBar);
+        HelloPokemon.progressBarColor(enemyHealthProgressBar);
     }
 
     /**
-     * Changes the color of the progress bar depending on the percent health remaining.
-     * Green: health > 67%, Yellow: 33% < health < 67%, Red: health < 33%
-     * @param progressBar player or enemy progress bar
-     */
-    public void progressBarColor(ProgressBar progressBar) {
-        if (progressBar.getProgress() > 0.67) {
-            progressBar.setStyle("-fx-accent: " + "green");
-        }
-        else if (progressBar.getProgress() > 0.33 && progressBar.getProgress() < 0.67) {
-            progressBar.setStyle("-fx-accent: " + "yellow");
-        }
-        else if (progressBar.getProgress() < 0.33) {
-            progressBar.setStyle("-fx-accent: " + "red");
-        }
-    }
-
-    /**
-     * Set up the name, color, and tooltip description for each of the 4 moves of the player's Pokemon
+     * Set up the name, color, and tooltip description for each of the 4 moves of the player's Pokémon
      */
     public void setUpMoves(Creature playerCreatureUpFront) {
         // Set the text, color, and tooltip with a description of each move
@@ -204,7 +187,7 @@ public class ArenaController {
 
     /**
      * When a move is clicked, a round is started. Both Pokemon up front target each other and attack in order of
-     * speed. The player's Pokemon uses the selected move and the enemy's Pokemon uses a random move.
+     * speed. The player's Pokémon uses the selected move and the enemy's Pokemon uses a random move.
      * @param mouseEvent
      * @param playerMoveIndex index of the move that the player selects
      */
@@ -219,7 +202,7 @@ public class ArenaController {
         Random rand = new Random();
         int enemyRandomMoveIndex = rand.nextInt(4);
 
-        // Play a round by having both Pokemon on the Arena use a move
+        // Play a round by having both Pokémon on the Arena use a move
         arena.playRound(playerTeamIndex, enemyTeamIndex, playerMoveIndex, enemyRandomMoveIndex);
         // TODO: temporary print statements to show selected move & damage
         if (playerCreatureUpFront.getHealth() > 0) {
@@ -229,18 +212,18 @@ public class ArenaController {
             System.out.println("Enemy's health: " + enemyCreatureUpFront.getHealth() + " Enemy's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(enemyRandomMoveIndex).getName());
         }
 
-        // Must call setUpCombatants after every move to reassign targets in case a Pokemon in the Arena dies
-        // Check if at least 1 Pokemon in the Arena is dead
+        // Must call setUpCombatants after every move to reassign targets in case a Pokémon in the Arena dies
+        // Check if at least 1 Pokémon in the Arena is dead
         if (!(arena.setUpCombatants(playerTeamIndex, enemyTeamIndex))) {
             // TODO: send player to selection screen if your Pokemon dies
                 // you do not have to call setUpPokemon in here because that is done in SelectionController
         }
-        // If both Pokemon in the Arena are alive
+        // If both Pokémon in the Arena are alive
         else {
             arena.setUpCombatants(playerTeamIndex, enemyTeamIndex);
         }
 
-        // At the end of each turn, set up the health bar of the Pokemon again
+        // At the end of each turn, set up the health bar of the Pokémon again
         setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
 
         // Explain the move made by the player and the enemy
@@ -261,12 +244,13 @@ public class ArenaController {
     public void chooseMoveFour(MouseEvent mouseEvent) { playARound(mouseEvent, 3); }
 
     /**
-     * Switch to the Pokemon Selection screen and set up the current Pokemon on the arena
+     * Switch to the Pokémon Selection screen and set up the current Pokémon on the arena
      * @param mouseEvent
      */
     public void switchToSelection(MouseEvent mouseEvent) {
         Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_SELECTION);
+        HelloPokemon.selectionController.showPokemon();
     }
 
     /**
