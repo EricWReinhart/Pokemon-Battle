@@ -178,17 +178,14 @@ public class SelectionController {
 
     }
 
-
-
     /**
      * Method to switch back to the arena
      * @param mouseEvent
      */
-    public void switchToArena(javafx.scene.input.MouseEvent mouseEvent, int playerIdx, int enemyIdx) {
+    public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         // TODO: update to the correct indices
-        HelloPokemon.arenaController.setUpPokemon(playerIdx, enemyIdx);
     }
 
     /**
@@ -207,7 +204,8 @@ public class SelectionController {
      */
     public void pick1(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        this.switchToArena(mouseEvent, 0, enemyIdx);
+        HelloPokemon.arenaController.setUpPokemon(0, enemyIdx);
+        this.switchToArena(mouseEvent);
     }
 
     /**
@@ -216,7 +214,8 @@ public class SelectionController {
      */
     public void pick3(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        this.switchToArena(mouseEvent, 2, enemyIdx);
+        HelloPokemon.arenaController.setUpPokemon(2, enemyIdx);
+        this.switchToArena(mouseEvent);
     }
 
     /**
@@ -225,7 +224,8 @@ public class SelectionController {
      */
     public void pick5(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        this.switchToArena(mouseEvent, 4, enemyIdx);
+        HelloPokemon.arenaController.setUpPokemon(4, enemyIdx);
+        this.switchToArena(mouseEvent);
     }
 
     /**
@@ -234,7 +234,8 @@ public class SelectionController {
      */
     public void pick2(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        this.switchToArena(mouseEvent, 1, enemyIdx);
+        HelloPokemon.arenaController.setUpPokemon(1, enemyIdx);
+        this.switchToArena(mouseEvent);
     }
 
     /**
@@ -243,7 +244,8 @@ public class SelectionController {
      */
     public void pick4(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        this.switchToArena(mouseEvent, 3, enemyIdx);
+        HelloPokemon.arenaController.setUpPokemon(3, enemyIdx);
+        this.switchToArena(mouseEvent);
     }
 
     /**
@@ -252,7 +254,8 @@ public class SelectionController {
      */
     public void pick6(MouseEvent mouseEvent) {
         int enemyIdx = (int)(Math.random()*6);
-        this.switchToArena(mouseEvent, 5, enemyIdx);
+        HelloPokemon.arenaController.setUpPokemon(5, enemyIdx);
+        this.switchToArena(mouseEvent);
     }
 }
 
