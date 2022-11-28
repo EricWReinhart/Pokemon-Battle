@@ -72,6 +72,7 @@ public class HelloPokemon extends Application {
         primaryStage.show();
     }
 
+
     /**
      * Use an FXMLLoader to create a Scene to set on the input stage. When loading in a scene, set its respective
      * controller up properly.

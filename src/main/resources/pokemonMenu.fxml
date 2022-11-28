@@ -6,13 +6,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.MenuController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.MenuController">
    <children>
       <ImageView fx:id="bird" fitHeight="600.0" fitWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -32,27 +29,6 @@
             <ColorAdjust brightness="0.4" saturation="0.95" />
          </effect>
       </Label>
-      <Text fx:id="textQuit" fill="#21cdeb" layoutX="364.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter 'esc' to quit the game" textAlignment="CENTER" underline="true">
-         <font>
-            <Font size="20.0" />
-         </font>
-         <stroke>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.29440000653266907" green="0.46000000834465027" blue="0.2986191213130951" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </RadialGradient>
-         </stroke>
-      </Text>
       <Text fx:id="author" layoutX="382.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@2022 CSCI205 Fearsome Foursome" AnchorPane.bottomAnchor="0.0" />
       <Text fx:id="tm" fill="#e1b507" layoutX="646.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TM" />
       <Text fx:id="version" fill="#161617" layoutX="391.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gale of Darkness" textAlignment="CENTER" wrappingWidth="224.07763671875">
@@ -90,5 +66,10 @@
             <Image url="@Images/bird.png" />
          </image>
       </ImageView>
+      <Button fx:id="closeBtn" cancelButton="true" layoutX="451.0" layoutY="379.0" mnemonicParsing="false" prefHeight="56.0" onAction="#handleCloseButtonAction" prefWidth="114.0" text="Quit" textFill="#0a0a0a">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

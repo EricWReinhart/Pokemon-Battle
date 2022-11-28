@@ -19,6 +19,8 @@ package org.Fearsome_Foursome.Application.Controllers;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,6 +48,9 @@ public class MenuController {
     private Button btnStart;
 
     @FXML
+    private Button closeBtn;
+
+    @FXML
     private ImageView bird;
 
     @FXML
@@ -63,8 +68,8 @@ public class MenuController {
     @FXML
     private ImageView pikachu;
 
-    @FXML
-    private Text textQuit;
+    //@FXML
+    //private Text textQuit;
 
     @FXML
     private Label title;
@@ -80,13 +85,14 @@ public class MenuController {
         assert Background != null : "fx:id=\"Background\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert author != null : "fx:id=\"author\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert btnStart != null : "fx:id=\"btnStart\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
+        assert closeBtn != null : "fx:id=\"closeBtn\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert bird != null : "fx:id=\"bird\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert dragonite != null : "fx:id=\"dragonite\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert grass1 != null : "fx:id=\"grass1\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert grass2 != null : "fx:id=\"grass2\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert grass3 != null : "fx:id=\"grass3\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert pikachu != null : "fx:id=\"pikachu\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
-        assert textQuit != null : "fx:id=\"textQuit\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
+        //assert textQuit != null : "fx:id=\"textQuit\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert title != null : "fx:id=\"title\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert tm != null : "fx:id=\"tm\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert version != null : "fx:id=\"version\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
@@ -102,5 +108,12 @@ public class MenuController {
         Stage stage = (Stage) btnStart.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(0, 0);
+    }
+
+
+    @FXML
+    public void handleCloseButtonAction(ActionEvent event) {
+        Stage stage = (Stage) closeBtn.getScene().getWindow();
+        stage.close();
     }
 }
