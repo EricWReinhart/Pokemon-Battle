@@ -16,28 +16,34 @@
                 <Image url="@Images/forestBackGround.jpg" />
             </image>
         </ImageView>
-        <FlowPane layoutX="406.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <FlowPane layoutX="406.0" layoutY="230.0" prefHeight="233.0" prefWidth="225.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <children>
-            <TextField fx:id="playerName" />
+            <TextField fx:id="playerName" alignment="CENTER">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets left="20.0" />
+               </FlowPane.margin></TextField>
                 <ProgressBar fx:id="playerHealthProgressBar" prefHeight="14.0" prefWidth="170.0" progress="1.0" style="-fx-accent: green;">
                     <FlowPane.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets left="10.0" right="10.0" />
                     </FlowPane.margin>
                     <padding>
                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                     </padding>
                 </ProgressBar>
-                <Button fx:id="swapPokemonButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#switchToSelection" text="Swap Pokemon" />
+                <Button fx:id="swapPokemonButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#switchToSelection" prefHeight="25.0" prefWidth="196.0" text="Swap Pokemon" />
                 <Button fx:id="moveButton1" mnemonicParsing="false" onMouseClicked="#chooseMoveOne" prefHeight="25.0" prefWidth="99.0" text="Move 1" />
-                <Button fx:id="moveButton2" mnemonicParsing="false" onMouseClicked="#chooseMoveTwo" prefHeight="25.0" prefWidth="99.0" text="Move 2" />
                 <Button fx:id="moveButton3" mnemonicParsing="false" onMouseClicked="#chooseMoveThree" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
                 <Button fx:id="moveButton4" mnemonicParsing="false" onMouseClicked="#chooseMoveFour" prefHeight="25.0" prefWidth="99.0" text="Move 3" />
+                <Button fx:id="moveButton2" mnemonicParsing="false" onMouseClicked="#chooseMoveTwo" prefHeight="25.0" prefWidth="99.0" text="Move 2" />
             </children>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
         </FlowPane>
-        <ProgressBar fx:id="enemyHealthProgressBar" layoutX="23.0" layoutY="18.0" prefHeight="14.0" prefWidth="170.0" progress="1.0" style="-fx-accent: green;" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
+        <ProgressBar fx:id="enemyHealthProgressBar" layoutX="28.0" layoutY="31.0" prefHeight="14.0" prefWidth="170.0" progress="1.0" style="-fx-accent: green;" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="31.0">
             <padding>
                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
             </padding></ProgressBar>
@@ -52,6 +58,9 @@
             </image>
         </ImageView>
       <Button fx:id="btnQuit" layoutX="50.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#goHome" text="Quit" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" />
-      <TextField fx:id="enemyName" layoutX="30.0" layoutY="1.0" />
+      <TextField fx:id="enemyName" layoutX="35.0" layoutY="6.0">
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding></TextField>
     </children>
 </AnchorPane>
