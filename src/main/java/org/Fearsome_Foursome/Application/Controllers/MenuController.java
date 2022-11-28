@@ -68,9 +68,6 @@ public class MenuController {
     @FXML
     private ImageView pikachu;
 
-    //@FXML
-    //private Text textQuit;
-
     @FXML
     private Label title;
 
@@ -92,7 +89,6 @@ public class MenuController {
         assert grass2 != null : "fx:id=\"grass2\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert grass3 != null : "fx:id=\"grass3\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert pikachu != null : "fx:id=\"pikachu\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
-        //assert textQuit != null : "fx:id=\"textQuit\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert title != null : "fx:id=\"title\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert tm != null : "fx:id=\"tm\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert version != null : "fx:id=\"version\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
@@ -111,6 +107,10 @@ public class MenuController {
     }
 
 
+    /**
+     * Quit the application
+     * @param event
+     */
     @FXML
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) closeBtn.getScene().getWindow();
