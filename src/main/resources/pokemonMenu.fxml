@@ -9,31 +9,34 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.MenuController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.MenuController">
    <children>
       <ImageView fx:id="bird" fitHeight="600.0" fitWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@Images/background.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnStart" layoutX="458.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#showArena" text="Start" textAlignment="CENTER" textFill="#141414">
+      <Button fx:id="btnStart" layoutX="452.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#showArena" text="Start" textAlignment="CENTER" textFill="#141414">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Label fx:id="title" alignment="CENTER" layoutX="345.0" layoutY="70.0" text="Pokémon" textAlignment="CENTER" textFill="#d9440d" textOverrun="LEADING_WORD_ELLIPSIS">
+      <Label fx:id="title" alignment="CENTER" layoutX="329.0" layoutY="62.0" text="Pokémon" textAlignment="CENTER" textFill="#d9440d" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
-            <Font size="67.0" />
+            <Font name="DejaVu Sans Bold" size="67.0" />
          </font>
          <effect>
             <ColorAdjust brightness="0.4" saturation="0.95" />
          </effect>
       </Label>
       <Text fx:id="author" layoutX="382.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@2022 CSCI205 Fearsome Foursome" AnchorPane.bottomAnchor="0.0" />
-      <Text fx:id="tm" fill="#e1b507" layoutX="646.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TM" />
-      <Text fx:id="version" fill="#161617" layoutX="391.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gale of Darkness" textAlignment="CENTER" wrappingWidth="224.07763671875">
+      <Text fx:id="tm" fill="#e1b507" layoutX="646.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TM">
          <font>
-            <Font size="23.0" />
+            <Font name="Z003-MediumItalic" size="13.0" />
+         </font></Text>
+      <Text fx:id="version" fill="#161617" layoutX="397.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gale of Darkness" textAlignment="CENTER" wrappingWidth="224.07763671875">
+         <font>
+            <Font name="Carlito" size="23.0" />
          </font>
       </Text>
       <ImageView fx:id="dragonite" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
