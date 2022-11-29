@@ -101,6 +101,7 @@ public class MenuController {
      */
     public void showArena(javafx.scene.input.MouseEvent mouseEvent) {
         // Get the Stage object of this button
+        HelloPokemon.globalModel.getArena().refreshAll();
         Stage stage = (Stage) btnStart.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(0, 0);
