@@ -17,7 +17,7 @@
 package org.Fearsome_Foursome.Application.Controllers;
 
 /**
- * Sample Skeleton for 'lightArena.fxml' Controller Class
+ * Sample Skeleton for 'lightArena2.fxml' Controller Class
  */
 
 import java.net.URL;
@@ -48,10 +48,10 @@ public class lightArenaController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-        assert background != null : "fx:id=\"background\" was not injected: check your FXML file 'lightArena.fxml'.";
-        assert lightAlly != null : "fx:id=\"lightAlly\" was not injected: check your FXML file 'lightArena.fxml'.";
-        assert lightEnemy != null : "fx:id=\"lightEnemy\" was not injected: check your FXML file 'lightArena.fxml'.";
-        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'lightArena.fxml'.";
+        assert background != null : "fx:id=\"background\" was not injected: check your FXML file 'lightArena2.fxml'.";
+        assert lightAlly != null : "fx:id=\"lightAlly\" was not injected: check your FXML file 'lightArena2.fxml'.";
+        assert lightEnemy != null : "fx:id=\"lightEnemy\" was not injected: check your FXML file 'lightArena2.fxml'.";
+        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'lightArena2.fxml'.";
 
     }
 
