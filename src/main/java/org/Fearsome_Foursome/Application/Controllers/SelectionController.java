@@ -185,6 +185,7 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
+//        Stage stage = (Stage)HelloPokemon.lightArena2Controller.getBackground().getScene().getWindow();
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(HelloPokemon.globalModel.getArena().getPlayerUpFrontIndex(), HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex());
@@ -201,14 +202,35 @@ public class SelectionController {
     }
 
     /**
+     * Helper method to show pokeball and flash when the player selects a new (valid) {@link Creature}
+     * @param enemyIdx
+     */
+    private void showBallAndFlashPlayerSwitch(int enemyIdx) {
+        Stage stage = (Stage)background.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.SWITCH_ALLY_POKEBALL_ARENA);
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.SWITCH_ALLY_LIGHT_ARENA);
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Sets the {@link org.Fearsome_Foursome.Creatures.Creature} up front for the player to be the first {@link org.Fearsome_Foursome.Creatures.Creature}, if that {@link org.Fearsome_Foursome.Creatures.Creature} is alive
      * @param mouseEvent
      */
     public void pick1(MouseEvent mouseEvent) {
         int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
-        if (HelloPokemon.globalModel.getArena().setUpCombatants(0, enemyIdx)){
-            // we do successfully swap out Pokémon
-        }
+//        if (HelloPokemon.globalModel.getArena().setUpCombatants(0, enemyIdx)){
+//            // we do successfully swap out Pokémon
+//            this.showBallAndFlashPlayerSwitch(enemyIdx);
+//        }
         this.switchToArena(mouseEvent);
         HelloPokemon.arenaController.setUpPokemon(0, enemyIdx);
     }
@@ -218,7 +240,11 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void pick3(MouseEvent mouseEvent) {
-        int enemyIdx = (int)(Math.random()*6);
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+//        if (HelloPokemon.globalModel.getArena().setUpCombatants(2, enemyIdx)){
+//            // we do successfully swap out Pokémon
+//            this.showBallAndFlashPlayerSwitch(enemyIdx);
+//        }
         this.switchToArena(mouseEvent);
         HelloPokemon.arenaController.setUpPokemon(2, enemyIdx);
     }
@@ -228,7 +254,11 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void pick5(MouseEvent mouseEvent) {
-        int enemyIdx = (int)(Math.random()*6);
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+//        if (HelloPokemon.globalModel.getArena().setUpCombatants(4, enemyIdx)){
+//            // we do successfully swap out Pokémon
+//            this.showBallAndFlashPlayerSwitch(enemyIdx);
+//        }
         this.switchToArena(mouseEvent);
         HelloPokemon.arenaController.setUpPokemon(4, enemyIdx);
     }
@@ -238,7 +268,11 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void pick2(MouseEvent mouseEvent) {
-        int enemyIdx = (int)(Math.random()*6);
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+//        if (HelloPokemon.globalModel.getArena().setUpCombatants(1, enemyIdx)){
+//            // we do successfully swap out Pokémon
+//            this.showBallAndFlashPlayerSwitch(enemyIdx);
+//        }
         this.switchToArena(mouseEvent);
         HelloPokemon.arenaController.setUpPokemon(1, enemyIdx);
     }
@@ -248,7 +282,11 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void pick4(MouseEvent mouseEvent) {
-        int enemyIdx = (int)(Math.random()*6);
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+//        if (HelloPokemon.globalModel.getArena().setUpCombatants(3, enemyIdx)){
+//            // we do successfully swap out Pokémon
+//            this.showBallAndFlashPlayerSwitch(enemyIdx);
+//        }
         this.switchToArena(mouseEvent);
         HelloPokemon.arenaController.setUpPokemon(3, enemyIdx);
     }
@@ -258,7 +296,11 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void pick6(MouseEvent mouseEvent) {
-        int enemyIdx = (int)(Math.random()*6);
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+//        if (HelloPokemon.globalModel.getArena().setUpCombatants(5, enemyIdx)){
+//            // we do successfully swap out Pokémon
+//            this.showBallAndFlashPlayerSwitch(enemyIdx);
+//        }
         this.switchToArena(mouseEvent);
         HelloPokemon.arenaController.setUpPokemon(5, enemyIdx);
     }

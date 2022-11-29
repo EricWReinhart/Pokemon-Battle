@@ -6,9 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
-import org.Fearsome_Foursome.Application.Controllers.ArenaController;
-import org.Fearsome_Foursome.Application.Controllers.MenuController;
-import org.Fearsome_Foursome.Application.Controllers.SelectionController;
+import org.Fearsome_Foursome.Application.Controllers.*;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -27,6 +25,11 @@ public class HelloPokemon extends Application {
     public static MenuController menuController;
     /** Reference to Selection Controller */
     public static SelectionController selectionController;
+    /** Various Scene-Switching Controllers */
+    public static BallArena1Controller ballArena1Controller;
+    public static BallArena2Controller ballArena2Controller;
+    public static LightArena1Controller lightArena1Controller;
+    public static LightArena2Controller lightArena2Controller;
 
     /**
      * We need an enumeration for all of our Scenes - a public inner class
@@ -99,6 +102,22 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.POKEMON_SELECTION)) {
                 selectionController = loader.getController();
+            }
+
+            else if (scene.equals(GameScenes.SWITCH_ALLY_LIGHT_ARENA)) {
+                lightArena2Controller = loader.getController();
+            }
+
+            else if (scene.equals(GameScenes.SWITCH_ENEMY_LIGHT_ARENA)) {
+                lightArena1Controller = loader.getController();
+            }
+
+            else if (scene.equals(GameScenes.SWITCH_ALLY_POKEBALL_ARENA)) {
+                ballArena2Controller = loader.getController();
+            }
+
+            else if (scene.equals(GameScenes.SWITCH_ENEMY_POKEBALL_ARENA)) {
+                ballArena1Controller = loader.getController();
             }
 
             stage.setScene(new Scene(root));
