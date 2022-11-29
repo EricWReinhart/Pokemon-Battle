@@ -205,7 +205,10 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void pick1(MouseEvent mouseEvent) {
-        int enemyIdx = (int)(Math.random()*6);
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+        if (HelloPokemon.globalModel.getArena().setUpCombatants(0, enemyIdx)){
+            // we do successfully swap out Pokémon
+        }
         this.switchToArena(mouseEvent);
         HelloPokemon.arenaController.setUpPokemon(0, enemyIdx);
     }

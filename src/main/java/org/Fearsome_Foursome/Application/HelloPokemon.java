@@ -36,7 +36,11 @@ public class HelloPokemon extends Application {
         /** There exist exactly 3 GameScenes objects - here they are */
         POKEMON_ARENA("/pokemonArena.fxml"),
         POKEMON_SELECTION("/pokemonSelection.fxml"),
-        POKEMON_MENU("/pokemonMenu.fxml");
+        POKEMON_MENU("/pokemonMenu.fxml"),
+        SWITCH_ALLY_POKEBALL_ARENA("/ballArena1.fxml"),
+        SWITCH_ALLY_LIGHT_ARENA("/lightArena1.fxml"),
+        SWITCH_ENEMY_POKEBALL_ARENA("/ballArena2.fxml"),
+        SWITCH_ENEMY_LIGHT_ARENA("/lightArena2.fxml");
 
         /** Attribute for a string which can load the scene */
         private final String fileName;
