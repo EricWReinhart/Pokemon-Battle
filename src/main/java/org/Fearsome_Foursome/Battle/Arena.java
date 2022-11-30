@@ -39,6 +39,9 @@ public class Arena {
     /** Corresponding indices of the two {@link Creature}s for the enemy who are up front to move */
     private int enemyCreatureUpFrontIndex;
 
+    /** Text log of each turn of the battle */
+    private String battleTextLog;
+
     /** Initializes the players*/
     public Arena(){
         this.player = new Player();
@@ -81,20 +84,26 @@ public class Arena {
     }
 
     /**
-     * A method that checks the speed of each Creature and has them move successive.
+     * A method that checks the speed of each Creature and has them move successively.
      * If either team is dead combat over becomes true.
      * @param playerMove A move picked by the user
      * @param enemyMove A move picked randomly
      */
-    private void turn(int playerMove, int enemyMove){
-        // checking the speed to see who moves first
+    private String turn(int playerMove, int enemyMove){
+        // reset the text log at the start of each turn
+        battleTextLog = "";
+
+        // checking the speed to see who moves first and return an appropriate
         if (playerCreatureUpFront.getSpeed() >= enemyCreatureUpFront.getSpeed()){
             // player moves first
-            playerCreatureUpFront.move(playerMove);
+            battleTextLog = "Your " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMove).getName() + ". \n";
+            battleTextLog += playerCreatureUpFront.move(playerMove) + "\n";
 
             // if the enemy is not dead after the player's attack then the enemy can move
             if(!(enemyCreatureUpFront.isDead())){
-                enemyCreatureUpFront.move(enemyMove);
+                battleTextLog += "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMove).getName() + ". \n";
+                battleTextLog += enemyCreatureUpFront.move(enemyMove) + "\n";
+
             }
             else{
                 // the enemy's Pokemon is dead so increment amount of dead Pokemon by 1
@@ -104,11 +113,13 @@ public class Arena {
         }
         else{
             // enemy creature can move first
-            enemyCreatureUpFront.move(enemyMove);
+            battleTextLog = "The opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMove).getName() + ". \n";
+            battleTextLog += enemyCreatureUpFront.move(enemyMove) + "\n";
 
             // if the player is not dead after the enemy's attack then the enemy can move
             if(!(playerCreatureUpFront.isDead())){
-                playerCreatureUpFront.move(enemyMove);
+                battleTextLog += "\nYour " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMove).getName() + ". \n";
+                battleTextLog += playerCreatureUpFront.move(playerMove) + "\n";
             }
             else{
                 // the player's Pokemon is dead so increment amount of dead Pokemon by 1
@@ -119,6 +130,8 @@ public class Arena {
         // Check if either team is dead, if so combatOver is true
         if(this.player.getDeadCount() == 6 || this.enemy.getDeadCount() == 6 )
             combatOver = true;
+
+        return battleTextLog;
     }
 
     /**
@@ -128,16 +141,17 @@ public class Arena {
      * @param playerMoveIndex Move for a Pokemon chosen by user
      * @param enemyMoveIndex Move for a Pokemon randomly chosen
      */
-    public void playRound(int playerCreatureIndex, int enemyCreatureIndex, int playerMoveIndex, int enemyMoveIndex){
+    public String playRound(int playerCreatureIndex, int enemyCreatureIndex, int playerMoveIndex, int enemyMoveIndex){
         if(combatOver){
             throw new IllegalStateException();
         }
         else{
            // sets up combatants and if true you can call turn
             if(setUpCombatants(playerCreatureIndex,enemyCreatureIndex)){
-                turn(playerMoveIndex,enemyMoveIndex);
+                return turn(playerMoveIndex,enemyMoveIndex);
             }
         }
+        return ""; // TODO: this statement should never be hit?
     }
 
     /** Simple getter for the player up front */
