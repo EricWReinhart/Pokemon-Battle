@@ -87,24 +87,27 @@ public class Arena {
     /**
      * A method that checks the speed of each Creature and has them move successively.
      * If either team is dead combat over becomes true.
-     * @param playerMove A move picked by the user
-     * @param enemyMove A move picked randomly
+     * @param playerMoveIndex A move picked by the user
+     * @param enemyMoveIndex A move picked randomly
      */
-    private String turn(int playerMove, int enemyMove){
+    private String turn(int playerMoveIndex, int enemyMoveIndex){
         // reset the text log at the start of each turn
         battleTextLog = "";
 
         // checking the speed to see who moves first and return an appropriate
         if (playerCreatureUpFront.getSpeed() >= enemyCreatureUpFront.getSpeed()){
             // player moves first
-            battleTextLog = "Your " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMove).getName() + ". \n";
-            battleTextLog += playerCreatureUpFront.move(playerMove) + "\n";
+            battleTextLog = "Your " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName() + ". \n";
+            battleTextLog += playerCreatureUpFront.move(playerMoveIndex) + "\n";
 
             // if the enemy is not dead after the player's attack then the enemy can move
             if(!(enemyCreatureUpFront.isDead())){
-                battleTextLog += "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMove).getName() + ". \n";
-                battleTextLog += enemyCreatureUpFront.move(enemyMove) + "\n";
-
+                battleTextLog += "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMoveIndex).getName() + ". \n";
+                battleTextLog += enemyCreatureUpFront.move(enemyMoveIndex) + "\n";
+                // great - now did the player die after the enemy moved?
+                if (playerCreatureUpFront.isDead()){
+                    player.incrementDead();
+                }
             }
             else{
                 // the enemy's Pokemon is dead so increment amount of dead Pokemon by 1
@@ -114,16 +117,20 @@ public class Arena {
         }
         else{
             // enemy creature can move first
-            battleTextLog = "The opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMove).getName() + ". \n";
-            battleTextLog += enemyCreatureUpFront.move(enemyMove) + "\n";
+            battleTextLog = "The opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMoveIndex).getName() + ". \n";
+            battleTextLog += enemyCreatureUpFront.move(enemyMoveIndex) + "\n";
 
             // if the player is not dead after the enemy's attack then the enemy can move
             if(!(playerCreatureUpFront.isDead())){
-                battleTextLog += "\nYour " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMove).getName() + ". \n";
-                battleTextLog += playerCreatureUpFront.move(playerMove) + "\n";
+                battleTextLog += "\nYour " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName() + ". \n";
+                battleTextLog += playerCreatureUpFront.move(playerMoveIndex) + "\n";
+                // great - now did the enemy die after the player moved?
+                if (enemyCreatureUpFront.isDead()){
+                    this.enemy.incrementDead();
+                }
             }
             else{
-                // the player's Pokemon is dead so increment amount of dead Pokemon by 1
+                // the player's Pokémon is dead so increment amount of dead Pokémon by 1
                 this.player.incrementDead();
             }
 
