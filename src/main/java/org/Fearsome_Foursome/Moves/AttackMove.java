@@ -99,18 +99,24 @@ public class AttackMove implements Move{
      * @param target
      */
     @Override
-    public void actOn(Creature self, Creature target) {
-        if (Math.random() < accuracy) {
+    public String actOn(Creature self, Creature target) {
+        if (Math.random() <= accuracy) {
             if (target.getClass().equals(strongAgainst)){
                 // target takes double damage
                 target.damage(2*damage);
+                return "It's super effective!";
             } else if (weakAgainstList != null && weakAgainstList.contains(target.getClass())){
                 // target takes half damage
                 target.damage((int)(0.5*damage));
+                return "It's not very effective...";
             } else{
                 // target takes normal damage
                 target.damage(damage);
+                return "";
             }
+        }
+        else {
+            return "It missed!";
         }
     }
 

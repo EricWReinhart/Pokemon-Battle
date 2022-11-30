@@ -19,10 +19,7 @@
 package org.Fearsome_Foursome.Application.Controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -81,6 +78,9 @@ public class ArenaController {
     private TextField enemyHealthNumeric;
 
     @FXML
+    private TextArea battleTextLog;
+
+    @FXML
     private Button swapPokemonButton;
 
     void initialize() {
@@ -94,8 +94,7 @@ public class ArenaController {
         assert btnQuit != null : "fx:id=\"btnQuit\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert playerName != null : "fx:id=\"playerName\" was not injected: no injectable field found in FXML Controller class for the id 'playerName'";
         assert enemyName != null : "fx:id=\"playerName\" was not injected: no injectable field found in FXML Controller class for the id 'playerName'";
-
-    }
+        assert battleTextLog != null : "fx:id=\"battleTextLog\" was not injected: check your FXML file 'pokemonArena.fxml'.";    }
 
     /** The active Arena */
     private Arena arena;
@@ -192,25 +191,12 @@ public class ArenaController {
      * @param playerMoveIndex index of the move that the player selects
      */
     public void playARound(MouseEvent mouseEvent, int playerMoveIndex) {
-        // Obtain the index of the player's and enemy's Pokemon up front in their respective teams of 6
-//        int playerCreatureIndex = playerTeamIndex;
-//        int enemyCreatureIndex = enemyTeamIndex;
-        // TODO: old way of getting enemyTeamIndex, probs can delete but leave it for now
-            //  int enemyCreatureIndex = Arrays.asList(arena.getEnemy().getCreatureArray()).indexOf(enemyCreatureUpFront);
-
         // Generate a random move slot for the enemy to use
         Random rand = new Random();
         int enemyRandomMoveIndex = rand.nextInt(4);
 
-        // Play a round by having both Pokémon on the Arena use a move
-        arena.playRound(playerTeamIndex, enemyTeamIndex, playerMoveIndex, enemyRandomMoveIndex);
-        // TODO: temporary print statements to show selected move & damage
-        if (playerCreatureUpFront.getHealth() > 0) {
-            System.out.println("Player's health: " + playerCreatureUpFront.getHealth() + " Player's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName());
-        }
-        if (enemyCreatureUpFront.getHealth() > 0) {
-            System.out.println("Enemy's health: " + enemyCreatureUpFront.getHealth() + " Enemy's move: " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(enemyRandomMoveIndex).getName());
-        }
+        // Play a round by having both Pokémon on the Arena use a move and show text of what happens
+        battleTextLog.setText(arena.playRound(playerTeamIndex, enemyTeamIndex, playerMoveIndex, enemyRandomMoveIndex));
 
         // Must call setUpCombatants after every move to reassign targets in case a Pokémon in the Arena dies
         // Check if at least 1 Pokémon in the Arena is dead
@@ -225,22 +211,15 @@ public class ArenaController {
 
         // At the end of each turn, set up the health bar of the Pokémon again
         setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
-
-        // Explain the move made by the player and the enemy
-        // TODO: call a method here that sets text of a TextField to messages like
-            // “Charizard used Flamethrower! It’s super effective!" & “Charizard used Flamethrower! It’s not very effective…”
     }
-// TODO: add the same javadoc for chooseMove methods even though all that changes is the number?
+
     /**
-     * User chooses Move 1
+     * User chooses Move 1 or 2 or 3 or 4
      * @param mouseEvent
      */
     public void chooseMoveOne(MouseEvent mouseEvent) { playARound(mouseEvent, 0); }
-
     public void chooseMoveTwo(MouseEvent mouseEvent) { playARound(mouseEvent, 1); }
-
     public void chooseMoveThree(MouseEvent mouseEvent) { playARound(mouseEvent, 2); }
-
     public void chooseMoveFour(MouseEvent mouseEvent) { playARound(mouseEvent, 3); }
 
     /**

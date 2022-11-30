@@ -38,6 +38,9 @@ public class SupportMove implements Move {
     /** {@link String} corresponding to this {@link Move} */
     private final String color;
 
+    /** Action done by the move such as healing or increasing speed */
+    private String moveAction;
+
     /**
      * Constructor for the {@link SupportMove} class, which initializes attributeToChange and bonus
      * @param type {@link SupportType}
@@ -82,19 +85,22 @@ public class SupportMove implements Move {
      * @param target
      */
     @Override
-    public void actOn(Creature self, Creature target) {
+    public String actOn(Creature self, Creature target) {
         // simply increase the relevant attribute of self
         switch (attributeToChange) {
             case Health:
                 self.increaseHealth(bonus);
+                moveAction = "Recovered 150 health!"; // TODO: don't hardcode this, also make sure it doesn't exceed max health
                 break;
             case MaxHealth:
                 self.increaseMaxHealth(bonus);
                 break;
             case Speed:
                 self.increaseSpeed(bonus);
+                moveAction = "Increased speed by 100!";
                 break;
         }
+        return moveAction;
     }
 
     /**
