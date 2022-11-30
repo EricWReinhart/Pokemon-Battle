@@ -115,10 +115,14 @@ public class ArenaController {
     /**
      * Set up the 2 current Pokémon up front by displaying their associated name, health, sprite, and moves
      */
-    public void setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
+    public boolean setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
         // Set up combatants for battle by setting the targets
         arena = HelloPokemon.globalModel.getArena();
-        arena.setUpCombatants(playerTeamIdx, enemyTeamIdx);
+
+        if (!arena.setUpCombatants(playerTeamIdx, enemyTeamIdx)){
+            // SOMEBODY'S DEAD, and the way we have this set up is such that this could only happen if the user selects a dead Pokémon
+            return false;
+        }
 
         // Store a reference to the player & enemy Pokémon up front and their indices in each team
         playerCreatureUpFront = HelloPokemon.globalModel.getPlayerCreatureUpFront();
@@ -131,6 +135,9 @@ public class ArenaController {
 
         // Display the correct moves of the player's Pokémon
         setUpMoves(playerCreatureUpFront);
+
+        // we were successful
+        return true;
     }
 
     /**
@@ -204,6 +211,7 @@ public class ArenaController {
         battleTextLog.setText(arena.playRound(playerTeamIndex, enemyTeamIndex, playerMoveIndex, enemyRandomMoveIndex));
 
         // Must call setUpCombatants after every move to reassign targets in case a Pokémon in the Arena dies
+
         // Check if at least 1 Pokémon in the Arena is dead
         if (playerCreatureUpFront.isDead()) {
             // player died
@@ -216,7 +224,6 @@ public class ArenaController {
                 this.switchToSelection(mouseEvent);
             }
         } else if (enemyCreatureUpFront.isDead()){
-            System.out.println("Hello?");
             // then the enemy died
             if (arena.isCombatOver()) {
                 // player must have won
@@ -224,6 +231,7 @@ public class ArenaController {
             } else {
                 // enemy randomly switches Pokémon
                 arena.setUpCombatants(arena.getPlayerUpFrontIndex(), arena.getRandomNotDeadFromEnemy());
+                enemyCreatureUpFront = arena.getEnemyCreatureUpFront();
             }
         }
 

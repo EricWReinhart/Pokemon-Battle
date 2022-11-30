@@ -222,27 +222,10 @@ public class SelectionController {
     public void pick1(MouseEvent mouseEvent) {
         int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
         this.switchToArena(mouseEvent);
-        HelloPokemon.arenaController.setUpPokemon(0, enemyIdx);
-    }
-
-    /**
-     * Self-explanatory what this method should do
-     * @param mouseEvent
-     */
-    public void pick3(MouseEvent mouseEvent) {
-        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
-        this.switchToArena(mouseEvent);
-        HelloPokemon.arenaController.setUpPokemon(2, enemyIdx);
-    }
-
-    /**
-     * Self-explanatory what this method should do
-     * @param mouseEvent
-     */
-    public void pick5(MouseEvent mouseEvent) {
-        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
-        this.switchToArena(mouseEvent);
-        HelloPokemon.arenaController.setUpPokemon(4, enemyIdx);
+        if (!HelloPokemon.arenaController.setUpPokemon(0, enemyIdx)){
+            // don't let them go back to the battle scene because they tried to pick a dead Pokémon
+            HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        }
     }
 
     /**
@@ -252,7 +235,23 @@ public class SelectionController {
     public void pick2(MouseEvent mouseEvent) {
         int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
         this.switchToArena(mouseEvent);
-        HelloPokemon.arenaController.setUpPokemon(1, enemyIdx);
+        if (!HelloPokemon.arenaController.setUpPokemon(1, enemyIdx)){
+            // don't let them go back to the battle scene because they tried to pick a dead Pokémon
+            HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        }
+    }
+
+    /**
+     * Self-explanatory what this method should do
+     * @param mouseEvent
+     */
+    public void pick3(MouseEvent mouseEvent) {
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+        this.switchToArena(mouseEvent);
+        if (!HelloPokemon.arenaController.setUpPokemon(2, enemyIdx)){
+            // don't let them go back to the battle scene because they tried to pick a dead Pokémon
+            HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        }
     }
 
     /**
@@ -262,7 +261,23 @@ public class SelectionController {
     public void pick4(MouseEvent mouseEvent) {
         int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
         this.switchToArena(mouseEvent);
-        HelloPokemon.arenaController.setUpPokemon(3, enemyIdx);
+        if (!HelloPokemon.arenaController.setUpPokemon(4, enemyIdx)){
+            // don't let them go back to the battle scene because they tried to pick a dead Pokémon
+            HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        }
+    }
+
+    /**
+     * Self-explanatory what this method should do
+     * @param mouseEvent
+     */
+    public void pick5(MouseEvent mouseEvent) {
+        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
+        this.switchToArena(mouseEvent);
+        if (!HelloPokemon.arenaController.setUpPokemon(4, enemyIdx)){
+            // don't let them go back to the battle scene because they tried to pick a dead Pokémon
+            HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        }
     }
 
     /**
@@ -272,7 +287,10 @@ public class SelectionController {
     public void pick6(MouseEvent mouseEvent) {
         int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
         this.switchToArena(mouseEvent);
-        HelloPokemon.arenaController.setUpPokemon(5, enemyIdx);
+        if (!HelloPokemon.arenaController.setUpPokemon(5, enemyIdx)){
+            // don't let them go back to the battle scene because they tried to pick a dead Pokémon
+            HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        }
     }
 
     /**
