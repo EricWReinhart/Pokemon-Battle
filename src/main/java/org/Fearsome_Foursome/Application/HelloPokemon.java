@@ -25,11 +25,6 @@ public class HelloPokemon extends Application {
     public static MenuController menuController;
     /** Reference to Selection Controller */
     public static SelectionController selectionController;
-    /** Various Scene-Switching Controllers */
-    public static BallArena1Controller ballArena1Controller;
-    public static BallArena2Controller ballArena2Controller;
-    public static LightArena1Controller lightArena1Controller;
-    public static LightArena2Controller lightArena2Controller;
 
     /**
      * We need an enumeration for all of our Scenes - a public inner class
@@ -39,11 +34,7 @@ public class HelloPokemon extends Application {
         /** There exist exactly 3 GameScenes objects - here they are */
         POKEMON_ARENA("/pokemonArena.fxml"),
         POKEMON_SELECTION("/pokemonSelection.fxml"),
-        POKEMON_MENU("/pokemonMenu.fxml"),
-        SWITCH_ALLY_POKEBALL_ARENA("/ballArena1.fxml"),
-        SWITCH_ALLY_LIGHT_ARENA("/lightArena1.fxml"),
-        SWITCH_ENEMY_POKEBALL_ARENA("/ballArena2.fxml"),
-        SWITCH_ENEMY_LIGHT_ARENA("/lightArena2.fxml");
+        POKEMON_MENU("/pokemonMenu.fxml");
 
         /** Attribute for a string which can load the scene */
         private final String fileName;
@@ -102,22 +93,6 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.POKEMON_SELECTION)) {
                 selectionController = loader.getController();
-            }
-
-            else if (scene.equals(GameScenes.SWITCH_ALLY_LIGHT_ARENA)) {
-                lightArena2Controller = loader.getController();
-            }
-
-            else if (scene.equals(GameScenes.SWITCH_ENEMY_LIGHT_ARENA)) {
-                lightArena1Controller = loader.getController();
-            }
-
-            else if (scene.equals(GameScenes.SWITCH_ALLY_POKEBALL_ARENA)) {
-                ballArena2Controller = loader.getController();
-            }
-
-            else if (scene.equals(GameScenes.SWITCH_ENEMY_POKEBALL_ARENA)) {
-                ballArena1Controller = loader.getController();
             }
 
             stage.setScene(new Scene(root));
