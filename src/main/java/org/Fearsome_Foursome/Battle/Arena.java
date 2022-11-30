@@ -17,6 +17,8 @@ package org.Fearsome_Foursome.Battle;
 
 import org.Fearsome_Foursome.Creatures.Creature;
 
+import java.util.ArrayList;
+
 public class Arena {
     /** The player you control */
     private Player player;
@@ -46,7 +48,6 @@ public class Arena {
     public Arena(){
         this.player = new Player();
         this.enemy = new Player();
-
     }
 
     /**
@@ -190,6 +191,51 @@ public class Arena {
      */
     public int getEnemyUpFrontIndex() {
         return enemyCreatureUpFrontIndex;
+    }
+
+    /**
+     * Simple getter for the value of combatOver
+     * @return boolean
+     */
+    public boolean isCombatOver() {
+        return combatOver;
+    }
+
+    /**
+     * Return a random index of a Pokemon from the Enemy which is alive
+     * @return int
+     */
+    public int getRandomNotDeadFromEnemy() {
+        Creature[] creatures = enemy.getCreatureArray();
+        return getAliveIndex(creatures);
+    }
+
+    /**
+     * Return a random index of a Pokemon from the Player which is alive
+     * @return int
+     */
+    public int getRandomNotDeadFromPlayer() {
+        Creature[] creatures = player.getCreatureArray();
+        return getAliveIndex(creatures);
+    }
+
+    /**
+     * Given an array of creatures, return the index of a randomly alive one
+     * @param creatures
+     * @return int
+     */
+    private int getAliveIndex(Creature[] creatures) {
+        ArrayList<Integer> alive = new ArrayList<>();
+        for (int i=0; i<creatures.length; i++){
+            if (!creatures[i].isDead()){
+                alive.add(i);
+            }
+        }
+        if (alive.size() == 0){
+            return -1;
+        } else {
+            return alive.get((int)(Math.random()*alive.size()));
+        }
     }
 }
    

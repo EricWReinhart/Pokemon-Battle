@@ -29,6 +29,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.HelloPokemon;
+import org.Fearsome_Foursome.Battle.Arena;
+import org.Fearsome_Foursome.Battle.Player;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 public class SelectionController {
@@ -185,9 +187,22 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
+        this.checkIfPressedCancelWithDeadPokemon();
+
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(HelloPokemon.globalModel.getArena().getPlayerUpFrontIndex(), HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex());
+    }
+
+    /**
+     * Did the user get forced to the selection screen, and pressed cancel? Then give them a random alive Pokémon
+     */
+    private void checkIfPressedCancelWithDeadPokemon() {
+        if (ArenaController.justDied){
+            int newPlayerIndex = HelloPokemon.arenaController.getRandomNotDeadPlayer();
+            HelloPokemon.arenaController.setUpPokemon(newPlayerIndex, HelloPokemon.arenaController.getEnemyUpFrontIndex());
+            ArenaController.justDied = false;
+        }
     }
 
     /**

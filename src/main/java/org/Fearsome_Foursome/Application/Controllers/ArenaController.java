@@ -18,12 +18,14 @@
 
 package org.Fearsome_Foursome.Application.Controllers;
 
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.Fearsome_Foursome.Application.GameModel;
 import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Battle.Arena;
@@ -107,15 +109,16 @@ public class ArenaController {
     /** Index of the enemy's current Pokémon in the Arena */
     private int enemyTeamIndex;
 
+    /** Did a player creature just die? */
+    public static boolean justDied = false;
+
     /**
      * Set up the 2 current Pokémon up front by displaying their associated name, health, sprite, and moves
      */
     public void setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
         // Set up combatants for battle by setting the targets
         arena = HelloPokemon.globalModel.getArena();
-        if (arena.setUpCombatants(playerTeamIdx, enemyTeamIdx)){
-            this.showBallAndFlashPlayerSwitch();
-        }
+        arena.setUpCombatants(playerTeamIdx, enemyTeamIdx);
 
         // Store a reference to the player & enemy Pokémon up front and their indices in each team
         playerCreatureUpFront = HelloPokemon.globalModel.getPlayerCreatureUpFront();
@@ -202,17 +205,42 @@ public class ArenaController {
 
         // Must call setUpCombatants after every move to reassign targets in case a Pokémon in the Arena dies
         // Check if at least 1 Pokémon in the Arena is dead
-        if (!(arena.setUpCombatants(playerTeamIndex, enemyTeamIndex))) {
-            // TODO: send player to selection screen if your Pokemon dies
-                // you do not have to call setUpPokemon in here because that is done in SelectionController
-        }
-        // If both Pokémon in the Arena are alive
-        else {
-            arena.setUpCombatants(playerTeamIndex, enemyTeamIndex);
+        if (playerCreatureUpFront.isDead()) {
+            // player died
+            if (arena.isCombatOver()) {
+                // player must have lost
+                this.loadLoserScreen();
+            } else {
+                // player did not lose but must change Pokémon
+                justDied = true;
+                this.switchToSelection(mouseEvent);
+            }
+        } else if (enemyCreatureUpFront.isDead()){
+            System.out.println("Hello?");
+            // then the enemy died
+            if (arena.isCombatOver()) {
+                // player must have won
+                this.loadWinnerScreen();
+            } else {
+                // enemy randomly switches Pokémon
+                arena.setUpCombatants(arena.getPlayerUpFrontIndex(), arena.getRandomNotDeadFromEnemy());
+            }
         }
 
         // At the end of each turn, set up the health bar of the Pokémon again
         setUpNameSpriteHealth(playerCreatureUpFront, enemyCreatureUpFront);
+    }
+
+    /**
+     * Method to load the winner screen
+     */
+    private void loadWinnerScreen() {
+    }
+
+    /**
+     * Method to load the loser screen
+     */
+    private void loadLoserScreen() {
     }
 
     /**
@@ -244,10 +272,18 @@ public class ArenaController {
     }
 
     /**
-     * Public method to show a pokeball and flash when a creature is shown
+     * Return the index of the player's Pokémon randomly, such that they are not dead
+     * @return int
      */
-    public void showBallAndFlashPlayerSwitch() {
-        playerSprite.setImage(new Image("Sprites/pokeball.png"));
-        playerSprite.setImage(new Image("Sprites/explosion.png"));
+    public int getRandomNotDeadPlayer() {
+        return arena.getRandomNotDeadFromPlayer();
+    }
+
+    /**
+     * Return the index of the enemy {@link Creature} who is currently up to bat
+     * @return int
+     */
+    public int getEnemyUpFrontIndex() {
+        return enemyTeamIndex;
     }
 }
