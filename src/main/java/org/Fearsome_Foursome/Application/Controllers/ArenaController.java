@@ -113,7 +113,9 @@ public class ArenaController {
     public void setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
         // Set up combatants for battle by setting the targets
         arena = HelloPokemon.globalModel.getArena();
-        arena.setUpCombatants(playerTeamIdx, enemyTeamIdx);
+        if (arena.setUpCombatants(playerTeamIdx, enemyTeamIdx)){
+            this.showBallAndFlashPlayerSwitch();
+        }
 
         // Store a reference to the player & enemy Pokémon up front and their indices in each team
         playerCreatureUpFront = HelloPokemon.globalModel.getPlayerCreatureUpFront();
@@ -185,8 +187,8 @@ public class ArenaController {
     }
 
     /**
-     * When a move is clicked, a round is started. Both Pokemon up front target each other and attack in order of
-     * speed. The player's Pokémon uses the selected move and the enemy's Pokemon uses a random move.
+     * When a move is clicked, a round is started. Both Pokémon up front target each other and attack in order of
+     * speed. The player's Pokémon uses the selected move and the enemy's Pokémon uses a random move.
      * @param mouseEvent
      * @param playerMoveIndex index of the move that the player selects
      */
@@ -239,5 +241,13 @@ public class ArenaController {
     public void goHome(MouseEvent mouseEvent) {
         Stage stage = (Stage)btnQuit.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
+    }
+
+    /**
+     * Public method to show a pokeball and flash when a creature is shown
+     */
+    public void showBallAndFlashPlayerSwitch() {
+        playerSprite.setImage(new Image("Sprites/pokeball.png"));
+        playerSprite.setImage(new Image("Sprites/explosion.png"));
     }
 }
