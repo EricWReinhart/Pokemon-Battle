@@ -48,6 +48,6 @@ public interface Move {
      *  Method that must be implemented by anything that implements the Move interface
      *  Will the action help oneself or hurt another? We cannot be sure so provide both arguments
      *  */
-    void actOn(Creature self, Creature target);
+    String actOn(Creature self, Creature target);
 
 }

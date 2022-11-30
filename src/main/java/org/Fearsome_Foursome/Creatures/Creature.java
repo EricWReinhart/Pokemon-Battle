@@ -208,12 +208,12 @@ public abstract class Creature {
      * Given the index in the list of moves available to this {@link Creature}, perform that move
      * @param i
      */
-    public void move(int i){
+    public String move(int i){
         // let's make this VERY clear - first get the Move from the list of moves this particular Creatures most specific class is allowed
         Move functionalInterfaseMove = CREATURE_MOVE_MAP.get(this.getClass()).get(i);
 
         // now call that Move's actOn method on 'this' and 'target' - at least one of those two Creatures will be changed
-        functionalInterfaseMove.actOn(this, this.target);
+        return functionalInterfaseMove.actOn(this, this.target);
     }
 
     /**
