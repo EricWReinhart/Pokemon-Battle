@@ -261,7 +261,7 @@ public class SelectionController {
     public void pick4(MouseEvent mouseEvent) {
         int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
         this.switchToArena(mouseEvent);
-        if (!HelloPokemon.arenaController.setUpPokemon(4, enemyIdx)){
+        if (!HelloPokemon.arenaController.setUpPokemon(3, enemyIdx)){
             // don't let them go back to the battle scene because they tried to pick a dead Pokémon
             HelloPokemon.arenaController.switchToSelection(mouseEvent);
         }

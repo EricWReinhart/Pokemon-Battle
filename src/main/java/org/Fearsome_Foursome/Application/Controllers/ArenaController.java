@@ -217,6 +217,7 @@ public class ArenaController {
             // player died
             if (arena.isCombatOver()) {
                 // player must have lost
+                System.out.println("Hello?");
                 this.loadLoserScreen();
             } else {
                 // player did not lose but must change Pokémon
@@ -243,12 +244,16 @@ public class ArenaController {
      * Method to load the winner screen
      */
     private void loadWinnerScreen() {
+        Stage stage = (Stage)btnQuit.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.WINNER_SCREEN);
     }
 
     /**
      * Method to load the loser screen
      */
     private void loadLoserScreen() {
+        Stage stage = (Stage)btnQuit.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.LOSER_SCREEN);
     }
 
     /**

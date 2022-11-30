@@ -25,6 +25,10 @@ public class HelloPokemon extends Application {
     public static MenuController menuController;
     /** Reference to Selection Controller */
     public static SelectionController selectionController;
+    /** Reference to the WinnerScreen Controller */
+    public static WinnerController winnerController;
+    /** Reference to the LoserScreen Controller */
+    public static LoserController loserController;
 
     /**
      * We need an enumeration for all of our Scenes - a public inner class
@@ -34,7 +38,9 @@ public class HelloPokemon extends Application {
         /** There exist exactly 3 GameScenes objects - here they are */
         POKEMON_ARENA("/pokemonArena.fxml"),
         POKEMON_SELECTION("/pokemonSelection.fxml"),
-        POKEMON_MENU("/pokemonMenu.fxml");
+        POKEMON_MENU("/pokemonMenu.fxml"),
+        WINNER_SCREEN("/winnerScreen.fxml"),
+        LOSER_SCREEN("/loserScreen.fxml");
 
         /** Attribute for a string which can load the scene */
         private final String fileName;
@@ -93,6 +99,14 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.POKEMON_SELECTION)) {
                 selectionController = loader.getController();
+            }
+
+            else if (scene.equals(GameScenes.WINNER_SCREEN)) {
+                winnerController = loader.getController();
+            }
+
+            else if (scene.equals(GameScenes.LOSER_SCREEN)) {
+                loserController = loader.getController();
             }
 
             stage.setScene(new Scene(root));
