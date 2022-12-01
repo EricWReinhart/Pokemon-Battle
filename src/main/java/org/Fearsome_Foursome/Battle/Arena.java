@@ -91,9 +91,6 @@ public class Arena {
      * @param enemyMoveIndex A move picked randomly
      */
     private String turn(int playerMoveIndex, int enemyMoveIndex){
-        // reset the text log at the start of each turn
-        battleTextLog = "";
-
         // checking the speed to see who moves first and return an appropriate
         if (playerCreatureUpFront.getSpeed() >= enemyCreatureUpFront.getSpeed()){
             // player moves first

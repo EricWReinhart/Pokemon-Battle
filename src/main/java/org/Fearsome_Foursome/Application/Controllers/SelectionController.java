@@ -192,6 +192,12 @@ public class SelectionController {
         Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(HelloPokemon.globalModel.getArena().getPlayerUpFrontIndex(), HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex());
+
+        // TODO: issue is that getplayerupfrontindex isn't updated to new mon yet
+            // meaning next line is sending in prev index not new one?
+//        HelloPokemon.globalModel.getArena().setUpCombatants(HelloPokemon.globalModel.getArena().getPlayerUpFrontIndex(), HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex()); // TODO: I added this
+        HelloPokemon.arenaController.setPokemonSwapBattleLog();
+        ArenaController.justDied = false;
     }
 
     /**
@@ -201,7 +207,8 @@ public class SelectionController {
         if (ArenaController.justDied){
             int newPlayerIndex = HelloPokemon.arenaController.getRandomNotDeadPlayer();
             HelloPokemon.arenaController.setUpPokemon(newPlayerIndex, HelloPokemon.arenaController.getEnemyUpFrontIndex());
-            ArenaController.justDied = false;
+//            HelloPokemon.arenaController.setPokemonSwapBattleLog();
+//            ArenaController.justDied = false; //TODO: was just here before, remove 196
         }
     }
 
