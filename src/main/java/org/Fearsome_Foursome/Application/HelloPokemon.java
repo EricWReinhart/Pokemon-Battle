@@ -25,11 +25,10 @@ public class HelloPokemon extends Application {
     public static MenuController menuController;
     /** Reference to Selection Controller */
     public static SelectionController selectionController;
-    /** Various Scene-Switching Controllers */
-    public static BallArena1Controller ballArena1Controller;
-    public static BallArena2Controller ballArena2Controller;
-    public static LightArena1Controller lightArena1Controller;
-    public static LightArena2Controller lightArena2Controller;
+    /** Reference to the WinnerScreen Controller */
+    public static WinnerController winnerController;
+    /** Reference to the LoserScreen Controller */
+    public static LoserController loserController;
 
     /**
      * We need an enumeration for all of our Scenes - a public inner class
@@ -40,10 +39,8 @@ public class HelloPokemon extends Application {
         POKEMON_ARENA("/pokemonArena.fxml"),
         POKEMON_SELECTION("/pokemonSelection.fxml"),
         POKEMON_MENU("/pokemonMenu.fxml"),
-        SWITCH_ALLY_POKEBALL_ARENA("/ballArena1.fxml"),
-        SWITCH_ALLY_LIGHT_ARENA("/lightArena1.fxml"),
-        SWITCH_ENEMY_POKEBALL_ARENA("/ballArena2.fxml"),
-        SWITCH_ENEMY_LIGHT_ARENA("/lightArena2.fxml");
+        WINNER_SCREEN("/winnerScreen.fxml"),
+        LOSER_SCREEN("/loserScreen.fxml");
 
         /** Attribute for a string which can load the scene */
         private final String fileName;
@@ -104,20 +101,12 @@ public class HelloPokemon extends Application {
                 selectionController = loader.getController();
             }
 
-            else if (scene.equals(GameScenes.SWITCH_ALLY_LIGHT_ARENA)) {
-                lightArena2Controller = loader.getController();
+            else if (scene.equals(GameScenes.WINNER_SCREEN)) {
+                winnerController = loader.getController();
             }
 
-            else if (scene.equals(GameScenes.SWITCH_ENEMY_LIGHT_ARENA)) {
-                lightArena1Controller = loader.getController();
-            }
-
-            else if (scene.equals(GameScenes.SWITCH_ALLY_POKEBALL_ARENA)) {
-                ballArena2Controller = loader.getController();
-            }
-
-            else if (scene.equals(GameScenes.SWITCH_ENEMY_POKEBALL_ARENA)) {
-                ballArena1Controller = loader.getController();
+            else if (scene.equals(GameScenes.LOSER_SCREEN)) {
+                loserController = loader.getController();
             }
 
             stage.setScene(new Scene(root));
