@@ -74,12 +74,6 @@ public class ArenaController {
     private ProgressBar enemyHealthProgressBar;
 
     @FXML
-    private TextField playerHealthNumeric;
-
-    @FXML
-    private TextField enemyHealthNumeric;
-
-    @FXML
     private TextArea battleTextLog;
 
     @FXML
@@ -110,9 +104,6 @@ public class ArenaController {
     private int enemyTeamIndex;
     /** Did a player creature just die? */
     public static boolean justDied = false;
-
-
-    // TODO: remove this, temp only, now have method for this
     /** Text that explains what is happening in the battle */
     private String battleText = "";
     /** Index of the most recently fainted Pokemon belonging to the user */
@@ -122,7 +113,7 @@ public class ArenaController {
      * Set up the 2 current Pokémon up front by displaying their associated name, health, sprite, and moves
      */
     public boolean setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
-        // Set up combatants for battle by setting the targets
+        // Store reference to the Arena itself
         arena = HelloPokemon.globalModel.getArena();
 
         if (!arena.setUpCombatants(playerTeamIdx, enemyTeamIdx)){
@@ -142,12 +133,7 @@ public class ArenaController {
         // Display the correct moves of the player's Pokémon
         setUpMoves(playerCreatureUpFront);
 
-
-//        battleText += "\nYou sent out " + playerCreatureUpFront.getName() + "!";
-//        System.out.println(battleText);
-//        setBattleTextLog(battleText);
-//        battleTextLog.setText(battleText);
-        // we were successful
+        // we were successful in setting up the Pokemon
         return true;
     }
 
@@ -163,14 +149,9 @@ public class ArenaController {
         playerName.setEditable(false);
         enemyName.setEditable(false);
 
-        // Set up the sprite for both Pokémon
+        // Display the sprite for both Pokémon
         playerSprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(playerCreatureUpFront.getName())[0]));
         enemySprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(enemyCreatureUpFront.getName())[1]));
-
-        // Adjust the numerical display of health for both Pokemon (example: 500/500)
-        // TODO: add these text fields to SceneBuilder
-//         playerHealthNumeric.setText(playerCreatureUpFront.getHealth() + "/" + playerCreatureUpFront.getMaxHealth());
-//         enemyHealthNumeric.setText(enemyCreatureUpFront.getHealth() + "/" + enemyCreatureUpFront.getMaxHealth());
 
         // Adjust the progress bar to the remaining health for both Pokémon
         playerHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
@@ -221,30 +202,17 @@ public class ArenaController {
         // Play a round by having both Pokémon on the Arena use a move and show text of what happens
         battleTextLog.setText(arena.playRound(playerTeamIndex, enemyTeamIndex, playerMoveIndex, enemyRandomMoveIndex));
 
-        // TODO: remove this comment? : Must call setUpCombatants after every move to reassign targets in case a Pokémon in the Arena dies
-
         // Check if at least 1 Pokémon in the Arena is dead
         if (playerCreatureUpFront.isDead()) {
             // player died
             if (arena.isCombatOver()) {
                 // player must have lost
-                System.out.println("Hello?"); // TODO: remove print statement
                 this.loadLoserScreen();
             } else {
                 // player did not lose but must change Pokémon
                 justDied = true;
-//                previousDeadUserPokemon = playerCreatureUpFront;
-
-                previousDeadUserPokemonIndex = playerTeamIndex; //TODO: remove ^^
-                System.out.println("first check : " + previousDeadUserPokemonIndex);
+                previousDeadUserPokemonIndex = playerTeamIndex;
                 this.switchToSelection(mouseEvent);
-//                arena.setUpCombatants(arena.getPlayerUpFrontIndex(), arena.getEnemyUpFrontIndex()); // TODO: I added
-
-//                setBattleTextLog(battleText);
-//                battleText += "\nYou sent out " + playerCreatureUpFront.getName() + "!";
-//                // explain what happens in the battle log to the user
-//                battleTextLog.setText(battleText); // TODO: happens but is then overwritten,
-//                        // doesn't change name to new mon swapping in
             }
         } else if (enemyCreatureUpFront.isDead()){
             // then the enemy died
@@ -258,7 +226,7 @@ public class ArenaController {
                 enemyCreatureUpFront = arena.getEnemyCreatureUpFront();
                 battleText += "\nThe opponent sent out " + enemyCreatureUpFront.getName() + "!";
                 // explain what happens in the battle log to the user
-                setBattleTextLog(battleText);
+                battleTextLog.setText(battleText);
             }
         }
 
@@ -326,34 +294,28 @@ public class ArenaController {
         return enemyTeamIndex;
     }
 
-
-    // TODO: add javadocs
+    /**
+     * Set the battle log for the very start of the battle
+     */
     public void setInitialBattleTextLog() {
         battleText = "You sent out " + playerCreatureUpFront.getName() + "!\nThe opponent sent out "+ enemyCreatureUpFront.getName() + "!";
         battleTextLog.setText(battleText);
     }
 
-    public void setBattleTextLog(String text) {
-        battleTextLog.setText(text);
-    }
-
+    /**
+     * If either Pokemon in the Arena faints or is swapped out, then display an appropriate message
+     * in the battle log
+     */
     public void setPokemonSwapBattleLog() {
-//        System.out.println(arena.getPlayer().getPokeCreature(tempIDK).getName());
-
-        // Selection: 1) if user Pokemon died last turn --> fainted...you sent out
-                   // 2) if not: you sent out
-
-
-//
-//        if (arena.getPlayer().getDeadCount() == 0) {
-//            battleText = "You sent out " + playerCreatureUpFront.getName() + "!";
-//        }
-        System.out.println("second check: " + previousDeadUserPokemonIndex);
+        // If the user's Pokemon just died, tell the user which Pokemon died and which Pokemon is being swapped in
         if (justDied) {
             battleText = "Your " + arena.getPlayer().getPokeCreature(previousDeadUserPokemonIndex).getName() + " fainted!\nYou sent out " + playerCreatureUpFront.getName() + "!";
+            justDied = false;
         } else {
+            // User's Pokemon is not dead but the user is swapping to a different Pokemon
             battleText = "You sent out " + playerCreatureUpFront.getName() + "!";
         }
+        // Update the battle log with the correct message
         battleTextLog.setText(battleText);
     }
 }
