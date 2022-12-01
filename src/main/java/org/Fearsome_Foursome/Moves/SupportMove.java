@@ -90,14 +90,14 @@ public class SupportMove implements Move {
         switch (attributeToChange) {
             case Health:
                 self.increaseHealth(bonus);
-                moveAction = "Recovered 150 health!"; // TODO: don't hardcode this, also make sure it doesn't exceed max health
+                moveAction = "\nRecovered 150 health!"; // TODO: don't hardcode this, also make sure it doesn't exceed max health
                 break;
             case MaxHealth:
                 self.increaseMaxHealth(bonus);
                 break;
             case Speed:
                 self.increaseSpeed(bonus);
-                moveAction = "Increased speed by 100!";
+                moveAction = "\nIncreased speed by 100!";
                 break;
         }
         return moveAction;

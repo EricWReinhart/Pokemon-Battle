@@ -104,11 +104,11 @@ public class AttackMove implements Move{
             if (target.getClass().equals(strongAgainst)){
                 // target takes double damage
                 target.damage(2*damage);
-                return "It's super effective!";
+                return "\nIt's super effective!";
             } else if (weakAgainstList != null && weakAgainstList.contains(target.getClass())){
                 // target takes half damage
                 target.damage((int)(0.5*damage));
-                return "It's not very effective...";
+                return "\nIt's not very effective...";
             } else{
                 // target takes normal damage
                 target.damage(damage);
@@ -116,7 +116,7 @@ public class AttackMove implements Move{
             }
         }
         else {
-            return "It missed!";
+            return "\nIt missed!";
         }
     }
 

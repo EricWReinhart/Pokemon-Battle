@@ -217,7 +217,7 @@ public class ArenaController {
             // player died
             if (arena.isCombatOver()) {
                 // player must have lost
-                System.out.println("Hello?");
+                System.out.println("Hello?"); // TODO: remove print statement
                 this.loadLoserScreen();
             } else {
                 // player did not lose but must change Pokémon
