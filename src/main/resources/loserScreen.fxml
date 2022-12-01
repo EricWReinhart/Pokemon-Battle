@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.LoserController">
+<AnchorPane fx:id="pane" prefHeight="337.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.LoserController">
    <children>
-      <Label layoutX="204.0" layoutY="145.0" prefHeight="68.0" prefWidth="169.0" text="You stink loser" />
+      <ImageView fx:id="background" fitHeight="400.0" fitWidth="601.0" layoutX="123.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@Images/background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gameOver" fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/game_over.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="question" layoutX="259.0" layoutY="159.0" text="Try again?" textFill="#e40101">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="startBtn" layoutX="256.0" layoutY="193.0" mnemonicParsing="false" text="New Game" textFill="#e10606" />
+      <Button fx:id="closeBtn" cancelButton="true" layoutX="255.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="24.0" prefWidth="90.0" text="Quit" textFill="#770beb" />
+      <ImageView fx:id="sadPikachu" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/sad_pikachu.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
