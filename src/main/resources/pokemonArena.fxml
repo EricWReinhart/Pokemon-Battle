@@ -63,6 +63,6 @@
             <padding>
                 <Insets left="5.0" right="5.0" />
             </padding></TextField>
-        <TextArea fx:id="battleTextLog" editable="false" layoutX="500.0" layoutY="330.0" prefHeight="110.0" prefWidth="250.0" style="-fx-border-color: Black; -fx-background-color: Black;" />
+        <TextArea fx:id="battleTextLog" editable="false" layoutX="500.0" layoutY="330.0" prefHeight="85.0" prefWidth="325.0" style="-fx-border-color: Black; -fx-background-color: Black;" />
     </children>
 </AnchorPane>

@@ -201,7 +201,6 @@ public class SelectionController {
         if (ArenaController.justDied){
             int newPlayerIndex = HelloPokemon.arenaController.getRandomNotDeadPlayer();
             HelloPokemon.arenaController.setUpPokemon(newPlayerIndex, HelloPokemon.arenaController.getEnemyUpFrontIndex());
-            ArenaController.justDied = false;
         }
     }
 
@@ -225,6 +224,10 @@ public class SelectionController {
         if (!HelloPokemon.arenaController.setUpPokemon(0, enemyIdx)){
             // don't let them go back to the battle scene because they tried to pick a dead Pokémon
             HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        } else {
+            // user selects an alive Pokemon so set up the Pokemon on the arena and update the battle log
+            HelloPokemon.arenaController.setUpPokemon(0, enemyIdx);
+            HelloPokemon.arenaController.setPokemonSwapBattleLog();
         }
     }
 
@@ -238,6 +241,10 @@ public class SelectionController {
         if (!HelloPokemon.arenaController.setUpPokemon(1, enemyIdx)){
             // don't let them go back to the battle scene because they tried to pick a dead Pokémon
             HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        } else {
+            // user selects an alive Pokemon so set up the Pokemon on the arena and update the battle log
+            HelloPokemon.arenaController.setUpPokemon(1, enemyIdx);
+            HelloPokemon.arenaController.setPokemonSwapBattleLog();
         }
     }
 
@@ -251,6 +258,10 @@ public class SelectionController {
         if (!HelloPokemon.arenaController.setUpPokemon(2, enemyIdx)){
             // don't let them go back to the battle scene because they tried to pick a dead Pokémon
             HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        } else {
+            // user selects an alive Pokemon so set up the Pokemon on the arena and update the battle log
+            HelloPokemon.arenaController.setUpPokemon(2, enemyIdx);
+            HelloPokemon.arenaController.setPokemonSwapBattleLog();
         }
     }
 
@@ -264,6 +275,10 @@ public class SelectionController {
         if (!HelloPokemon.arenaController.setUpPokemon(3, enemyIdx)){
             // don't let them go back to the battle scene because they tried to pick a dead Pokémon
             HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        } else {
+            // user selects an alive Pokemon so set up the Pokemon on the arena and update the battle log
+            HelloPokemon.arenaController.setUpPokemon(3, enemyIdx);
+            HelloPokemon.arenaController.setPokemonSwapBattleLog();
         }
     }
 
@@ -277,6 +292,10 @@ public class SelectionController {
         if (!HelloPokemon.arenaController.setUpPokemon(4, enemyIdx)){
             // don't let them go back to the battle scene because they tried to pick a dead Pokémon
             HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        } else {
+            // user selects an alive Pokemon so set up the Pokemon on the arena and update the battle log
+            HelloPokemon.arenaController.setUpPokemon(4, enemyIdx);
+            HelloPokemon.arenaController.setPokemonSwapBattleLog();
         }
     }
 
@@ -290,6 +309,10 @@ public class SelectionController {
         if (!HelloPokemon.arenaController.setUpPokemon(5, enemyIdx)){
             // don't let them go back to the battle scene because they tried to pick a dead Pokémon
             HelloPokemon.arenaController.switchToSelection(mouseEvent);
+        } else {
+            // user selects an alive Pokemon so set up the Pokemon on the arena and update the battle log
+            HelloPokemon.arenaController.setUpPokemon(5, enemyIdx);
+            HelloPokemon.arenaController.setPokemonSwapBattleLog();
         }
     }
 
