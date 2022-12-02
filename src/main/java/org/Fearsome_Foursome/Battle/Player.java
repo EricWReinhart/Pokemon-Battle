@@ -15,10 +15,10 @@ package org.Fearsome_Foursome.Battle;/* ****************************************
  ****************************************
  */
 
-import org.Fearsome_Foursome.Creatures.Creature;
-import org.Fearsome_Foursome.Creatures.FireCreature;
-import org.Fearsome_Foursome.Creatures.GrassCreature;
-import org.Fearsome_Foursome.Creatures.WaterCreature;
+import org.Fearsome_Foursome.Creatures.*;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 
 public class Player {
@@ -29,25 +29,35 @@ public class Player {
     private Creature[] creatureArray = new Creature[6];
 
     /**
-     * Keeps track of how many of of the {@link Player}'s {@link Creature}s are dead
+     * Keeps track of how many of the {@link Player}'s {@link Creature}s are dead
      */
     private int deadCount = 0;
 
+
     /**
-     * Creates a team
+     * Creates a team of random Pokemon
      */
     public Player(){
-        //Creating a Fire creature for team
-        creatureArray[0] = new FireCreature(0);
-        creatureArray[1] = new FireCreature(1);
+        // Create an Array of all possible Pokemon
+        Creature[] creatureOptions = {new FireCreature(0), new FireCreature(1), new WaterCreature(0),
+                                      new WaterCreature(1), new GrassCreature(0), new GrassCreature(1),
+                                      new NormalCreature(0), new NormalCreature(1)};
+        // Create a HashSet of the indices of Pokemon have already been chosen
+        HashSet<Integer> picked = new HashSet<>();
 
-        //Creating a water Creature for team
-        creatureArray[2] = new WaterCreature(0);
-        creatureArray[3] = new WaterCreature(1);
+        int randIndex;
+        int currentCreatureArrayIndex = 0;
 
-        //Creating a water Creature for team
-        creatureArray[4] = new GrassCreature(0);
-        creatureArray[5] = new GrassCreature(1);
+        // While the array of the player's Pokemon still has an empty slot, obtain a random Pokemon's index
+        // and add it to the player's team but do not allow repeats
+        while (Arrays.asList(creatureArray).contains(null)) {
+            randIndex = (int) (Math.random() * 8);
+            if (!picked.contains(randIndex)) {
+                picked.add(randIndex);
+                creatureArray[currentCreatureArrayIndex] = creatureOptions[randIndex];
+                currentCreatureArrayIndex++;
+            }
+        }
     }
 
     /** Allows use to get a poke creature at array*/
