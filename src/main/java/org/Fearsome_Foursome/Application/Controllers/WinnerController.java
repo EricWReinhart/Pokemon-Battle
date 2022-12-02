@@ -89,7 +89,7 @@ public class WinnerController {
      */
     public void returnHome(MouseEvent mouseEvent) {
         HelloPokemon.globalModel.getArena().refreshAll();
-        Stage stage = (Stage)homeBtn.getScene().getWindow();
+        Stage stage = (Stage)background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 }
