@@ -173,12 +173,9 @@ public class Arena {
 
     /** Refresh both the Player and Enemy teams */
     public void refreshAll() {
-        for (Creature creature : this.player.getCreatureArray()){
-            creature.refresh();
-        }
-        for (Creature creature : this.enemy.getCreatureArray()){
-            creature.refresh();
-        }
+        this.player = new Player();
+        this.enemy = new Player();
+        this.combatOver = false;
     }
 
     /**

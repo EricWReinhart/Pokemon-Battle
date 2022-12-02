@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.HelloPokemon;
@@ -73,13 +72,11 @@ public class LoserController {
      * Go to the arena
      * @param mouseEvent
      */
-    public void showArena(javafx.scene.input.MouseEvent mouseEvent) {
+    public void returnHome(javafx.scene.input.MouseEvent mouseEvent) {
         // Get the Stage object of this button
         HelloPokemon.globalModel.getArena().refreshAll();
         Stage stage = (Stage) startBtn.getScene().getWindow();
-        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
-        HelloPokemon.arenaController.setUpPokemon(0, 0);
-        HelloPokemon.arenaController.setInitialBattleTextLog();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 
 }

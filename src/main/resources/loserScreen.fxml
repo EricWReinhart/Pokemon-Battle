@@ -24,7 +24,7 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="startBtn" layoutX="464.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#showArena" prefHeight="62.0" prefWidth="141.0" text="New Game" textFill="#e10606">
+      <Button fx:id="startBtn" layoutX="464.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#returnHome" prefHeight="62.0" prefWidth="141.0" text="New Game" textFill="#e10606">
          <font>
             <Font size="15.0" />
          </font></Button>

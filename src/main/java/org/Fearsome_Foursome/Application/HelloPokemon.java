@@ -110,6 +110,7 @@ public class HelloPokemon extends Application {
             }
 
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
 
         } catch (IOException e){
             e.printStackTrace();
