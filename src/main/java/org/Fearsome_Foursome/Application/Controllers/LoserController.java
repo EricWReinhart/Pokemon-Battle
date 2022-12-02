@@ -70,13 +70,16 @@ public class LoserController {
     }
 
     /**
-     * Method to return to the home screen
+     * Go to the arena
      * @param mouseEvent
      */
-    public void returnHome(MouseEvent mouseEvent) {
+    public void showArena(javafx.scene.input.MouseEvent mouseEvent) {
+        // Get the Stage object of this button
         HelloPokemon.globalModel.getArena().refreshAll();
-        Stage stage = (Stage)background.getScene().getWindow();
-        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
+        Stage stage = (Stage) startBtn.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
+        HelloPokemon.arenaController.setUpPokemon(0, 0);
+        HelloPokemon.arenaController.setInitialBattleTextLog();
     }
 
 }

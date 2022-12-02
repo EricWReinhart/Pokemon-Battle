@@ -7,26 +7,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="337.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.LoserController">
+<AnchorPane fx:id="pane" prefHeight="564.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Fearsome_Foursome.Application.Controllers.LoserController">
    <children>
-      <ImageView fx:id="background" fitHeight="400.0" fitWidth="601.0" layoutX="123.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="background" fitHeight="612.0" fitWidth="1000.0" layoutX="123.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@Images/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="gameOver" fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="gameOver" fitHeight="215.0" fitWidth="249.0" layoutX="425.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/game_over.png" />
          </image>
       </ImageView>
-      <Label fx:id="question" layoutX="259.0" layoutY="159.0" text="Try again?" textFill="#e40101">
+      <Label fx:id="question" layoutX="461.0" layoutY="217.0" prefHeight="48.0" prefWidth="158.0" text="Try again?" textFill="#e40101">
          <font>
-            <Font size="16.0" />
+            <Font size="28.0" />
          </font>
       </Label>
-      <Button fx:id="startBtn" layoutX="256.0" layoutY="193.0" mnemonicParsing="false" onMouseClicked="#returnHome" text="New Game" textFill="#e10606" />
-      <Button fx:id="closeBtn" cancelButton="true" layoutX="255.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="24.0" prefWidth="90.0" text="Quit" textFill="#770beb" />
-      <ImageView fx:id="sadPikachu" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="startBtn" layoutX="464.0" layoutY="291.0" mnemonicParsing="false" onMouseClicked="#showArena" prefHeight="62.0" prefWidth="141.0" text="New Game" textFill="#e10606">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button fx:id="closeBtn" cancelButton="true" layoutX="465.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefHeight="62.0" prefWidth="141.0" text="Quit" textFill="#770beb">
+         <font>
+            <Font size="23.0" />
+         </font></Button>
+      <ImageView fx:id="sadPikachu" fitHeight="115.0" fitWidth="200.0" layoutX="170.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/sad_pikachu.png" />
          </image>
