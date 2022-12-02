@@ -31,97 +31,132 @@
             </DropShadow>
          </effect>
       </Text>
-      <Button fx:id="btnCancel" layoutX="555.0" layoutY="555.0" mnemonicParsing="false" onMouseClicked="#switchToArena" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="600.0" />
-      <HBox fx:id="pokemon1" layoutX="8.0" layoutY="33.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
+      <Button fx:id="btnCancel" layoutX="365.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#switchToArena" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="365.0" />
+      <HBox fx:id="pokemon1" layoutX="8.0" layoutY="33.0" maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
          <children>
+            <Button fx:id="btnSelect1" maxHeight="120.0" maxWidth="100.0" minHeight="120.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#pick1" prefHeight="120.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Button>
+            <Text fx:id="health1" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="71.41666793823242" />
+            <ProgressBar fx:id="currentHealth1" maxHeight="20.0" maxWidth="115.0" minHeight="20.0" minWidth="115.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
             <ImageView fx:id="sprite1" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Sprites/CharizardEnemy.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSelect1" mnemonicParsing="false" onMouseClicked="#pick1" prefHeight="154.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE" />
-            <Text fx:id="health1" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="71.41666793823242" />
-            <ProgressBar fx:id="currentHealth1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox fx:id="pokemon3" layoutX="8.0" layoutY="101.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0">
+      <HBox fx:id="pokemon3" layoutX="8.0" layoutY="101.0" maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="200.0">
          <children>
+            <Button fx:id="btnSelect3" maxHeight="120.0" maxWidth="100.0" minHeight="120.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#pick3" prefHeight="120.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Button>
+            <Text fx:id="health3" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="69.41666793823242" />
+            <ProgressBar fx:id="currentHealth3" maxHeight="20.0" maxWidth="115.0" minHeight="20.0" minWidth="115.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
             <ImageView fx:id="sprite3" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Sprites/BlastoiseEnemy.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSelect3" mnemonicParsing="false" onMouseClicked="#pick3" prefHeight="154.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE" />
-            <Text fx:id="health3" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="69.41666793823242" />
-            <ProgressBar fx:id="currentHealth3" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox fx:id="pokemon5" layoutX="7.0" layoutY="155.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="10.0">
+      <HBox fx:id="pokemon5" layoutX="7.0" layoutY="155.0" maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="10.0">
          <children>
+            <Button fx:id="btnSelect5" maxHeight="120.0" maxWidth="100.0" minHeight="120.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#pick5" prefHeight="120.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Button>
+            <Text fx:id="health5" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="63.41666793823242" />
+            <ProgressBar fx:id="currentHealth5" maxHeight="20.0" maxWidth="115.0" minHeight="20.0" minWidth="115.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
             <ImageView fx:id="sprite5" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Sprites/GyaradosEnemy.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSelect5" mnemonicParsing="false" onMouseClicked="#pick5" prefHeight="154.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE" />
-            <Text fx:id="health5" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="63.41666793823242" />
-            <ProgressBar fx:id="currentHealth5" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox fx:id="pokemon2" layoutX="689.0" layoutY="67.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <HBox fx:id="pokemon2" layoutX="689.0" layoutY="67.0" maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <children>
+            <Button fx:id="btnSelect2" maxHeight="120.0" maxWidth="100.0" minHeight="120.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#pick2" prefHeight="120.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Button>
+            <Text fx:id="health2" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="75.41666793823242" />
+            <ProgressBar fx:id="currentHealth2" maxHeight="20.0" maxWidth="115.0" minHeight="20.0" minWidth="115.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
             <ImageView fx:id="sprite2" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Sprites/SceptileEnemy.png" />
+                  <Image url="@Sprites/VolcaronaEnemy.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSelect2" mnemonicParsing="false" onMouseClicked="#pick2" prefHeight="154.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE" />
-            <Text fx:id="health2" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="75.41666793823242" />
-            <ProgressBar fx:id="currentHealth2" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox fx:id="pokemon4" layoutX="703.0" layoutY="232.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+      <HBox fx:id="pokemon4" layoutX="703.0" layoutY="232.0" maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
          <children>
+            <Button fx:id="btnSelect4" maxHeight="120.0" maxWidth="100.0" minHeight="120.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#pick4" prefHeight="120.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Button>
+            <Text fx:id="health4" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="68.41666793823242" />
+            <ProgressBar fx:id="currentHealth4" maxHeight="20.0" maxWidth="115.0" minHeight="20.0" minWidth="115.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
             <ImageView fx:id="sprite4" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Sprites/StaraptorEnemy.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSelect4" mnemonicParsing="false" onMouseClicked="#pick4" prefHeight="154.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE" />
-            <Text fx:id="health4" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="68.41666793823242" />
-            <ProgressBar fx:id="currentHealth4" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox fx:id="pokemon6" layoutX="703.0" layoutY="446.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="0.0">
+      <HBox fx:id="pokemon6" layoutX="703.0" layoutY="446.0" maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="0.0">
          <children>
+            <Button fx:id="btnSelect6" maxHeight="120.0" maxWidth="100.0" minHeight="120.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#pick6" prefHeight="120.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></Button>
+            <Text fx:id="health6" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="66.41666793823242" />
+            <ProgressBar fx:id="currentHealth6" maxHeight="20.0" maxWidth="115.0" minHeight="20.0" minWidth="115.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
             <ImageView fx:id="sprite6" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Sprites/VolcaronaEnemy.png" />
+                  <Image url="@Sprites/SceptileEnemy.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSelect6" mnemonicParsing="false" onMouseClicked="#pick6" prefHeight="154.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE" />
-            <Text fx:id="health6" fill="#f5f3f3" strokeType="OUTSIDE" strokeWidth="0.0" text="500/500" wrappingWidth="66.41666793823242" />
-            <ProgressBar fx:id="currentHealth6" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="115.0" progress="1.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <Button fx:id="btnHome" layoutX="815.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#returnHome" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Return Home" textFill="WHITE" />
    </children>
 </AnchorPane>
