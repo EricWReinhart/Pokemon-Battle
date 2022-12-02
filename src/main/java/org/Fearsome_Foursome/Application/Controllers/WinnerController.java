@@ -27,8 +27,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.Fearsome_Foursome.Application.HelloPokemon;
 
 public class WinnerController {
 
@@ -79,6 +81,16 @@ public class WinnerController {
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) closeBtn.getScene().getWindow();
         stage.close();
+    }
+
+    /**
+     * Method to return to the home screen
+     * @param mouseEvent
+     */
+    public void returnHome(MouseEvent mouseEvent) {
+        HelloPokemon.globalModel.getArena().refreshAll();
+        Stage stage = (Stage)homeBtn.getScene().getWindow();
+        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 }
 
