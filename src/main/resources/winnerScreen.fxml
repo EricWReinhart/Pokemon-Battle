@@ -58,7 +58,7 @@
             <Font name="Caladea" size="21.0" />
          </font>
       </Button>
-      <Button fx:id="homeBtn" layoutX="595.0" layoutY="471.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="131.0" text="Return to home" textFill="#08c4e1">
+      <Button fx:id="homeBtn" layoutX="595.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#returnHome" prefHeight="49.0" prefWidth="131.0" text="Return to home" textFill="#08c4e1">
          <font>
             <Font size="12.0" />
          </font>
