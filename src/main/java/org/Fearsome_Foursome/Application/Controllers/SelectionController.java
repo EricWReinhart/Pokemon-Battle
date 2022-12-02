@@ -48,9 +48,6 @@ public class SelectionController {
     private Button btnCancel;
 
     @FXML
-    private Button btnHome;
-
-    @FXML
     private Button btnSelect1;
 
     @FXML
@@ -147,7 +144,6 @@ public class SelectionController {
     void initialize() {
         assert background != null : "fx:id=\"background\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
-        assert btnHome != null : "fx:id=\"btnSelect\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert btnSelect1 != null : "fx:id=\"checkBox1\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert btnSelect2 != null : "fx:id=\"checkBox2\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
         assert btnSelect3 != null : "fx:id=\"checkBox3\" was not injected: check your FXML file 'pokemonSelection.fxml'.";
@@ -202,16 +198,6 @@ public class SelectionController {
             int newPlayerIndex = HelloPokemon.arenaController.getRandomNotDeadPlayer();
             HelloPokemon.arenaController.setUpPokemon(newPlayerIndex, HelloPokemon.arenaController.getEnemyUpFrontIndex());
         }
-    }
-
-    /**
-     * Method to return to the home screen
-     * @param mouseEvent
-     */
-    public void returnHome(MouseEvent mouseEvent) {
-        HelloPokemon.globalModel.getArena().refreshAll();
-        Stage stage = (Stage)background.getScene().getWindow();
-        HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 
     /**
