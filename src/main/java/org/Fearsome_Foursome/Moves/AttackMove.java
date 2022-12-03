@@ -18,7 +18,12 @@
 
 package org.Fearsome_Foursome.Moves;
 
-import javafx.scene.paint.Color;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 import java.util.List;
@@ -49,6 +54,9 @@ public class AttackMove implements Move{
     /** Color associated with this move */
     private final String color;
 
+    /** The address which contains the .png sprite animation for said {@link SupportMove} */
+    private final String imagePath;
+
     /**
      * Constructor for {@link AttackMove} class, which just initializes all the attributes
      * @param strongAgainst {@link Class}
@@ -64,6 +72,7 @@ public class AttackMove implements Move{
         this.name = name;
         this.description = description;
         this.color = color;
+        this.imagePath = "Sprites/Moves/" + name + ".png";
     }
 
     /**
@@ -156,5 +165,42 @@ public class AttackMove implements Move{
         if (this.strongAgainst == null)
             return false;
         return this.strongAgainst.equals(className);
+    }
+
+    /**
+     * Method to show this {@link AttackMove}'s animation
+     * @param image - the {@link ImageView} which will portray this moves Sprite
+     */
+    @Override
+    public void showAnimation(ImageView image) {
+        // first make the image visible
+        image.setImage(new Image(this.imagePath));
+        image.setVisible(true);
+
+        // needs to move and scale
+        TranslateTransition translation = new TranslateTransition();
+        ScaleTransition scale = new ScaleTransition();
+        translation.setNode(image);
+        translation.setDuration(Duration.millis(500));
+        scale.setNode(image);
+        scale.setDuration(Duration.millis(500));
+        if (image == HelloPokemon.arenaController.attackMovePlayer){
+            // player is attacking
+            translation.setByX(250);
+            translation.setByX(-20);
+            scale.setToX(0.75);
+            scale.setToY(0.75);
+        } else if (image == HelloPokemon.arenaController.attackMoveEnemy) {
+            // enemy is attacking
+            translation.setByX(-250);
+            translation.setByX(20);
+            scale.setToX(1.0 + 1.0/3.0);
+            scale.setToY(1.0 + 1.0/3.0);
+        }
+        translation.play();
+        scale.play();
+
+        image.setVisible(false);
+
     }
 }

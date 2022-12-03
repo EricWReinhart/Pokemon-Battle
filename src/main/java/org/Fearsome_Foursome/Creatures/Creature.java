@@ -41,7 +41,7 @@ public abstract class Creature {
     /** A map of all the different possible Pokémon names our app will include*/
     public static final HashMap<Class, ArrayList<String>> CREATURE_NAME_MAP = new HashMap<>();
 
-    /** A map of the front and back sprites of each Pokemon by name */
+    /** A map of the front and back sprites of each Pokémon by name */
     public static final HashMap<String, String[]> CREATURE_SPRITE_MAP = new HashMap<>();
 
     // CONCLUDES THE STATIC MEMBERS
@@ -302,6 +302,15 @@ public abstract class Creature {
         this.maxHealth = Creature.DEFAULT_MAX_HEALTH;
         this.health = this.maxHealth;
         this.speed = Creature.DEFAULT_SPEED;
+    }
+
+    /**
+     * Method to return the {@link Creature}'s {@link Move} at the indicated index
+     * @param index
+     * @return
+     */
+    public Move getMove(int index){
+        return CREATURE_MOVE_MAP.get(this.getClass()).get(index);
     }
 
 }

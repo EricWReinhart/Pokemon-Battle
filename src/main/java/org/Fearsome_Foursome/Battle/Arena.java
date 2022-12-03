@@ -15,7 +15,11 @@
  */
 package org.Fearsome_Foursome.Battle;
 
+import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Creatures.Creature;
+import org.Fearsome_Foursome.Moves.AttackMove;
+import org.Fearsome_Foursome.Moves.Move;
+import org.Fearsome_Foursome.Moves.SupportMove;
 
 import java.util.ArrayList;
 
@@ -91,23 +95,29 @@ public class Arena {
      * @param enemyMoveIndex A move picked randomly
      */
     private String turn(int playerMoveIndex, int enemyMoveIndex){
+        // get a hold of the Moves
+        Move playerMove = playerCreatureUpFront.getMove(playerMoveIndex);
+        Move enemyMove = enemyCreatureUpFront.getMove(enemyMoveIndex);
+
         // checking the speed to see who moves first and return an appropriate
         if (playerCreatureUpFront.getSpeed() >= enemyCreatureUpFront.getSpeed()){
             // player moves first
             battleTextLog = "Your " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName() + ". ";
             battleTextLog += playerCreatureUpFront.move(playerMoveIndex);
+            this.showAnimation(playerMove, playerCreatureUpFront);
 
             // if the enemy is not dead after the player's attack then the enemy can move
             if(!(enemyCreatureUpFront.isDead())){
                 battleTextLog += "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMoveIndex).getName() + ". ";
                 battleTextLog += enemyCreatureUpFront.move(enemyMoveIndex);
+                this.showAnimation(enemyMove, enemyCreatureUpFront);
                 // great - now did the player die after the enemy moved?
                 if (playerCreatureUpFront.isDead()){
                     player.incrementDead();
                 }
             }
             else{
-                // the enemy's Pokemon is dead so increment amount of dead Pokemon by 1
+                // the enemy's Pokémon is dead so increment amount of dead Pokémon by 1
                 this.enemy.incrementDead();
             }
 
@@ -116,11 +126,13 @@ public class Arena {
             // enemy creature can move first
             battleTextLog = "The opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMoveIndex).getName() + ". ";
             battleTextLog += enemyCreatureUpFront.move(enemyMoveIndex);
+            this.showAnimation(enemyMove, enemyCreatureUpFront);
 
             // if the player is not dead after the enemy's attack then the enemy can move
             if(!(playerCreatureUpFront.isDead())){
                 battleTextLog += "\nYour " + playerCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(playerCreatureUpFront.getClass()).get(playerMoveIndex).getName() + ". ";
                 battleTextLog += playerCreatureUpFront.move(playerMoveIndex);
+                this.showAnimation(playerMove, playerCreatureUpFront);
                 // great - now did the enemy die after the player moved?
                 if (enemyCreatureUpFront.isDead()){
                     this.enemy.incrementDead();
@@ -140,11 +152,11 @@ public class Arena {
     }
 
     /**
-     * Allows controller to bring up two Pokemon and pit them against each other.
-     * @param playerCreatureIndex Index for a Pokemon chosen by user
-     * @param enemyCreatureIndex Index for a Pokemon randomly chosen
-     * @param playerMoveIndex Move for a Pokemon chosen by user
-     * @param enemyMoveIndex Move for a Pokemon randomly chosen
+     * Allows controller to bring up two Pokémon and pit them against each other.
+     * @param playerCreatureIndex Index for a Pokémon chosen by user
+     * @param enemyCreatureIndex Index for a Pokémon randomly chosen
+     * @param playerMoveIndex Move for a Pokémon chosen by user
+     * @param enemyMoveIndex Move for a Pokémon randomly chosen
      */
     public String playRound(int playerCreatureIndex, int enemyCreatureIndex, int playerMoveIndex, int enemyMoveIndex){
         if(combatOver){
@@ -156,7 +168,7 @@ public class Arena {
                 return turn(playerMoveIndex,enemyMoveIndex);
             }
         }
-        return ""; // TODO: this statement should never be hit?
+        return ""; // this statement should never be hit
     }
 
     /** Simple getter for the player up front */
@@ -203,7 +215,7 @@ public class Arena {
     }
 
     /**
-     * Return a random index of a Pokemon from the Enemy which is alive
+     * Return a random index of a Pokémon from the Enemy which is alive
      * @return int
      */
     public int getRandomNotDeadFromEnemy() {
@@ -212,7 +224,7 @@ public class Arena {
     }
 
     /**
-     * Return a random index of a Pokemon from the Player which is alive
+     * Return a random index of a Pokémon from the Player which is alive
      * @return int
      */
     public int getRandomNotDeadFromPlayer() {
@@ -238,5 +250,28 @@ public class Arena {
             return alive.get((int)(Math.random()*alive.size()));
         }
     }
+
+    /**
+     * Method to portray the correct animation for a given {@link Move} and {@link Creature}
+     * @param move
+     * @param creature
+     */
+    public void showAnimation(Move move, Creature creature){
+        // if AttackMove, check which Creature and perform relevant animation on correct ImageView
+        if (move instanceof AttackMove){
+            if (creature == playerCreatureUpFront){
+                move.showAnimation(HelloPokemon.arenaController.attackMovePlayer);
+            } else if (creature == enemyCreatureUpFront){
+                move.showAnimation(HelloPokemon.arenaController.attackMoveEnemy);
+            }
+        }
+        // if SupportMove, check which Creature and again perform relevant animation on correct ImageView
+        else if (move instanceof SupportMove){
+            if (creature == playerCreatureUpFront){
+                move.showAnimation(HelloPokemon.arenaController.supportMovePlayer);
+            } else if (creature == enemyCreatureUpFront){
+                move.showAnimation(HelloPokemon.arenaController.supportMoveEnemy);
+            }
+        }
+    }
 }
-   

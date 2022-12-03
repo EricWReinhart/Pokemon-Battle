@@ -48,14 +48,29 @@
             <padding>
                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
             </padding></ProgressBar>
-        <ImageView fx:id="playerSprite" fitHeight="200.0" fitWidth="200.0" layoutX="265.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Sprites/SceptileAlly.png" />
-            </image>
-        </ImageView>
+      <ImageView fx:id="supportMoveEnemy" fitHeight="359.0" fitWidth="397.0" layoutX="500.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Sprites/Moves/AGILITY.png" />
+         </image>
+      </ImageView>
         <ImageView fx:id="enemySprite" fitHeight="110.0" fitWidth="175.0" layoutX="604.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-size: contain;">
             <image>
                 <Image url="@Sprites/SnorlaxEnemy.png" />
+            </image>
+        </ImageView>
+      <ImageView fx:id="attackMoveEnemy" fitHeight="90.0" fitWidth="140.0" layoutX="530.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" rotate="155.0" scaleX="0.75" scaleY="0.75" scaleZ="0.75">
+         <image>
+            <Image url="@Sprites/Moves/EMBER.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="attackMovePlayer" fitHeight="90.0" fitWidth="140.0" layoutX="375.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" rotate="340.0">
+         <image>
+            <Image url="@Sprites/Moves/EMBER.png" />
+         </image>
+      </ImageView>
+        <ImageView fx:id="playerSprite" fitHeight="200.0" fitWidth="200.0" layoutX="265.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Sprites/SceptileAlly.png" />
             </image>
         </ImageView>
         <Button fx:id="btnQuit" layoutX="945.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#goHome" text="Quit" AnchorPane.bottomAnchor="25.28570556640625" AnchorPane.leftAnchor="945.0" />
@@ -64,5 +79,10 @@
                 <Insets left="5.0" right="5.0" />
             </padding></TextField>
         <TextArea fx:id="battleTextLog" editable="false" layoutX="500.0" layoutY="330.0" prefHeight="85.0" prefWidth="325.0" style="-fx-border-color: Black; -fx-background-color: Black;" />
+      <ImageView fx:id="supportMovePlayer" fitHeight="514.0" fitWidth="493.0" layoutX="108.0" layoutY="-32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Sprites/Moves/RECOVER.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

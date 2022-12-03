@@ -18,7 +18,10 @@
 
 package org.Fearsome_Foursome.Moves;
 
-import javafx.scene.paint.Color;
+import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 public class SupportMove implements Move {
@@ -41,6 +44,9 @@ public class SupportMove implements Move {
     /** Action done by the move such as healing or increasing speed */
     private String moveAction;
 
+    /** The address which contains the .png sprite animation for said {@link SupportMove} */
+    private final String imagePath;
+
     /**
      * Constructor for the {@link SupportMove} class, which initializes attributeToChange and bonus
      * @param type {@link SupportType}
@@ -52,6 +58,7 @@ public class SupportMove implements Move {
         this.name = name;
         this.description = description;
         this.color = color;
+        this.imagePath = "Moves/" + name + ".png";
     }
 
     /**
@@ -117,5 +124,19 @@ public class SupportMove implements Move {
      */
     public int getBonus() {
         return bonus;
+    }
+
+    /**
+     * Method to show the animation for said {@link Move}
+     */
+    @Override
+    public void showAnimation(ImageView image) {
+        image.setImage(new Image(this.imagePath));
+        image.setVisible(true);
+        TranslateTransition stillTransition = new TranslateTransition();
+        stillTransition.setNode(image);
+        stillTransition.setDuration(Duration.millis(500));
+        stillTransition.play();
+        image.setVisible(false);
     }
 }

@@ -25,20 +25,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.Fearsome_Foursome.Application.GameModel;
 import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Battle.Arena;
-import org.Fearsome_Foursome.Battle.Player;
 import org.Fearsome_Foursome.Creatures.Creature;
-import org.Fearsome_Foursome.Moves.Move;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Random;
 
 public class ArenaController {
+
+    @FXML
+    public ImageView attackMoveEnemy;
+
+    @FXML
+    public ImageView attackMovePlayer;
+
+    @FXML
+    public ImageView supportMoveEnemy;
+
+    @FXML
+    public ImageView supportMovePlayer;
 
     @FXML
     private ImageView playerSprite;
@@ -106,7 +110,7 @@ public class ArenaController {
     public static boolean justDied = false;
     /** Text that explains what is happening in the battle */
     private String battleText = "";
-    /** Index of the most recently fainted Pokemon belonging to the user */
+    /** Index of the most recently fainted Pokémon belonging to the user */
     private static int previousDeadUserPokemonIndex;
 
     /**
@@ -115,6 +119,12 @@ public class ArenaController {
     public boolean setUpPokemon(int playerTeamIdx, int enemyTeamIdx) {
         // Store reference to the Arena itself
         arena = HelloPokemon.globalModel.getArena();
+
+        // we need to make the Move images hidden
+        attackMoveEnemy.setVisible(false);
+        attackMovePlayer.setVisible(false);
+        supportMoveEnemy.setVisible(false);
+        supportMovePlayer.setVisible(false);
 
         if (!arena.setUpCombatants(playerTeamIdx, enemyTeamIdx)){
             // SOMEBODY'S DEAD, and the way we have this set up is such that this could only happen if the user selects a dead Pokémon
@@ -133,7 +143,7 @@ public class ArenaController {
         // Display the correct moves of the player's Pokémon
         setUpMoves(playerCreatureUpFront);
 
-        // we were successful in setting up the Pokemon
+        // we were successful in setting up the Pokémon
         return true;
     }
 
@@ -303,16 +313,16 @@ public class ArenaController {
     }
 
     /**
-     * If either Pokemon in the Arena faints or is swapped out, then display an appropriate message
+     * If either Pokémon in the Arena faints or is swapped out, then display an appropriate message
      * in the battle log
      */
     public void setPokemonSwapBattleLog() {
-        // If the user's Pokemon just died, tell the user which Pokemon died and which Pokemon is being swapped in
+        // If the user's Pokémon just died, tell the user which Pokémon died and which Pokémon is being swapped in
         if (justDied) {
             battleText = "Your " + arena.getPlayer().getPokeCreature(previousDeadUserPokemonIndex).getName() + " fainted!\nYou sent out " + playerCreatureUpFront.getName() + "!";
             justDied = false;
         } else {
-            // User's Pokemon is not dead but the user is swapping to a different Pokemon
+            // User's Pokémon is not dead but the user is swapping to a different Pokémon
             battleText = "You sent out " + playerCreatureUpFront.getName() + "!";
         }
         // Update the battle log with the correct message

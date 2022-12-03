@@ -18,8 +18,9 @@
 
 package org.Fearsome_Foursome.Moves;
 
-import javafx.scene.paint.Color;
 import org.Fearsome_Foursome.Creatures.Creature;
+
+import javafx.scene.image.ImageView;
 
 /**
  * A functional interface that takes in a target {@link Creature} and does something to it
@@ -50,4 +51,8 @@ public interface Move {
      *  */
     String actOn(Creature self, Creature target);
 
+    /**
+     * Method which will show the animation attributed to said {@link Move}
+     */
+    void showAnimation(ImageView image);
 }
