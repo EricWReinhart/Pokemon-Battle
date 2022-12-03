@@ -18,7 +18,6 @@
 
 package org.Fearsome_Foursome.Application.Controllers;
 
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;

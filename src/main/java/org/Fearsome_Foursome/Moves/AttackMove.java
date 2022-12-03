@@ -72,7 +72,7 @@ public class AttackMove implements Move{
         this.name = name;
         this.description = description;
         this.color = color;
-        this.imagePath = "Sprites/Moves/" + name + ".png";
+        this.imagePath = "Sprites/" + name + ".png";
     }
 
     /**
@@ -177,28 +177,33 @@ public class AttackMove implements Move{
         image.setImage(new Image(this.imagePath));
         image.setVisible(true);
 
-        // needs to move and scale
-        TranslateTransition translation = new TranslateTransition();
-        ScaleTransition scale = new ScaleTransition();
-        translation.setNode(image);
-        translation.setDuration(Duration.millis(500));
-        scale.setNode(image);
-        scale.setDuration(Duration.millis(500));
-        if (image == HelloPokemon.arenaController.attackMovePlayer){
-            // player is attacking
-            translation.setByX(250);
-            translation.setByX(-20);
-            scale.setToX(0.75);
-            scale.setToY(0.75);
-        } else if (image == HelloPokemon.arenaController.attackMoveEnemy) {
-            // enemy is attacking
-            translation.setByX(-250);
-            translation.setByX(20);
-            scale.setToX(1.0 + 1.0/3.0);
-            scale.setToY(1.0 + 1.0/3.0);
+        if (!(this.name.equals("TACKLE"))) {
+            // needs to move and scale
+            TranslateTransition translation = new TranslateTransition();
+            ScaleTransition scale = new ScaleTransition();
+            translation.setNode(image);
+            translation.setDuration(Duration.millis(500));
+            scale.setNode(image);
+            scale.setDuration(Duration.millis(500));
+            if (image == HelloPokemon.arenaController.attackMovePlayer) {
+                // player is attacking
+                translation.setByX(250);
+                translation.setByX(-20);
+                scale.setToX(0.75);
+                scale.setToY(0.75);
+            } else if (image == HelloPokemon.arenaController.attackMoveEnemy) {
+                // enemy is attacking
+                translation.setByX(-250);
+                translation.setByX(20);
+                scale.setToX(1.0 + 1.0 / 3.0);
+                scale.setToY(1.0 + 1.0 / 3.0);
+            }
+            translation.play();
+            scale.play();
         }
-        translation.play();
-        scale.play();
+        else {
+            // tackling
+        }
 
         image.setVisible(false);
 
