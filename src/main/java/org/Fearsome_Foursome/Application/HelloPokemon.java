@@ -8,8 +8,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.Controllers.*;
 
-import java.io.IOException;
-import java.util.Arrays;
+import java.io.*;
 
 // SOURCE FOR SCENE SWITCHING METHOD:
 // https://github.com/bkingcs/MultiSceneTest
@@ -95,6 +94,7 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.POKEMON_MENU)) {
                 menuController = loader.getController();
+                menuController.stopMusic();
             }
 
             else if (scene.equals(GameScenes.POKEMON_SELECTION)) {
