@@ -99,7 +99,7 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.POKEMON_MENU)) {
                 menuController = loader.getController();
-                stopMusic();
+                playMusic("MenuMusic.wav");
             }
 
             else if (scene.equals(GameScenes.POKEMON_SELECTION)) {
@@ -108,12 +108,12 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.WINNER_SCREEN)) {
                 winnerController = loader.getController();
-                stopMusic();
                 playMusic("VictoryMusic.wav");
             }
 
             else if (scene.equals(GameScenes.LOSER_SCREEN)) {
                 loserController = loader.getController();
+                playMusic("LoserMusic.wav");
             }
 
             stage.setScene(new Scene(root));
@@ -150,9 +150,14 @@ public class HelloPokemon extends Application {
      * @throws LineUnavailableException
      */
     public static void playMusic(String fileName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        // Stop the music if it is currently playing
+        if (musicIsPlaying) {
+            clip.stop();
+            clip.close();
+        }
         musicIsPlaying = true;
+        // Set the file path and create AudioInputStream object
         String path = "src/main/resources/Music/" + fileName;
-        // Create AudioInputStream object
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
         // Create clip reference
         clip = AudioSystem.getClip();
@@ -160,17 +165,6 @@ public class HelloPokemon extends Application {
         clip.open(audioInputStream);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         clip.start();
-    }
-
-    /**
-     * Stop the music if it is currently playing
-     */
-    public static void stopMusic() {
-        if (musicIsPlaying) {
-            clip.stop();
-            clip.close();
-        }
-        musicIsPlaying = false;
     }
 
 }
