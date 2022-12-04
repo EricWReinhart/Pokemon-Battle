@@ -35,11 +35,6 @@ import javax.sound.sampled.*;
 
 public class MenuController {
 
-    /** Audio clip of music */
-    private static Clip clip;
-    /** Music is currently playing */
-    private static boolean musicIsPlaying = false;
-
     @FXML
     private ResourceBundle resources;
 
@@ -110,44 +105,12 @@ public class MenuController {
     public void showArena(javafx.scene.input.MouseEvent mouseEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Randomize the teams and play battle music
         HelloPokemon.globalModel.getArena().refreshAll();
-        playMusic("BattleMusic.wav");
+        HelloPokemon.playMusic("BattleMusic.wav");
         // Get the Stage object of this button
         Stage stage = (Stage) btnStart.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(0, 0);
         HelloPokemon.arenaController.setInitialBattleTextLog();
-    }
-
-    /**
-     * Play music
-     * Source: https://www.geeksforgeeks.org/play-audio-file-using-java/
-     * @param fileName name of the file
-     * @throws UnsupportedAudioFileException
-     * @throws IOException
-     * @throws LineUnavailableException
-     */
-    public void playMusic(String fileName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        musicIsPlaying = true;
-        String path = "src/main/resources/Music/" + fileName;
-        // Create AudioInputStream object
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
-        // Create clip reference
-        clip = AudioSystem.getClip();
-        // Open audioInputStream to the clip and loop it
-        clip.open(audioInputStream);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        clip.start();
-    }
-
-    /**
-     * Stop the music if it is currently playing
-     */
-    public void stopMusic() {
-        if (musicIsPlaying) {
-            clip.stop();
-            clip.close();
-        }
-        musicIsPlaying = false;
     }
 
     /**

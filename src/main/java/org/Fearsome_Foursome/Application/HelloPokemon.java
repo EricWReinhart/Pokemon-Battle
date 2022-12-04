@@ -8,6 +8,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.Controllers.*;
 
+import javax.sound.sampled.*;
 import java.io.*;
 
 // SOURCE FOR SCENE SWITCHING METHOD:
@@ -28,6 +29,10 @@ public class HelloPokemon extends Application {
     public static WinnerController winnerController;
     /** Reference to the LoserScreen Controller */
     public static LoserController loserController;
+    /** Audio clip of music */
+    private static Clip clip;
+    /** Music is currently playing */
+    private static boolean musicIsPlaying = false;
 
     /**
      * We need an enumeration for all of our Scenes - a public inner class
@@ -94,7 +99,7 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.POKEMON_MENU)) {
                 menuController = loader.getController();
-                menuController.stopMusic();
+                stopMusic();
             }
 
             else if (scene.equals(GameScenes.POKEMON_SELECTION)) {
@@ -103,6 +108,8 @@ public class HelloPokemon extends Application {
 
             else if (scene.equals(GameScenes.WINNER_SCREEN)) {
                 winnerController = loader.getController();
+                stopMusic();
+                playMusic("VictoryMusic.wav");
             }
 
             else if (scene.equals(GameScenes.LOSER_SCREEN)) {
@@ -112,7 +119,7 @@ public class HelloPokemon extends Application {
             stage.setScene(new Scene(root));
             stage.setResizable(false);
 
-        } catch (IOException e){
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e){
             e.printStackTrace();
         }
     }
@@ -132,6 +139,38 @@ public class HelloPokemon extends Application {
         else {
             progressBar.setStyle("-fx-accent: " + "red");
         }
+    }
+
+    /**
+     * Play music
+     * Source: https://www.geeksforgeeks.org/play-audio-file-using-java/
+     * @param fileName name of the file
+     * @throws UnsupportedAudioFileException
+     * @throws IOException
+     * @throws LineUnavailableException
+     */
+    public static void playMusic(String fileName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        musicIsPlaying = true;
+        String path = "src/main/resources/Music/" + fileName;
+        // Create AudioInputStream object
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
+        // Create clip reference
+        clip = AudioSystem.getClip();
+        // Open audioInputStream to the clip and loop it
+        clip.open(audioInputStream);
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip.start();
+    }
+
+    /**
+     * Stop the music if it is currently playing
+     */
+    public static void stopMusic() {
+        if (musicIsPlaying) {
+            clip.stop();
+            clip.close();
+        }
+        musicIsPlaying = false;
     }
 
 }
