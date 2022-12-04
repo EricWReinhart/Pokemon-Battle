@@ -174,7 +174,11 @@ public class AttackMove implements Move{
     public void showAnimation(ImageView moveImage, ImageView creatureImage) {
         if (this.name.equals("TACKLE")) {
             // needs to move the creature
-            this.createTimeLineTackle(moveImage, creatureImage);
+            if (creatureImage == HelloPokemon.arenaController.enemySprite) {
+                this.createTimeLineTackle(HelloPokemon.arenaController.enemyTackleSprite, creatureImage);
+            } else if (creatureImage == HelloPokemon.arenaController.playerSprite) {
+                this.createTimeLineTackle(HelloPokemon.arenaController.playerTackleSprite, creatureImage);
+            }
         } else {
             // tackling
             // first make the image visible

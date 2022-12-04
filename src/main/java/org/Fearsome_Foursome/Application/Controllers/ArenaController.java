@@ -44,6 +44,12 @@ public class ArenaController {
     public ImageView supportMovePlayer;
 
     @FXML
+    public ImageView enemyTackleSprite;
+
+    @FXML
+    public ImageView playerTackleSprite;
+
+    @FXML
     public ImageView playerSprite;
 
     @FXML
@@ -120,6 +126,8 @@ public class ArenaController {
         arena = HelloPokemon.globalModel.getArena();
 
         // we need to make the Move images hidden
+        enemyTackleSprite.setVisible(false);
+        playerTackleSprite.setVisible(false);
         attackMoveEnemy.setVisible(false);
         attackMovePlayer.setVisible(false);
         supportMoveEnemy.setVisible(false);

@@ -17,6 +17,46 @@
                 <Image url="@Images/forestBackGround.jpg" />
             </image>
         </ImageView>
+      <ImageView fx:id="supportMoveEnemy" fitHeight="500.0" fitWidth="500.0" layoutX="420.0" layoutY="-70.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" scaleZ="0.75">
+         <image>
+            <Image url="@Sprites/AGILITY.png" />
+         </image>
+      </ImageView>
+        <ImageView fx:id="enemySprite" fitHeight="200.0" fitWidth="200.0" layoutX="550.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" scaleZ="0.75" style="-fx-background-size: contain;">
+            <image>
+                <Image url="@Sprites/SnorlaxEnemy.png" />
+            </image>
+        </ImageView>
+      <ImageView fx:id="playerTackleSprite" fitHeight="200.0" fitWidth="200.0" layoutX="520.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" scaleZ="0.75">
+         <image>
+            <Image url="@Sprites/SceptileAlly.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="attackMoveEnemy" fitHeight="250.0" fitWidth="250.0" layoutX="400.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" rotate="-150.0">
+         <image>
+            <Image url="@Sprites/SURF.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="attackMovePlayer" fitHeight="250.0" fitWidth="250.0" layoutX="370.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" rotate="20.0">
+         <image>
+            <Image url="@Sprites/HYPERBEAM.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="enemyTackleSprite" fitHeight="200.0" fitWidth="200.0" layoutX="350.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Sprites/SnorlaxEnemy.png" />
+         </image>
+      </ImageView>
+        <ImageView fx:id="playerSprite" fitHeight="200.0" fitWidth="200.0" layoutX="265.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Sprites/SceptileAlly.png" />
+            </image>
+        </ImageView>
+      <ImageView fx:id="supportMovePlayer" fitHeight="500.0" fitWidth="500.0" layoutX="108.0" layoutY="-32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Sprites/RECOVER.png" />
+         </image>
+      </ImageView>
         <FlowPane layoutY="347.0" prefHeight="166.0" prefWidth="327.0" vgap="10.0" AnchorPane.bottomAnchor="1.28570556640625" AnchorPane.rightAnchor="673.0">
             <children>
                 <TextField fx:id="playerName">
@@ -48,41 +88,11 @@
             <padding>
                 <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
             </padding></ProgressBar>
-      <ImageView fx:id="supportMoveEnemy" fitHeight="359.0" fitWidth="397.0" layoutX="500.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Sprites/AGILITY.png" />
-         </image>
-      </ImageView>
-        <ImageView fx:id="enemySprite" fitHeight="110.0" fitWidth="175.0" layoutX="604.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-size: contain;">
-            <image>
-                <Image url="@Sprites/SnorlaxEnemy.png" />
-            </image>
-        </ImageView>
-      <ImageView fx:id="attackMoveEnemy" fitHeight="90.0" fitWidth="140.0" layoutX="530.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" rotate="155.0" scaleX="0.75" scaleY="0.75" scaleZ="0.75">
-         <image>
-            <Image url="@Sprites/EMBER.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="attackMovePlayer" fitHeight="90.0" fitWidth="140.0" layoutX="375.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" rotate="340.0">
-         <image>
-            <Image url="@Sprites/EMBER.png" />
-         </image>
-      </ImageView>
-        <ImageView fx:id="playerSprite" fitHeight="200.0" fitWidth="200.0" layoutX="265.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Sprites/SceptileAlly.png" />
-            </image>
-        </ImageView>
         <Button fx:id="btnQuit" layoutX="945.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#goHome" text="Quit" AnchorPane.bottomAnchor="25.28570556640625" AnchorPane.leftAnchor="945.0" />
         <TextField fx:id="enemyName" layoutX="786.0" layoutY="6.0">
             <padding>
                 <Insets left="5.0" right="5.0" />
             </padding></TextField>
-        <TextArea fx:id="battleTextLog" editable="false" layoutX="500.0" layoutY="330.0" prefHeight="85.0" prefWidth="325.0" style="-fx-border-color: Black; -fx-background-color: Black;" />
-      <ImageView fx:id="supportMovePlayer" fitHeight="514.0" fitWidth="493.0" layoutX="108.0" layoutY="-32.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Sprites/RECOVER.png" />
-         </image>
-      </ImageView>
+        <TextArea fx:id="battleTextLog" editable="false" layoutX="500.0" layoutY="420.0" prefHeight="85.0" prefWidth="325.0" style="-fx-border-color: Black; -fx-background-color: Black;" />
     </children>
 </AnchorPane>
