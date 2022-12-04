@@ -54,5 +54,5 @@ public interface Move {
     /**
      * Method which will show the animation attributed to said {@link Move}
      */
-    void showAnimation(ImageView image);
+    void showAnimation(ImageView moveImage, ImageView creatureView);
 }

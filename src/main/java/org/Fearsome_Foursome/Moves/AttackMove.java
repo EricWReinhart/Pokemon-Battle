@@ -18,8 +18,7 @@
 
 package org.Fearsome_Foursome.Moves;
 
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -169,43 +168,54 @@ public class AttackMove implements Move{
 
     /**
      * Method to show this {@link AttackMove}'s animation
-     * @param image - the {@link ImageView} which will portray this moves Sprite
+     * @param moveImage - the {@link ImageView} which will portray this moves Sprite
      */
     @Override
-    public void showAnimation(ImageView image) {
-        // first make the image visible
-        image.setImage(new Image(this.imagePath));
-        image.setVisible(true);
-
-        if (!(this.name.equals("TACKLE"))) {
-            // needs to move and scale
-            TranslateTransition translation = new TranslateTransition();
-            ScaleTransition scale = new ScaleTransition();
-            translation.setNode(image);
-            translation.setDuration(Duration.millis(500));
-            scale.setNode(image);
-            scale.setDuration(Duration.millis(500));
-            if (image == HelloPokemon.arenaController.attackMovePlayer) {
-                // player is attacking
-                translation.setByX(250);
-                translation.setByX(-20);
-                scale.setToX(0.75);
-                scale.setToY(0.75);
-            } else if (image == HelloPokemon.arenaController.attackMoveEnemy) {
-                // enemy is attacking
-                translation.setByX(-250);
-                translation.setByX(20);
-                scale.setToX(1.0 + 1.0 / 3.0);
-                scale.setToY(1.0 + 1.0 / 3.0);
-            }
-            translation.play();
-            scale.play();
-        }
-        else {
+    public void showAnimation(ImageView moveImage, ImageView creatureImage) {
+        if (this.name.equals("TACKLE")) {
+            // needs to move the creature
+            this.createTimeLineTackle(moveImage, creatureImage);
+        } else {
             // tackling
+            // first make the image visible
+            moveImage.setImage(new Image(this.imagePath));
+            moveImage.setVisible(true);
+
+            // show for a limited amount of time
+            this.createTimeLineNonTackle(moveImage);
+
+            moveImage.setVisible(false);
         }
+    }
 
-        image.setVisible(false);
+    /**
+     * Method to animate a tackle, which depends on the creature who's up to bat
+     * @param moveImage
+     * @param creatureImage
+     */
+    private void createTimeLineTackle(ImageView moveImage, ImageView creatureImage) {
+        moveImage.setImage(creatureImage.getImage());
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(moveImage.visibleProperty(), true)),
+                new KeyFrame(Duration.ZERO, new KeyValue(creatureImage.visibleProperty(), false)),
+                new KeyFrame(Duration.seconds(0.5), new KeyValue(moveImage.visibleProperty(), false)),
+                new KeyFrame(Duration.seconds(0.5), new KeyValue(creatureImage.visibleProperty(), true))
+        );
+        timeline.play();
+    }
 
+    /**
+     * Method to animate a non-tackle {@link AttackMove}
+     * Source: https://stackoverflow.com/questions/23325488/add-timer-for-images-in-javafx
+     * @param moveImage
+     */
+    private void createTimeLineNonTackle(ImageView moveImage) {
+        moveImage.setImage(new Image(this.imagePath));
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(moveImage.visibleProperty(), true)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(moveImage.visibleProperty(), false))
+        );
+        timeline.play();
+        moveImage.setVisible(false);
     }
 }

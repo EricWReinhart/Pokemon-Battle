@@ -44,10 +44,10 @@ public class ArenaController {
     public ImageView supportMovePlayer;
 
     @FXML
-    private ImageView playerSprite;
+    public ImageView playerSprite;
 
     @FXML
-    private ImageView enemySprite;
+    public ImageView enemySprite;
 
     @FXML
     private TextField playerName;

@@ -18,6 +18,9 @@
 
 package org.Fearsome_Foursome.Moves;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -127,16 +130,16 @@ public class SupportMove implements Move {
     }
 
     /**
-     * Method to show the animation for said {@link Move}
+     * Method to show the animation for said {@link SupportMove}
      */
     @Override
-    public void showAnimation(ImageView image) {
-        image.setImage(new Image(this.imagePath));
-        image.setVisible(true);
-        TranslateTransition stillTransition = new TranslateTransition();
-        stillTransition.setNode(image);
-        stillTransition.setDuration(Duration.millis(500));
-        stillTransition.play();
-        image.setVisible(false);
+    public void showAnimation(ImageView moveImage, ImageView creatureImage) {
+        // just make the supporting move visible for a certain amount of time
+        moveImage.setImage(new Image(this.imagePath));
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(moveImage.visibleProperty(), true)),
+                new KeyFrame(Duration.seconds(1), new KeyValue(moveImage.visibleProperty(), false))
+        );
+        timeline.play();
     }
 }

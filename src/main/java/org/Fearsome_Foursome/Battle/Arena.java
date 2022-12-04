@@ -260,17 +260,17 @@ public class Arena {
         // if AttackMove, check which Creature and perform relevant animation on correct ImageView
         if (move instanceof AttackMove){
             if (creature == playerCreatureUpFront){
-                move.showAnimation(HelloPokemon.arenaController.attackMovePlayer);
+                move.showAnimation(HelloPokemon.arenaController.attackMovePlayer, HelloPokemon.arenaController.playerSprite);
             } else if (creature == enemyCreatureUpFront){
-                move.showAnimation(HelloPokemon.arenaController.attackMoveEnemy);
+                move.showAnimation(HelloPokemon.arenaController.attackMoveEnemy, HelloPokemon.arenaController.enemySprite);
             }
         }
         // if SupportMove, check which Creature and again perform relevant animation on correct ImageView
         else if (move instanceof SupportMove){
             if (creature == playerCreatureUpFront){
-                move.showAnimation(HelloPokemon.arenaController.supportMovePlayer);
+                move.showAnimation(HelloPokemon.arenaController.supportMovePlayer, HelloPokemon.arenaController.playerSprite);
             } else if (creature == enemyCreatureUpFront){
-                move.showAnimation(HelloPokemon.arenaController.supportMoveEnemy);
+                move.showAnimation(HelloPokemon.arenaController.supportMoveEnemy, HelloPokemon.arenaController.enemySprite);
             }
         }
     }
