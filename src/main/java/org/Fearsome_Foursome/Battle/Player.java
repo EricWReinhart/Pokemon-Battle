@@ -60,19 +60,19 @@ public class Player {
         }
     }
 
-    /** Allows use to get a poke creature at array*/
+    /** Allows user to get a Pokemon at an index in the array */
     public Creature getPokeCreature(int i){
         Creature potentialCreature = creatureArray[i];
-
-//        // don't want to return a dead creature
-//        if (potentialCreature.isDead()) {
-//            return null;
-//        }
 
         // the creature is alive - that's fine
         return potentialCreature;
     }
-    // TODO: added this method commented out some of getPokeCreature method to fix an issue when setting up combatants
+
+    /**
+     * Check if a Pokemon is dead
+     * @param i
+     * @return true if the Pokemon is dead, false otherwise
+     */
     public boolean potentialCreatureIsDead(int i) {
         Creature potentialCreature = creatureArray[i];
         return potentialCreature.isDead();
