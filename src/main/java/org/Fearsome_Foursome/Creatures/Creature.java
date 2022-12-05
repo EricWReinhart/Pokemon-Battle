@@ -18,12 +18,12 @@
 
 package org.Fearsome_Foursome.Creatures;
 
+import javafx.scene.image.ImageView;
 import org.Fearsome_Foursome.Moves.Move;
 import org.Fearsome_Foursome.Moves.Moves;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 /**
  * An abstract class which has attributes and methods shared by all different types of creatures
@@ -206,7 +206,6 @@ public abstract class Creature {
 
     /**
      * Given the index in the list of moves available to this {@link Creature}, perform that move
-     * @param i
      */
     public String move(int i){
         // let's make this VERY clear - first get the Move from the list of moves this particular Creatures most specific class is allowed
@@ -218,7 +217,6 @@ public abstract class Creature {
 
     /**
      * Simple method to damage a {@link Creature} by a certain amount
-     * @param amount
      */
     public void damage(int amount){
         this.health = Math.max(this.health - amount, 0);
@@ -226,7 +224,6 @@ public abstract class Creature {
 
     /**
      * Simple method to boost the speed of a {@link Creature}
-     * @param amount
      */
     public void increaseSpeed(int amount){
         this.speed += amount;
@@ -234,7 +231,6 @@ public abstract class Creature {
 
     /**
      * Simple method to increase the health of a {@link Creature}
-     * @param amount
      */
     public void increaseHealth(int amount){
         this.health += amount;
@@ -245,7 +241,6 @@ public abstract class Creature {
 
     /**
      * Simple method to increase the maximum health of a {@link Creature}
-     * @param amount
      */
     public void increaseMaxHealth(int amount){
         this.maxHealth += amount;
@@ -253,7 +248,6 @@ public abstract class Creature {
 
     /**
      * A simple method to select the {@link Creature}'s target for when they perform aggressive moves
-     * @param target
      */
     public void setTarget(Creature target){
         this.target = target;
@@ -294,23 +288,5 @@ public abstract class Creature {
      * @return int
      */
     public int getMaxHealth() { return maxHealth; }
-
-    /**
-     * Method to reset the {@link Creature} to whatever state it was at the beginning
-     */
-    public void refresh() {
-        this.maxHealth = Creature.DEFAULT_MAX_HEALTH;
-        this.health = this.maxHealth;
-        this.speed = Creature.DEFAULT_SPEED;
-    }
-
-    /**
-     * Method to return the {@link Creature}'s {@link Move} at the indicated index
-     * @param index
-     * @return
-     */
-    public Move getMove(int index){
-        return CREATURE_MOVE_MAP.get(this.getClass()).get(index);
-    }
 
 }

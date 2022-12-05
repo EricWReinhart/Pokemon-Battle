@@ -46,10 +46,19 @@ public interface Move {
     String getColor();
 
     /**
-     *  Method that must be implemented by anything that implements the Move interface
-     *  Will the action help oneself or hurt another? We cannot be sure so provide both arguments
-     *  */
+     * Method to actually perform the {@link Move}'s action from one Pokémon to another
+     * @param self - {@link Creature}
+     * @param target - {@link Creature}
+     * @return {@link String}
+     */
     String actOn(Creature self, Creature target);
+
+    /**
+     * Just simulate the damaging - no {@link String}s or animations - this is necessary for unit testing
+     * @param self - {@link Creature}
+     * @param target - {@link Creature}
+     */
+    void actOnNoAnimation(Creature self, Creature target);
 
     /**
      * Method which will show the animation attributed to said {@link Move}

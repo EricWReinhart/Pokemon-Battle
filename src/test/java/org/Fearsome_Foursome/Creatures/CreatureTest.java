@@ -12,7 +12,7 @@
  * Package: org.Fearsome_Foursome.Creatures
  * Class: FireCreature
  *
- * Description: Testing the different Creature sub classes
+ * Description: Testing the different Creature subclasses
  *
  * *****************************************/
 
@@ -140,7 +140,7 @@ class CreatureTest {
             AttackMove theAttack = (AttackMove)Creature.CREATURE_MOVE_MAP.get(hitter.getClass()).get(index);
 
             // set up the damage scaling
-            double scale = 0.0;
+            double scale;
             if (theAttack.isWeakAgainst(target.getClass()))
                 scale = 0.5;
             else if (theAttack.isStrongAgainst(target.getClass()))
@@ -152,7 +152,7 @@ class CreatureTest {
             int numHits = 0;
             int oldTargetHealth = target.getHealth();
             for (int i=0; i<NUM_TRIALS; i++){
-                hitter.move(index);
+                theAttack.actOnNoAnimation(hitter, target);
                 if (target.getHealth() == oldTargetHealth - (int)(theAttack.getDamage()*scale)){
                     numHits++;
                     // and refresh the target
@@ -193,11 +193,13 @@ class CreatureTest {
         // test to make sure all the supports work as expected
         for (int index : supportIndices){
             SupportMove theSupport = (SupportMove)Creature.CREATURE_MOVE_MAP.get(mover.getClass()).get(index);
+            theSupport.actOnNoAnimation(mover, mover.target);
 
-            // we are changing the health
+            // make sure the appropriate attribute was changed by the appropriate amount
             if (theSupport.getAttributeToChange().equals(CreatureAttribute.Health)){
+                // we are changing the health
                 int oldHealth = mover.getHealth();
-                mover.move(index);
+                theSupport.actOnNoAnimation(mover, mover.target);
                 if (mover.getHealth() != oldHealth)
                     return false;
                 // now damage it
@@ -205,24 +207,20 @@ class CreatureTest {
                 if (!(mover.getHealth() == oldHealth - theSupport.getBonus()))
                     return false;
                 // just for grins, that makes sure we got damaged
-                mover.move(index);
+                theSupport.actOnNoAnimation(mover, mover.target);
                 if (mover.getHealth() != oldHealth)
                     return false;
                 // now we should be back at full health
-            }
-
-            // we are changing the speed
-            if (theSupport.getAttributeToChange().equals(CreatureAttribute.Speed)){
+            } else if (theSupport.getAttributeToChange().equals(CreatureAttribute.Speed)){
+                // we are changing the speed
                 int oldSpeed = mover.getSpeed();
-                mover.move(index);
+                theSupport.actOnNoAnimation(mover, mover.target);
                 if (!(mover.getSpeed() == oldSpeed + theSupport.getBonus()))
                     return false;
-            }
-
-            // we are changing the maximum health
-            if (theSupport.getAttributeToChange().equals(CreatureAttribute.MaxHealth)){
+            } else if (theSupport.getAttributeToChange().equals(CreatureAttribute.MaxHealth)){
+                // we are changing the maximum health
                 int oldMaxHealth = mover.getMaxHealth();
-                mover.move(index);
+                theSupport.actOnNoAnimation(mover, mover.target);
                 if (!(mover.getMaxHealth() == oldMaxHealth + theSupport.getBonus()))
                     return false;
             }

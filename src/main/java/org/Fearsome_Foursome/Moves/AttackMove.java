@@ -103,28 +103,58 @@ public class AttackMove implements Move{
 
     /**
      * Override for the required 'actOn' method which will do something to the creatures involved
-     * @param self
-     * @param target
+     * @param self - {@link Creature}
+     * @param target - {@link Creature}
      */
     @Override
     public String actOn(Creature self, Creature target) {
+        String message = "";
         if (Math.random() <= accuracy) {
             if (target.getClass().equals(strongAgainst)){
                 // target takes double damage
                 target.damage(2*damage);
-                return "\nIt's super effective!";
+                message = "\nIt's super effective!";
             } else if (weakAgainstList != null && weakAgainstList.contains(target.getClass())){
                 // target takes half damage
                 target.damage((int)(0.5*damage));
-                return "\nIt's not very effective...";
+                message = "\nIt's not very effective...";
             } else{
                 // target takes normal damage
                 target.damage(damage);
-                return "";
+                message = "";
             }
+
+            // now show the animation
+            if (self == HelloPokemon.globalModel.getArena().playerCreatureUpFront){
+                this.showAnimation(HelloPokemon.arenaController.attackMovePlayer, HelloPokemon.arenaController.playerSprite);
+            } else if (self == HelloPokemon.globalModel.getArena().enemyCreatureUpFront){
+                this.showAnimation(HelloPokemon.arenaController.attackMoveEnemy, HelloPokemon.arenaController.enemySprite);
+            }
+            return message;
         }
         else {
             return "\nIt missed!";
+        }
+    }
+
+    /**
+     * Testing version of this method
+     * @param self - {@link Creature}
+     * @param target - {@link Creature}
+     */
+    @Override
+    public void actOnNoAnimation(Creature self, Creature target) {
+        if (Math.random() <= accuracy) {
+            if (target.getClass().equals(strongAgainst)){
+                // target takes double damage
+                target.damage(2*damage);
+            } else if (weakAgainstList != null && weakAgainstList.contains(target.getClass())){
+                // target takes half damage
+                target.damage((int)(0.5*damage));
+            } else{
+                // target takes normal damage
+                target.damage(damage);
+            }
         }
     }
 

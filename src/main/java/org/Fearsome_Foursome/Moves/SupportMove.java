@@ -21,10 +21,10 @@ package org.Fearsome_Foursome.Moves;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Creatures.Creature;
 
 public class SupportMove implements Move {
@@ -91,8 +91,8 @@ public class SupportMove implements Move {
 
     /**
      * What does this move DO to all parties involved?
-     * @param self
-     * @param target
+     * @param self {@link Creature}
+     * @param target {@link Creature}
      */
     @Override
     public String actOn(Creature self, Creature target) {
@@ -110,7 +110,33 @@ public class SupportMove implements Move {
                 moveAction = "\nIncreased speed by " + SupportType.Speeding.amountToIncrease + "!";
                 break;
         }
+        // depending on the attacking Creature, this affects which animation we are using
+        if (self == HelloPokemon.globalModel.getArena().playerCreatureUpFront){
+            this.showAnimation(HelloPokemon.arenaController.supportMovePlayer, HelloPokemon.arenaController.playerSprite);
+        } else if (self == HelloPokemon.globalModel.getArena().enemyCreatureUpFront){
+            this.showAnimation(HelloPokemon.arenaController.supportMoveEnemy, HelloPokemon.arenaController.enemySprite);
+        }
         return moveAction;
+    }
+
+    /**
+     * Testing version of this method
+     * @param self - {@link Creature}
+     * @param target - {@link Creature}
+     */
+    @Override
+    public void actOnNoAnimation(Creature self, Creature target) {
+        switch (attributeToChange) {
+            case Health:
+                self.increaseHealth(bonus);
+                break;
+            case MaxHealth:
+                self.increaseMaxHealth(bonus);
+                break;
+            case Speed:
+                self.increaseSpeed(bonus);
+                break;
+        }
     }
 
     /**

@@ -51,9 +51,9 @@ public class HelloPokemon extends Application {
 
         /**
          * Not just anyone can call this constructor - set the fileName attribute
-         * @param fileName
+         * @param fileName {@link String}
          */
-        private GameScenes(String fileName){
+        GameScenes(String fileName){
             this.fileName = fileName;
         }
 
@@ -84,9 +84,8 @@ public class HelloPokemon extends Application {
     /**
      * Use an FXMLLoader to create a Scene to set on the input stage. When loading in a scene, set its respective
      * controller up properly.
-     * @param stage
-     * @param scene
-     * @throws IOException
+     * @param stage {@link Stage}
+     * @param scene {@link Scene}
      */
     public static void loadScene(Stage stage, GameScenes scene) {
         FXMLLoader loader = new FXMLLoader();
@@ -143,11 +142,11 @@ public class HelloPokemon extends Application {
 
     /**
      * Play music
-     * Source: https://www.geeksforgeeks.org/play-audio-file-using-java/
+     * Source: <a href="https://www.geeksforgeeks.org/play-audio-file-using-java/">...</a>
      * @param fileName name of the file
-     * @throws UnsupportedAudioFileException
-     * @throws IOException
-     * @throws LineUnavailableException
+     * @throws UnsupportedAudioFileException - incorrect format
+     * @throws IOException - missing file
+     * @throws LineUnavailableException - possible failure
      */
     public static void playMusic(String fileName) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         // Stop the music if it is currently playing

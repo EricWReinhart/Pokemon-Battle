@@ -208,7 +208,7 @@ public class ArenaController {
     /**
      * When a move is clicked, a round is started. Both Pokémon up front target each other and attack in order of
      * speed. The player's Pokémon uses the selected move and the enemy's Pokémon uses a random move.
-     * @param mouseEvent
+     * @param mouseEvent {@link MouseEvent}
      * @param playerMoveIndex index of the move that the player selects
      */
     public void playARound(MouseEvent mouseEvent, int playerMoveIndex) {
@@ -269,7 +269,7 @@ public class ArenaController {
 
     /**
      * User chooses Move 1 or 2 or 3 or 4
-     * @param mouseEvent
+     * @param mouseEvent {@link MouseEvent}
      */
     public void chooseMoveOne(MouseEvent mouseEvent) { playARound(mouseEvent, 0); }
     public void chooseMoveTwo(MouseEvent mouseEvent) { playARound(mouseEvent, 1); }
@@ -278,7 +278,7 @@ public class ArenaController {
 
     /**
      * Switch to the Pokémon Selection screen and set up the current Pokémon on the arena
-     * @param mouseEvent
+     * @param mouseEvent {@link MouseEvent}
      */
     public void switchToSelection(MouseEvent mouseEvent) {
         Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
@@ -288,7 +288,7 @@ public class ArenaController {
 
     /**
      * Return to home screen
-     * @param mouseEvent
+     * @param mouseEvent {@link MouseEvent}
      */
     public void goHome(MouseEvent mouseEvent) {
         Stage stage = (Stage)btnQuit.getScene().getWindow();
