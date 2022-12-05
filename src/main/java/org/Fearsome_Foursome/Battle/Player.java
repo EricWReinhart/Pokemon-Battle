@@ -39,9 +39,9 @@ public class Player {
      */
     public Player(){
         // Create an Array of all possible Pokemon
-        Creature[] creatureOptions = {new FireCreature(0), new FireCreature(1), new WaterCreature(0),
-                                      new WaterCreature(1), new GrassCreature(0), new GrassCreature(1),
-                                      new NormalCreature(0), new NormalCreature(1)};
+        Creature[] creatureOptions = {new FireCreature(0), new FireCreature(1), new FireCreature(2), new WaterCreature(0),
+                                      new WaterCreature(1),  new WaterCreature(2), new GrassCreature(0), new GrassCreature(1),
+                                      new NormalCreature(0), new NormalCreature(1), new ElectricCreature(0), new ElectricCreature(1)};
         // Create a HashSet of the indices of Pokemon have already been chosen
         HashSet<Integer> picked = new HashSet<>();
 
@@ -51,13 +51,23 @@ public class Player {
         // While the array of the player's Pokemon still has an empty slot, obtain a random Pokemon's index
         // and add it to the player's team but do not allow repeats
         while (Arrays.asList(creatureArray).contains(null)) {
-            randIndex = (int) (Math.random() * 8);
+            randIndex = (int) (Math.random() * creatureOptions.length);
             if (!picked.contains(randIndex)) {
                 picked.add(randIndex);
                 creatureArray[currentCreatureArrayIndex] = creatureOptions[randIndex];
                 currentCreatureArrayIndex++;
             }
         }
+
+        // TODO: TEMP FOR TESTING ONLY
+//        creatureArray[0] = creatureOptions[10];
+//        creatureArray[1] = creatureOptions[11];
+//        creatureArray[2] = creatureOptions[10];
+//        creatureArray[3] = creatureOptions[11];
+//        creatureArray[4] = creatureOptions[8];
+//        creatureArray[5] = creatureOptions[8];
+
+
     }
 
     /** Allows user to get a Pokemon at an index in the array */

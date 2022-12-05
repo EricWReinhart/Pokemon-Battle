@@ -86,6 +86,10 @@ public abstract class Creature {
         addNormalCreatureActions();
         addNormalCreatureNames();
 
+        // establish the electricCreature actions and names
+        addElectricCreatureActions();
+        addElectricCreatureNames();
+
     }
 
     /**
@@ -111,9 +115,11 @@ public abstract class Creature {
 
         fireCreatureNames.add("Charizard");
         fireCreatureNames.add("Volcarona");
+        fireCreatureNames.add("Magmortar");
 
         CREATURE_SPRITE_MAP.put(fireCreatureNames.get(0), new String[]{"CharizardAlly.png", "CharizardEnemy.png"});
         CREATURE_SPRITE_MAP.put(fireCreatureNames.get(1), new String[]{"VolcaronaAlly.png", "VolcaronaEnemy.png"});
+        CREATURE_SPRITE_MAP.put(fireCreatureNames.get(2), new String[]{"MagmortarAlly.png", "MagmortarEnemy.png"});
     }
 
     /**
@@ -139,9 +145,11 @@ public abstract class Creature {
 
         waterCreatureNames.add("Blastoise");
         waterCreatureNames.add("Gyarados");
+        waterCreatureNames.add("Milotic");
 
         CREATURE_SPRITE_MAP.put(waterCreatureNames.get(0), new String[]{"BlastoiseAlly.png", "BlastoiseEnemy.png"});
         CREATURE_SPRITE_MAP.put(waterCreatureNames.get(1), new String[]{"GyaradosAlly.png", "GyaradosEnemy.png"});
+        CREATURE_SPRITE_MAP.put(waterCreatureNames.get(2), new String[]{"MiloticAlly.png", "MiloticEnemy.png"});
     }
 
     /**
@@ -198,6 +206,34 @@ public abstract class Creature {
 
         CREATURE_SPRITE_MAP.put(normalCreatureNames.get(0), new String[]{"SnorlaxAlly.png", "SnorlaxEnemy.png"});
         CREATURE_SPRITE_MAP.put(normalCreatureNames.get(1), new String[]{"StaraptorAlly.png", "StaraptorEnemy.png"});
+    }
+
+    /**
+     * Private method to add all the moves the {@link ElectricCreature} class can do into the dictionary
+     */
+    private void addElectricCreatureActions(){
+        CREATURE_MOVE_MAP.put(ElectricCreature.class, new ArrayList<>());
+        ArrayList<Move> electricCreatureMoves = CREATURE_MOVE_MAP.get(ElectricCreature.class);
+
+        // now add all the Moves to the relevant list
+        electricCreatureMoves.add(Moves.Thundershock);
+        electricCreatureMoves.add(Moves.Thunderbolt);
+        electricCreatureMoves.add(Moves.Tackle);
+        electricCreatureMoves.add(Moves.Agility);
+    }
+
+    /**
+     * Private method to add all the names and sprites of the {@link ElectricCreature} Pokémon
+     */
+    private void addElectricCreatureNames(){
+        CREATURE_NAME_MAP.put(ElectricCreature.class, new ArrayList<>());
+        ArrayList<String> electricCreatureNames = CREATURE_NAME_MAP.get(ElectricCreature.class);
+
+        electricCreatureNames.add("Electivire");
+        electricCreatureNames.add("Galvantula");
+
+        CREATURE_SPRITE_MAP.put(electricCreatureNames.get(0), new String[]{"ElectivireAlly.png", "ElectivireEnemy.png"});
+        CREATURE_SPRITE_MAP.put(electricCreatureNames.get(1), new String[]{"GalvantulaAlly.png", "GalvantulaEnemy.png"});
     }
 
     /**

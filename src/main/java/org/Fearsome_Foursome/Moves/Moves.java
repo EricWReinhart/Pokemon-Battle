@@ -54,6 +54,11 @@ public class Moves {
                                                 Arrays.asList(WaterCreature.class, FireCreature.class),
                                                     "FLAMETHROWER", "Type: Fire\nDamage: 150\nAccuracy: 80", "red");
 
+    // Strong Electric ATTACK move Thunderbolt
+    public static final Move Thunderbolt = new AttackMove(AttackType.Strong, WaterCreature.class,
+                                                Arrays.asList(GrassCreature.class),
+                                                "THUNDERBOLT", "Type: ELECTRIC\nDamage: 150\nAccuracy: 80",  "yellow");
+
     // Weak Normal ATTACK move Tackle
     public static final Move Tackle = new AttackMove(AttackType.Weak, null, null,
                                                     "TACKLE","Type: Normal\nDamage: 100\nAccuracy: 100",  "white");
@@ -72,5 +77,10 @@ public class Moves {
     public static final Move Ember = new AttackMove(AttackType.Weak, GrassCreature.class,
                                                Arrays.asList(WaterCreature.class, FireCreature.class),
                                                 "EMBER", "Type: Fire\nDamage: 100\nAccuracy: 100",  "red");
+
+    // Weak Electric ATTACK move Thundershock
+    public static final Move Thundershock = new AttackMove(AttackType.Weak, WaterCreature.class,
+                                                Arrays.asList(GrassCreature.class),
+                                                "THUNDERSHOCK", "Type: Electric\nDamage: 100\nAccuracy: 100", "yellow");
 
 }
