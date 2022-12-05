@@ -18,6 +18,7 @@
 
 package org.Fearsome_Foursome.Application.Controllers;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -27,6 +28,11 @@ import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Battle.Arena;
 import org.Fearsome_Foursome.Creatures.Creature;
+import org.Fearsome_Foursome.Creatures.NormalCreature;
+import org.Fearsome_Foursome.Moves.AttackMove;
+import org.Fearsome_Foursome.Moves.Move;
+import org.Fearsome_Foursome.Moves.Moves;
+
 import java.util.Random;
 
 public class ArenaController {
@@ -88,35 +94,65 @@ public class ArenaController {
     @FXML
     private Button swapPokemonButton;
 
+    @FXML
     void initialize() {
+        assert attackMoveEnemy != null : "fx:id=\"attackMoveEnemy\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert attackMovePlayer != null : "fx:id=\"attackMovePlayer\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert battleTextLog != null : "fx:id=\"battleTextLog\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert btnQuit != null : "fx:id=\"btnQuit\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert enemyHealthProgressBar != null : "fx:id=\"enemyHealthProgressBar\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert enemyName != null : "fx:id=\"enemyName\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert enemySprite != null : "fx:id=\"enemySprite\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert enemyTackleSprite != null : "fx:id=\"enemyTackleSprite\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert moveButton1 != null : "fx:id=\"moveButton1\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert moveButton2 != null : "fx:id=\"moveButton2\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert moveButton3 != null : "fx:id=\"moveButton3\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert moveButton4 != null : "fx:id=\"moveButton4\" was not injected: check your FXML file 'pokemonArena.fxml'.";
-        assert playerHealthProgressBar != null : "fx:id=\"selfHealthProgressBar1\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert playerHealthProgressBar != null : "fx:id=\"playerHealthProgressBar\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert playerName != null : "fx:id=\"playerName\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert playerSprite != null : "fx:id=\"playerSprite\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert playerTackleSprite != null : "fx:id=\"playerTackleSprite\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert supportMoveEnemy != null : "fx:id=\"supportMoveEnemy\" was not injected: check your FXML file 'pokemonArena.fxml'.";
+        assert supportMovePlayer != null : "fx:id=\"supportMovePlayer\" was not injected: check your FXML file 'pokemonArena.fxml'.";
         assert swapPokemonButton != null : "fx:id=\"swapPokemonButton\" was not injected: check your FXML file 'pokemonArena.fxml'.";
-        assert btnQuit != null : "fx:id=\"btnQuit\" was not injected: check your FXML file 'pokemonArena.fxml'.";
-        assert playerName != null : "fx:id=\"playerName\" was not injected: no injectable field found in FXML Controller class for the id 'playerName'";
-        assert enemyName != null : "fx:id=\"playerName\" was not injected: no injectable field found in FXML Controller class for the id 'playerName'";
-        assert battleTextLog != null : "fx:id=\"battleTextLog\" was not injected: check your FXML file 'pokemonArena.fxml'.";    }
+    }
 
-    /** The active Arena */
+    /**
+     * The active Arena
+     */
     private Arena arena;
-    /** Player's Pokémon currently in battle */
+    /**
+     * Player's Pokémon currently in battle
+     */
     private Creature playerCreatureUpFront;
-    /** Enemy's Pokémon currently in battle */
+    /**
+     * Enemy's Pokémon currently in battle
+     */
     private Creature enemyCreatureUpFront;
-    /** Index of the player's current Pokémon in the Arena */
+    /**
+     * Index of the player's current Pokémon in the Arena
+     */
     private int playerTeamIndex;
-    /** Index of the enemy's current Pokémon in the Arena */
+    /**
+     * Index of the enemy's current Pokémon in the Arena
+     */
     private int enemyTeamIndex;
-    /** Did a player creature just die? */
+    /**
+     * Did a player creature just die?
+     */
     public static boolean justDied = false;
-    /** Text that explains what is happening in the battle */
+    /**
+     * Text that explains what is happening in the battle
+     */
     private String battleText = "";
-    /** Index of the most recently fainted Pokémon belonging to the user */
+    /**
+     * Index of the most recently fainted Pokémon belonging to the user
+     */
     private static int previousDeadUserPokemonIndex;
+    /**
+     * Is the user playing against a smart opponent or a random opponent?
+     */
+    public static boolean hardMode = false;
 
     /**
      * Set up the 2 current Pokémon up front by displaying their associated name, health, sprite, and moves
@@ -133,7 +169,7 @@ public class ArenaController {
         supportMoveEnemy.setVisible(false);
         supportMovePlayer.setVisible(false);
 
-        if (!arena.setUpCombatants(playerTeamIdx, enemyTeamIdx)){
+        if (!arena.setUpCombatants(playerTeamIdx, enemyTeamIdx)) {
             // SOMEBODY'S DEAD, and the way we have this set up is such that this could only happen if the user selects a dead Pokémon
             return false;
         }
@@ -156,8 +192,9 @@ public class ArenaController {
 
     /**
      * Set up the name, sprite, and health bar of the current Pokémon in the Arena
+     *
      * @param playerCreatureUpFront player's current Pokémon
-     * @param enemyCreatureUpFront enemy's current Pokémon
+     * @param enemyCreatureUpFront  enemy's current Pokémon
      */
     public void setUpNameSpriteHealth(Creature playerCreatureUpFront, Creature enemyCreatureUpFront) {
         // Display the name for both Pokémon
@@ -208,13 +245,13 @@ public class ArenaController {
     /**
      * When a move is clicked, a round is started. Both Pokémon up front target each other and attack in order of
      * speed. The player's Pokémon uses the selected move and the enemy's Pokémon uses a random move.
-     * @param mouseEvent {@link MouseEvent}
+     *
+     * @param mouseEvent      {@link MouseEvent}
      * @param playerMoveIndex index of the move that the player selects
      */
     public void playARound(MouseEvent mouseEvent, int playerMoveIndex) {
         // Generate a random move slot for the enemy to use
-        Random rand = new Random();
-        int enemyRandomMoveIndex = rand.nextInt(4);
+        int enemyRandomMoveIndex = this.pickEnemyIndex();
 
         // Play a round by having both Pokémon on the Arena use a move and show text of what happens
         battleTextLog.setText(arena.playRound(playerTeamIndex, enemyTeamIndex, playerMoveIndex, enemyRandomMoveIndex));
@@ -231,7 +268,7 @@ public class ArenaController {
                 previousDeadUserPokemonIndex = playerTeamIndex;
                 this.switchToSelection(mouseEvent);
             }
-        } else if (enemyCreatureUpFront.isDead()){
+        } else if (enemyCreatureUpFront.isDead()) {
             // then the enemy died
             if (arena.isCombatOver()) {
                 // player must have won
@@ -255,7 +292,7 @@ public class ArenaController {
      * Method to load the winner screen
      */
     private void loadWinnerScreen() {
-        Stage stage = (Stage)btnQuit.getScene().getWindow();
+        Stage stage = (Stage) btnQuit.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.WINNER_SCREEN);
     }
 
@@ -263,40 +300,55 @@ public class ArenaController {
      * Method to load the loser screen
      */
     private void loadLoserScreen() {
-        Stage stage = (Stage)btnQuit.getScene().getWindow();
+        Stage stage = (Stage) btnQuit.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.LOSER_SCREEN);
     }
 
     /**
      * User chooses Move 1 or 2 or 3 or 4
+     *
      * @param mouseEvent {@link MouseEvent}
      */
-    public void chooseMoveOne(MouseEvent mouseEvent) { playARound(mouseEvent, 0); }
-    public void chooseMoveTwo(MouseEvent mouseEvent) { playARound(mouseEvent, 1); }
-    public void chooseMoveThree(MouseEvent mouseEvent) { playARound(mouseEvent, 2); }
-    public void chooseMoveFour(MouseEvent mouseEvent) { playARound(mouseEvent, 3); }
+    public void chooseMoveOne(MouseEvent mouseEvent) {
+        playARound(mouseEvent, 0);
+    }
+
+    public void chooseMoveTwo(MouseEvent mouseEvent) {
+        playARound(mouseEvent, 1);
+    }
+
+    public void chooseMoveThree(MouseEvent mouseEvent) {
+        playARound(mouseEvent, 2);
+    }
+
+    public void chooseMoveFour(MouseEvent mouseEvent) {
+        playARound(mouseEvent, 3);
+    }
 
     /**
      * Switch to the Pokémon Selection screen and set up the current Pokémon on the arena
+     *
      * @param mouseEvent {@link MouseEvent}
      */
     public void switchToSelection(MouseEvent mouseEvent) {
-        Stage stage = (Stage)swapPokemonButton.getScene().getWindow();
+        Stage stage = (Stage) swapPokemonButton.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_SELECTION);
         HelloPokemon.selectionController.showPokemon();
     }
 
     /**
      * Return to home screen
+     *
      * @param mouseEvent {@link MouseEvent}
      */
     public void goHome(MouseEvent mouseEvent) {
-        Stage stage = (Stage)btnQuit.getScene().getWindow();
+        Stage stage = (Stage) btnQuit.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_MENU);
     }
 
     /**
      * Return the index of the player's Pokémon randomly, such that they are not dead
+     *
      * @return int
      */
     public int getRandomNotDeadPlayer() {
@@ -305,6 +357,7 @@ public class ArenaController {
 
     /**
      * Return the index of the enemy {@link Creature} who is currently up to bat
+     *
      * @return int
      */
     public int getEnemyUpFrontIndex() {
@@ -315,7 +368,7 @@ public class ArenaController {
      * Set the battle log for the very start of the battle
      */
     public void setInitialBattleTextLog() {
-        battleText = "You sent out " + playerCreatureUpFront.getName() + "!\nThe opponent sent out "+ enemyCreatureUpFront.getName() + "!";
+        battleText = "You sent out " + playerCreatureUpFront.getName() + "!\nThe opponent sent out " + enemyCreatureUpFront.getName() + "!";
         battleTextLog.setText(battleText);
     }
 
@@ -334,5 +387,84 @@ public class ArenaController {
         }
         // Update the battle log with the correct message
         battleTextLog.setText(battleText);
+    }
+
+    /**
+     * Depending on if the enemy is smart or random, an index will be returned to represent the enemy's move
+     *
+     * @return int - the enemy's Move index
+     */
+    private int pickEnemyIndex() {
+        if (!hardMode) {
+            Random rand = new Random();
+            return rand.nextInt(4);
+        } else {
+            return this.makeDecisionForEnemy();
+        }
+    }
+
+    /**
+     * When an enemy is smart, this is the decision process they will go through to select a move
+     * @return int - the enemy's Move index
+     */
+    private int makeDecisionForEnemy() {
+        if (this.enemyCreatureUpFront instanceof NormalCreature) {
+            // map the different indices
+            int heal = -1;
+            int speed = -1;
+            int tackle = -1;
+            int hyperbeam = -1;
+            for (int i = 0; i < 4; i++) {
+                Move move = this.enemyCreatureUpFront.getMove(i);
+                if (move == Moves.Recover) {
+                    heal = i;
+                } else if (move == Moves.Agility) {
+                    speed = i;
+                } else if (move == Moves.Tackle) {
+                    tackle = i;
+                } else {
+                    hyperbeam = i;
+                }
+            }
+            if (this.enemyCreatureUpFront.getHealth() <= this.enemyCreatureUpFront.getMaxHealth() / 2) {
+                return heal;
+            } else if (this.playerCreatureUpFront.getHealth() <= this.playerCreatureUpFront.getMaxHealth() / 2) {
+                return tackle;
+            } else if (this.playerCreatureUpFront.getSpeed() > 2 * this.enemyCreatureUpFront.getSpeed()) {
+                return speed;
+            } else {
+                return hyperbeam;
+            }
+        } else {
+            // map the different indices
+            int strong = -1;
+            int accurate = -1;
+            int tackle = -1;
+            int agility = -1;
+            AttackMove strongAttack = (AttackMove) Moves.Tackle;
+            for (int i = 0; i < 4; i++) {
+                Move move = this.enemyCreatureUpFront.getMove(i);
+                if (move instanceof AttackMove && ((AttackMove) move).getAccuracy() < 1) {
+                    strong = i;
+                    strongAttack = (AttackMove) move;
+                } else if (move instanceof AttackMove && move != Moves.Tackle) {
+                    accurate = i;
+                } else if (move == Moves.Tackle) {
+                    tackle = i;
+                } else {
+                    agility = i;
+                }
+            }
+            // is the target weak against the strong/accurateAttacks?
+            if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() <= this.playerCreatureUpFront.getMaxHealth() / 2) {
+                return accurate;
+            } else if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass())) {
+                return strong;
+            } else if (this.playerCreatureUpFront.getSpeed() > 2 * this.enemyCreatureUpFront.getSpeed()) {
+                return agility;
+            } else {
+                return tackle;
+            }
+        }
     }
 }

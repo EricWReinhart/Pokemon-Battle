@@ -81,5 +81,13 @@
             <DropShadow />
          </effect>
       </Button>
+      <Button fx:id="btnHardMode" layoutX="790.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#setDifficulty" text="Hard Mode?" textAlignment="CENTER" textFill="#141414" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

@@ -16,8 +16,6 @@
  */
 package org.Fearsome_Foursome.Application.Controllers;
 
-import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,8 +23,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.HelloPokemon;
@@ -81,6 +81,9 @@ public class MenuController {
     private Text version;
 
     @FXML
+    private Button btnHardMode;
+
+    @FXML
     void initialize() {
         assert Background != null : "fx:id=\"Background\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert author != null : "fx:id=\"author\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
@@ -121,5 +124,18 @@ public class MenuController {
     public void handleCloseButtonAction(ActionEvent event) {
         Stage stage = (Stage) closeBtn.getScene().getWindow();
         stage.close();
+    }
+
+    /**
+     * Set the {@link ArenaController} static hard mode boolean
+     * @param mouseEvent
+     */
+    public void setDifficulty(MouseEvent mouseEvent) {
+        ArenaController.hardMode = !ArenaController.hardMode;
+        if (btnHardMode.getText().equals("Hard Mode?")){
+            btnHardMode.setText("Easy Mode?");
+        } else {
+            btnHardMode.setText("Hard Mode?");
+        }
     }
 }

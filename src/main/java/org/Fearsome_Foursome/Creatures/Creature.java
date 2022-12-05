@@ -289,4 +289,11 @@ public abstract class Creature {
      */
     public int getMaxHealth() { return maxHealth; }
 
+    /**
+     * Method to return the {@link Creature}'s {@link Move} at the indicated index
+     * @param index
+     * @return
+     */
+    public Move getMove(int index) { return CREATURE_MOVE_MAP.get(this.getClass()).get(index); }
+
 }
