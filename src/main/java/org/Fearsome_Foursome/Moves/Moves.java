@@ -34,7 +34,7 @@ public class Moves {
     public static final Move Agility = new SupportMove(SupportType.Speeding, "AGILITY", "Type: Normal\nAttribute: Speed\n Amount: 100", "orange");
 
     // SUPPORT move Recover to heal the user
-    public static final Move Recover = new SupportMove(SupportType.Healing, "RECOVER", "Type: Normal\nAttribute: Health\n Amount: 100", "orange");
+    public static final Move Recover = new SupportMove(SupportType.Healing, "RECOVER", "Type: Normal\nAttribute: Health\n Amount: 75", "orange");
 
     // Strong Normal ATTACK move Hyperbeam
     public static final Move Hyperbeam = new AttackMove(AttackType.Strong, null, null,
