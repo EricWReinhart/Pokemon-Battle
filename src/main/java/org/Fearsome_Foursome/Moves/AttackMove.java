@@ -110,6 +110,13 @@ public class AttackMove implements Move{
     public String actOn(Creature self, Creature target) {
         String message = "";
         if (Math.random() <= accuracy) {
+            // first, show the animation
+            if (self == HelloPokemon.globalModel.getArena().playerCreatureUpFront){
+                this.showAnimation(HelloPokemon.arenaController.attackMovePlayer, HelloPokemon.arenaController.playerSprite);
+            } else if (self == HelloPokemon.globalModel.getArena().enemyCreatureUpFront){
+                this.showAnimation(HelloPokemon.arenaController.attackMoveEnemy, HelloPokemon.arenaController.enemySprite);
+            }
+
             if (target.getClass().equals(strongAgainst)){
                 // target takes double damage
                 target.damage(2*damage);
@@ -124,12 +131,6 @@ public class AttackMove implements Move{
                 message = "";
             }
 
-            // now show the animation
-            if (self == HelloPokemon.globalModel.getArena().playerCreatureUpFront){
-                this.showAnimation(HelloPokemon.arenaController.attackMovePlayer, HelloPokemon.arenaController.playerSprite);
-            } else if (self == HelloPokemon.globalModel.getArena().enemyCreatureUpFront){
-                this.showAnimation(HelloPokemon.arenaController.attackMoveEnemy, HelloPokemon.arenaController.enemySprite);
-            }
             return message;
         }
         else {

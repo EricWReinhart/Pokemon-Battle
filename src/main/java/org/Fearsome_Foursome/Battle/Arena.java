@@ -15,6 +15,7 @@
  */
 package org.Fearsome_Foursome.Battle;
 
+import org.Fearsome_Foursome.Application.Controllers.ArenaController;
 import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Creatures.Creature;
 import org.Fearsome_Foursome.Moves.AttackMove;
@@ -22,6 +23,8 @@ import org.Fearsome_Foursome.Moves.Move;
 import org.Fearsome_Foursome.Moves.SupportMove;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.TreeSet;
 
 public class Arena {
     /** The player you control */
@@ -142,6 +145,55 @@ public class Arena {
             combatOver = true;
 
         return battleTextLog;
+    }
+
+    /**
+     * Look through the enemy's Pokémon - depending on the player's Pokémon one of them is a better choice
+     * @return {@link Creature}
+     */
+    private Creature bestEnemyChoice() {
+        // this method will only run if the enemy has Pokémon left which are alive
+
+        Comparator<Creature> creatureComparator = (creature1, creature2) -> {
+            return creature1.getHealth() - creature2.getHealth();
+        };
+        TreeSet<Creature> strongAgainstCreatures = new TreeSet<>(creatureComparator);
+        TreeSet<Creature> allCreatures = new TreeSet<>(creatureComparator);
+
+        // look through the Pokémon
+        for (Creature creature : enemy.getCreatureArray()){
+            if (!creature.isDead()) {
+                if (creature.hasStrongMoveAgainst(playerCreatureUpFront.getClass())) {
+                    strongAgainstCreatures.add(creature);
+                }
+                allCreatures.add(creature);
+            }
+        }
+
+        // look through the sorted Pokémon
+        if (!strongAgainstCreatures.isEmpty()){
+            return strongAgainstCreatures.iterator().next();
+        } else {
+            return allCreatures.iterator().next();
+        }
+    }
+
+    /**
+     * Determine if it would be a good idea for the enemy to switch out its Pokémon up to bat
+     * @return boolean
+     */
+    private boolean smartToSwitchEnemy() {
+        if (playerCreatureUpFront.hasStrongMoveAgainst(enemyCreatureUpFront.getClass())){
+            // then holy shit the enemy had better switch Pokémon
+            return true;
+        }
+        // otherwise
+        if (enemyCreatureUpFront.hasWeakMoveAgainst(playerCreatureUpFront.getClass())){
+            // then the enemy does not have effective attacks against the player - worth switching for the enemy
+            return true;
+        }
+        // else
+        return false;
     }
 
     /**

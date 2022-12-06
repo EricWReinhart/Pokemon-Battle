@@ -19,6 +19,7 @@
 package org.Fearsome_Foursome.Creatures;
 
 import javafx.scene.image.ImageView;
+import org.Fearsome_Foursome.Moves.AttackMove;
 import org.Fearsome_Foursome.Moves.Move;
 import org.Fearsome_Foursome.Moves.Moves;
 
@@ -295,5 +296,34 @@ public abstract class Creature {
      * @return
      */
     public Move getMove(int index) { return CREATURE_MOVE_MAP.get(this.getClass()).get(index); }
+
+    /**
+     * Method to determine if this {@link Creature} has a {@link Move} which is strong against the target class
+     * @param targetClass
+     * @return boolean
+     */
+    public boolean hasStrongMoveAgainst(Class targetClass) {
+        for (Move move : Creature.CREATURE_MOVE_MAP.get(this.getClass())){
+            if (move instanceof AttackMove && ((AttackMove) move).isStrongAgainst(targetClass)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method to determine if this {@link Creature} has a {@link Move} which is weak againast the target class
+     * @param targetClass
+     * @return boolean
+     */
+    public boolean hasWeakMoveAgainst(Class targetClass) {
+        for (Move move : Creature.CREATURE_MOVE_MAP.get(this.getClass())){
+            if (move instanceof AttackMove && ((AttackMove) move).isWeakAgainst(targetClass)){
+                // some of the enemy's attacks are weak against the player - worth changing
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
