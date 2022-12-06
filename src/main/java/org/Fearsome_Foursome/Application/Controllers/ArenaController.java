@@ -231,7 +231,7 @@ public class ArenaController {
         } else {
             // the player just switched Pokémon
             if (!justDied &&HelloPokemon.globalModel.getArena().enemyCreatureUpFront.getSpeed() >=HelloPokemon.globalModel.getArena().playerCreatureUpFront.getSpeed()) {
-                battleTextLog.setText(HelloPokemon.globalModel.getArena().makeEnemyAttack());
+                battleTextLog.setText(HelloPokemon.globalModel.getArena().performEnemyAttack());
                 if (HelloPokemon.globalModel.getArena().playerCreatureUpFront.isDead()) {
                     this.handlePlayerCreatureDeath(mouseEvent);
                 }

@@ -119,22 +119,26 @@ public class Arena {
         // if the enemy is not dead after the player's attack then the enemy can move
         if(!(enemyCreatureUpFront.isDead())){
             // should the enemy switch?
+            String oldEnemyCreatureUpFrontName = enemyCreatureUpFront.getName();
             if (ArenaController.hardMode && this.smartToSwitchEnemy()){
                 this.makeEnemyBestChoice();
-                battleTextLog += "\nThe opponent sent out " + enemyCreatureUpFront.getName() + "!";
-                // update the view
-                HelloPokemon.arenaController.setUpPokemon(playerCreatureUpFrontIndex, enemyCreatureUpFrontIndex);
-                if (enemyCreatureUpFront.getSpeed() > playerCreatureUpFront.getSpeed()){
-                    // if the enemy is fast enough, they get to attack
-                    int enemyMoveIndex = this.pickEnemyIndex();
-                    battleTextLog += "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMoveIndex).getName() + ". ";
-                    battleTextLog += enemyCreatureUpFront.move(enemyMoveIndex);
+                if (!oldEnemyCreatureUpFrontName.equals(enemyCreatureUpFront.getName())) {
+                    // were they able to make a change?
+                    battleTextLog += "\nThe opponent sent out " + enemyCreatureUpFront.getName() + "!";
+                    // update the view
+                    HelloPokemon.arenaController.setUpPokemon(playerCreatureUpFrontIndex, enemyCreatureUpFrontIndex);
+                    // now, the new Pokémon may be allowed to attack
+                    if (enemyCreatureUpFront.getSpeed() > playerCreatureUpFront.getSpeed()) {
+                        // if the enemy is fast enough, they get to attack
+                        battleTextLog += performEnemyAttack();
+                    }
+                } else {
+                    // then the enemy could not make a change even though it would have been nice to - just attack
+                    battleTextLog += performEnemyAttack();
                 }
             } else {
                 // the enemy should not switch, so just attack
-                int enemyMoveIndex = this.pickEnemyIndex();
-                battleTextLog += "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMoveIndex).getName() + ". ";
-                battleTextLog += enemyCreatureUpFront.move(enemyMoveIndex);
+                battleTextLog += performEnemyAttack();
             }
         }
         else{
@@ -153,6 +157,7 @@ public class Arena {
             return creature2.getHealth() - creature1.getHealth();
         };
         TreeSet<Creature> strongAgainstCreatures = new TreeSet<>(creatureComparator);
+        TreeSet<Creature> nonVulnerableCreatures = new TreeSet<>(creatureComparator);
         TreeSet<Creature> allCreatures = new TreeSet<>(creatureComparator);
         HashMap<Creature, Integer> indices = new HashMap<>();
 
@@ -161,9 +166,15 @@ public class Arena {
             Creature creature = this.enemy.getPokeCreature(i);
             indices.put(creature, i);
             if (!creature.isDead()) {
+                // does the enemy have something strong against the player Pokémon?
                 if (creature.hasStrongMoveAgainst(playerCreatureUpFront.getClass())) {
                     strongAgainstCreatures.add(creature);
                 }
+                // does the enemy have something that is not weak against the player Pokémon?
+                if (!this.playerCreatureUpFront.hasStrongMoveAgainst(creature.getClass())) {
+                    nonVulnerableCreatures.add(creature);
+                }
+                // it's a living creature - if nothing else is available it will have to do
                 allCreatures.add(creature);
             }
         }
@@ -171,6 +182,8 @@ public class Arena {
         // look through the sorted Pokémon
         if (!strongAgainstCreatures.isEmpty()){
             enemyCreatureUpFront = strongAgainstCreatures.iterator().next();
+        } else if (!nonVulnerableCreatures.isEmpty()){
+            enemyCreatureUpFront = nonVulnerableCreatures.iterator().next();
         } else {
             enemyCreatureUpFront = allCreatures.iterator().next();
         }
@@ -213,9 +226,9 @@ public class Arena {
      * Make the enemy attack the player - potentially necessary whenever a swapping occurs
      * @return {@link String}
      */
-    public String makeEnemyAttack() {
-        int enemyMoveIndex = this.pickEnemyIndex();
-        String message = enemyCreatureUpFront.getName() + " used " + enemyCreatureUpFront.getMove(enemyMoveIndex).getName() + "!";
+    public String performEnemyAttack() {
+        int enemyMoveIndex = this.pickEnemyMoveIndex();
+        String message = "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + enemyCreatureUpFront.getMove(enemyMoveIndex).getName() + "!";
         message += enemyCreatureUpFront.move(enemyMoveIndex);
         if (playerCreatureUpFront.isDead()){
             player.incrementDead();
@@ -308,7 +321,7 @@ public class Arena {
      *
      * @return int - the enemy's Move index
      */
-    private int pickEnemyIndex() {
+    private int pickEnemyMoveIndex() {
         if (!ArenaController.hardMode) {
             Random rand = new Random();
             return rand.nextInt(4);
