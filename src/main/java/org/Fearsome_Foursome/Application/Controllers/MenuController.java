@@ -48,7 +48,10 @@ public class MenuController {
     private Text author;
 
     @FXML
-    private Button btnStart;
+    private Button btnNormalMode;
+
+    @FXML
+    private Button btnHardMode;
 
     @FXML
     private Button closeBtn;
@@ -80,14 +83,11 @@ public class MenuController {
     @FXML
     private Text version;
 
-    @FXML
-    private Button btnHardMode;
 
     @FXML
     void initialize() {
         assert Background != null : "fx:id=\"Background\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert author != null : "fx:id=\"author\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
-        assert btnStart != null : "fx:id=\"btnStart\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert closeBtn != null : "fx:id=\"closeBtn\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert bird != null : "fx:id=\"bird\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert dragonite != null : "fx:id=\"dragonite\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
@@ -98,7 +98,8 @@ public class MenuController {
         assert title != null : "fx:id=\"title\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert tm != null : "fx:id=\"tm\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
         assert version != null : "fx:id=\"version\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
-
+        assert btnHardMode != null : "fx:id=\"btnHardMode\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
+        assert btnNormalMode != null : "fx:id=\"btnNormalMode\" was not injected: check your FXML file 'pokemonMenu.fxml'.";
     }
 
     /**
@@ -110,7 +111,7 @@ public class MenuController {
         HelloPokemon.globalModel.getArena().refreshAll();
         HelloPokemon.playMusic("BattleMusic.wav");
         // Get the Stage object of this button
-        Stage stage = (Stage) btnStart.getScene().getWindow();
+        Stage stage = (Stage) btnNormalMode.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(0, 0);
         HelloPokemon.arenaController.setInitialBattleTextLog();
