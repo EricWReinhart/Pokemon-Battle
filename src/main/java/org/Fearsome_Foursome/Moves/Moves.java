@@ -18,6 +18,7 @@
 
 package org.Fearsome_Foursome.Moves;
 
+import org.Fearsome_Foursome.Creatures.ElectricCreature;
 import org.Fearsome_Foursome.Creatures.FireCreature;
 import org.Fearsome_Foursome.Creatures.GrassCreature;
 import org.Fearsome_Foursome.Creatures.WaterCreature;
@@ -56,7 +57,7 @@ public class Moves {
 
     // Strong Electric ATTACK move Thunderbolt
     public static final Move Thunderbolt = new AttackMove(AttackType.Strong, WaterCreature.class,
-                                                Arrays.asList(GrassCreature.class),
+                                                Arrays.asList(GrassCreature.class, ElectricCreature.class),
                                                 "THUNDERBOLT", "Type: ELECTRIC\nDamage: 150\nAccuracy: 80",  "yellow");
 
     // Weak Normal ATTACK move Tackle
@@ -80,7 +81,7 @@ public class Moves {
 
     // Weak Electric ATTACK move Electroball
     public static final Move Electroball = new AttackMove(AttackType.Weak, WaterCreature.class,
-                                                Arrays.asList(GrassCreature.class),
+                                                Arrays.asList(GrassCreature.class, ElectricCreature.class),
                                                 "ELECTROBALL", "Type: Electric\nDamage: 100\nAccuracy: 100", "yellow");
 
 }
