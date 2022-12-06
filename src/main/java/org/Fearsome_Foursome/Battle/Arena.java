@@ -178,15 +178,14 @@ public class Arena {
         }
 
         // look through the sorted Pokémon
+        Creature creatureToReturn;
         if (!strongAgainstCreatures.isEmpty()){
-            Creature creatureToReturn = strongAgainstCreatures.iterator().next();
-            enemyCreatureUpFrontIndex = indices.get(creatureToReturn);
-            return creatureToReturn;
+            creatureToReturn = strongAgainstCreatures.iterator().next();
         } else {
-            Creature creatureToReturn = allCreatures.iterator().next();
-            enemyCreatureUpFrontIndex = indices.get(creatureToReturn);
-            return creatureToReturn;
+            creatureToReturn = allCreatures.iterator().next();
         }
+        enemyCreatureUpFrontIndex = indices.get(creatureToReturn);
+        return creatureToReturn;
     }
 
     /**
