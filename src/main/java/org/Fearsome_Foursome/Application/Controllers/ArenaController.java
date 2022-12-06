@@ -426,14 +426,20 @@ public class ArenaController {
                     hyperbeam = i;
                 }
             }
-            if (this.enemyCreatureUpFront.getHealth() <= this.enemyCreatureUpFront.getMaxHealth() / 2) {
+            if (this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
+                // if the enemy is high on health, go for a hyperbeam attack
+                return hyperbeam;
+            } else if (this.enemyCreatureUpFront.getMaxHealth() / 3 <= this.enemyCreatureUpFront.getHealth() && this.enemyCreatureUpFront.getHealth() <= this.enemyCreatureUpFront.getMaxHealth()) {
+                // if we are in a productive window to heal, then heal
+                // too low? then we're going to be dead soon so just deal some damage
+                // too high? then we don't need to heal so damage instead
                 return heal;
-            } else if (this.playerCreatureUpFront.getHealth() <= this.playerCreatureUpFront.getMaxHealth() / 2) {
-                return tackle;
-            } else if (this.playerCreatureUpFront.getSpeed() > 2 * this.enemyCreatureUpFront.getSpeed()) {
+            } else if (this.playerCreatureUpFront.getSpeed() > 1.3 * this.enemyCreatureUpFront.getSpeed()) {
+                // we have been procrastinating speed - maybe add some now
                 return speed;
             } else {
-                return hyperbeam;
+                // final move decision
+                return tackle;
             }
         } else {
             // map the different indices
@@ -442,6 +448,7 @@ public class ArenaController {
             int tackle = -1;
             int agility = -1;
             AttackMove strongAttack = (AttackMove) Moves.Tackle;
+            // actually get a hold of the move because we need to test what it is strong and weak against (which will be the same for the accurate attack)
             for (int i = 0; i < 4; i++) {
                 Move move = this.enemyCreatureUpFront.getMove(i);
                 if (move instanceof AttackMove && ((AttackMove) move).getAccuracy() < 1) {
@@ -456,13 +463,23 @@ public class ArenaController {
                 }
             }
             // is the target weak against the strong/accurateAttacks?
-            if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() <= this.playerCreatureUpFront.getMaxHealth() / 2) {
-                return accurate;
-            } else if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass())) {
+            if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
+                // if target it at more than half health, go for the big damage with the elemental strong attack
                 return strong;
-            } else if (this.playerCreatureUpFront.getSpeed() > 2 * this.enemyCreatureUpFront.getSpeed()) {
+            } else if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass())) {
+                // if target is not at more than half health, go with guaranteed hits with the elemental accurate attack
+                return accurate;
+            } else if (!strongAttack.isWeakAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
+                // it will at least be neutrally effective
+                return strong;
+            } else if (!strongAttack.isWeakAgainst(this.playerCreatureUpFront.getClass())) {
+                // still, the accurate attack will at least be neutrally effective
+                return accurate;
+            }  else if (this.playerCreatureUpFront.getSpeed() > 1.3 * this.enemyCreatureUpFront.getSpeed()) {
+                // if this happens, the creature has not bumped up its speed in a while - may be worth doing
                 return agility;
             } else {
+                // if we are here, any elemental attacks are weak against the target, so we should tackle
                 return tackle;
             }
         }
