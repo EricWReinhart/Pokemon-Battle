@@ -211,10 +211,10 @@ public abstract class Creature {
      */
     public String move(int i){
         // let's make this VERY clear - first get the Move from the list of moves this particular Creatures most specific class is allowed
-        Move functionalInterfaseMove = CREATURE_MOVE_MAP.get(this.getClass()).get(i);
+        Move move = CREATURE_MOVE_MAP.get(this.getClass()).get(i);
 
         // now call that Move's actOn method on 'this' and 'target' - at least one of those two Creatures will be changed
-        return functionalInterfaseMove.actOn(this, this.target);
+        return move.actOn(this, this.target);
     }
 
     /**
