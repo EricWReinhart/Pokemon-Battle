@@ -22,9 +22,7 @@ import org.Fearsome_Foursome.Moves.AttackMove;
 import org.Fearsome_Foursome.Moves.Move;
 import org.Fearsome_Foursome.Moves.SupportMove;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Arena {
     /** The player you control */
@@ -107,6 +105,12 @@ public class Arena {
 
             // if the enemy is not dead after the player's attack then the enemy can move
             if(!(enemyCreatureUpFront.isDead())){
+                // should the enemy switch?
+                if (this.smartToSwitchEnemy()){
+                    enemyCreatureUpFront = this.bestEnemyChoice();
+                    battleTextLog += "\nThe opponent sent out " + enemyCreatureUpFront.getName() + "!";
+                    HelloPokemon.arenaController.setUpPokemon(playerCreatureUpFrontIndex, enemyCreatureUpFrontIndex);
+                }
                 battleTextLog += "\nThe opponent's " + enemyCreatureUpFront.getName() + " used " + Creature.CREATURE_MOVE_MAP.get(enemyCreatureUpFront.getClass()).get(enemyMoveIndex).getName() + ". ";
                 battleTextLog += enemyCreatureUpFront.move(enemyMoveIndex);
                 // great - now did the player die after the enemy moved?
@@ -159,9 +163,12 @@ public class Arena {
         };
         TreeSet<Creature> strongAgainstCreatures = new TreeSet<>(creatureComparator);
         TreeSet<Creature> allCreatures = new TreeSet<>(creatureComparator);
+        HashMap<Creature, Integer> indices = new HashMap<>();
 
         // look through the Pokémon
-        for (Creature creature : enemy.getCreatureArray()){
+        for (int i=0; i<enemy.getCreatureArray().length; i++){
+            Creature creature = this.enemy.getPokeCreature(i);
+            indices.put(creature, i);
             if (!creature.isDead()) {
                 if (creature.hasStrongMoveAgainst(playerCreatureUpFront.getClass())) {
                     strongAgainstCreatures.add(creature);
@@ -172,9 +179,13 @@ public class Arena {
 
         // look through the sorted Pokémon
         if (!strongAgainstCreatures.isEmpty()){
-            return strongAgainstCreatures.iterator().next();
+            Creature creatureToReturn = strongAgainstCreatures.iterator().next();
+            enemyCreatureUpFrontIndex = indices.get(creatureToReturn);
+            return creatureToReturn;
         } else {
-            return allCreatures.iterator().next();
+            Creature creatureToReturn = allCreatures.iterator().next();
+            enemyCreatureUpFrontIndex = indices.get(creatureToReturn);
+            return creatureToReturn;
         }
     }
 
