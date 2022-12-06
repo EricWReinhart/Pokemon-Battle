@@ -216,7 +216,7 @@ public abstract class Creature {
         ArrayList<Move> electricCreatureMoves = CREATURE_MOVE_MAP.get(ElectricCreature.class);
 
         // now add all the Moves to the relevant list
-        electricCreatureMoves.add(Moves.Thundershock);
+        electricCreatureMoves.add(Moves.Electroball);
         electricCreatureMoves.add(Moves.Thunderbolt);
         electricCreatureMoves.add(Moves.Tackle);
         electricCreatureMoves.add(Moves.Agility);

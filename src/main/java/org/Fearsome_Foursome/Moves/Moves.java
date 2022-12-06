@@ -78,9 +78,9 @@ public class Moves {
                                                Arrays.asList(WaterCreature.class, FireCreature.class),
                                                 "EMBER", "Type: Fire\nDamage: 100\nAccuracy: 100",  "red");
 
-    // Weak Electric ATTACK move Thundershock
-    public static final Move Thundershock = new AttackMove(AttackType.Weak, WaterCreature.class,
+    // Weak Electric ATTACK move Electroball
+    public static final Move Electroball = new AttackMove(AttackType.Weak, WaterCreature.class,
                                                 Arrays.asList(GrassCreature.class),
-                                                "THUNDERSHOCK", "Type: Electric\nDamage: 100\nAccuracy: 100", "yellow");
+                                                "ELECTROBALL", "Type: Electric\nDamage: 100\nAccuracy: 100", "yellow");
 
 }
