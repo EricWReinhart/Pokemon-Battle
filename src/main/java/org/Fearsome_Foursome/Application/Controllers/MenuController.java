@@ -129,13 +129,13 @@ public class MenuController {
     /**
      * Set the {@link ArenaController} static hard mode boolean
      * @param mouseEvent
+     * @throws UnsupportedAudioFileException
+     * @throws LineUnavailableException
+     * @throws IOException
      */
-    public void setDifficulty(MouseEvent mouseEvent) {
+    public void setHard(MouseEvent mouseEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         ArenaController.hardMode = !ArenaController.hardMode;
-        if (btnHardMode.getText().equals("Hard Mode?")){
-            btnHardMode.setText("Easy Mode?");
-        } else {
-            btnHardMode.setText("Hard Mode?");
-        }
+        showArena(mouseEvent);
     }
+
 }
