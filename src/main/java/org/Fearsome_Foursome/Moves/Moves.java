@@ -29,7 +29,6 @@ import java.util.Arrays;
  * Any move in our game is defined HERE
  */
 public class Moves {
-
     // SUPPORT move Agility to raise user's speed
     public static final Move Agility = new SupportMove(SupportType.Speeding, "AGILITY", "Type: Normal\nAttribute: Speed\n Amount: 100", "orange");
 
@@ -46,7 +45,7 @@ public class Moves {
                                             "SURF", "Type: Water\nDamage: 150\nAccuracy: 80", "blue");
 
     // Strong Grass ATTACK move LeafBlade
-    public static final Move LeafBlade = new AttackMove(AttackType.Strong, WaterCreature.class,
+    public static final Move Leafblade = new AttackMove(AttackType.Strong, WaterCreature.class,
                                                 Arrays.asList(FireCreature.class, GrassCreature.class),
                                                     "LEAFBLADE", "Type: Grass\nDamage: 150\nAccuracy: 80", "green");
 
@@ -54,6 +53,11 @@ public class Moves {
     public static final Move Flamethrower = new AttackMove(AttackType.Strong, GrassCreature.class,
                                                 Arrays.asList(WaterCreature.class, FireCreature.class),
                                                     "FLAMETHROWER", "Type: Fire\nDamage: 150\nAccuracy: 80", "red");
+
+    // Strong Electric ATTACK move Thunderbolt
+    public static final Move Thunderbolt = new AttackMove(AttackType.Strong, WaterCreature.class,
+                                                Arrays.asList(GrassCreature.class),
+                                                "THUNDERBOLT", "Type: ELECTRIC\nDamage: 150\nAccuracy: 80",  "yellow");
 
     // Weak Normal ATTACK move Tackle
     public static final Move Tackle = new AttackMove(AttackType.Weak, null, null,
@@ -73,5 +77,10 @@ public class Moves {
     public static final Move Ember = new AttackMove(AttackType.Weak, GrassCreature.class,
                                                Arrays.asList(WaterCreature.class, FireCreature.class),
                                                 "EMBER", "Type: Fire\nDamage: 100\nAccuracy: 100",  "red");
+
+    // Weak Electric ATTACK move Electroball
+    public static final Move Electroball = new AttackMove(AttackType.Weak, WaterCreature.class,
+                                                Arrays.asList(GrassCreature.class),
+                                                "ELECTROBALL", "Type: Electric\nDamage: 100\nAccuracy: 100", "yellow");
 
 }

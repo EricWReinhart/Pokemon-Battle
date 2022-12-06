@@ -87,6 +87,10 @@ public abstract class Creature {
         addNormalCreatureActions();
         addNormalCreatureNames();
 
+        // establish the electricCreature actions and names
+        addElectricCreatureActions();
+        addElectricCreatureNames();
+
     }
 
     /**
@@ -104,7 +108,7 @@ public abstract class Creature {
     }
 
     /**
-     * Private method to add all the names of the {@link FireCreature} Pokémon
+     * Private method to add all the names and sprites of the {@link FireCreature} Pokémon
      */
     private void addFireCreatureNames(){
         CREATURE_NAME_MAP.put(FireCreature.class, new ArrayList<>());
@@ -112,10 +116,11 @@ public abstract class Creature {
 
         fireCreatureNames.add("Charizard");
         fireCreatureNames.add("Volcarona");
-        // any other specific Pokémon names we are allowing
+        fireCreatureNames.add("Magmortar");
 
         CREATURE_SPRITE_MAP.put(fireCreatureNames.get(0), new String[]{"CharizardAlly.png", "CharizardEnemy.png"});
         CREATURE_SPRITE_MAP.put(fireCreatureNames.get(1), new String[]{"VolcaronaAlly.png", "VolcaronaEnemy.png"});
+        CREATURE_SPRITE_MAP.put(fireCreatureNames.get(2), new String[]{"MagmortarAlly.png", "MagmortarEnemy.png"});
     }
 
     /**
@@ -133,7 +138,7 @@ public abstract class Creature {
     }
 
     /**
-     * Private method to add all the names of the {@link WaterCreature} Pokémon
+     * Private method to add all the names and sprites of the {@link WaterCreature} Pokémon
      */
     private void addWaterCreatureNames(){
         CREATURE_NAME_MAP.put(WaterCreature.class, new ArrayList<>());
@@ -141,10 +146,11 @@ public abstract class Creature {
 
         waterCreatureNames.add("Blastoise");
         waterCreatureNames.add("Gyarados");
-        // any other specific Pokémon names we are allowing
+        waterCreatureNames.add("Milotic");
 
         CREATURE_SPRITE_MAP.put(waterCreatureNames.get(0), new String[]{"BlastoiseAlly.png", "BlastoiseEnemy.png"});
         CREATURE_SPRITE_MAP.put(waterCreatureNames.get(1), new String[]{"GyaradosAlly.png", "GyaradosEnemy.png"});
+        CREATURE_SPRITE_MAP.put(waterCreatureNames.get(2), new String[]{"MiloticAlly.png", "MiloticEnemy.png"});
     }
 
     /**
@@ -156,13 +162,13 @@ public abstract class Creature {
 
         // now add all the Moves to the relevant list
         grassCreatureMoves.add(Moves.Vinewhip);
-        grassCreatureMoves.add(Moves.LeafBlade);
+        grassCreatureMoves.add(Moves.Leafblade);
         grassCreatureMoves.add(Moves.Tackle);
         grassCreatureMoves.add(Moves.Agility);
     }
 
     /**
-     * Private method to add all the names of the {@link GrassCreature} Pokémon
+     * Private method to add all the names and sprites of the {@link GrassCreature} Pokémon
      */
     private void addGrassCreatureNames(){
         CREATURE_NAME_MAP.put(GrassCreature.class, new ArrayList<>());
@@ -170,7 +176,6 @@ public abstract class Creature {
 
         grassCreatureNames.add("Venusaur");
         grassCreatureNames.add("Sceptile");
-        // any other specific Pokémon names we are allowing
 
         CREATURE_SPRITE_MAP.put(grassCreatureNames.get(0), new String[]{"VenusaurAlly.png", "VenusaurEnemy.png"});
         CREATURE_SPRITE_MAP.put(grassCreatureNames.get(1), new String[]{"SceptileAlly.png", "SceptileEnemy.png"});
@@ -191,7 +196,7 @@ public abstract class Creature {
     }
 
     /**
-     * Private method to add all the names of the {@link NormalCreature} Pokémon
+     * Private method to add all the names and sprites of the {@link NormalCreature} Pokémon
      */
     private void addNormalCreatureNames(){
         CREATURE_NAME_MAP.put(NormalCreature.class, new ArrayList<>());
@@ -199,10 +204,37 @@ public abstract class Creature {
 
         normalCreatureNames.add("Snorlax");
         normalCreatureNames.add("Staraptor");
-        // any other specific Pokémon names we are allowing
 
         CREATURE_SPRITE_MAP.put(normalCreatureNames.get(0), new String[]{"SnorlaxAlly.png", "SnorlaxEnemy.png"});
         CREATURE_SPRITE_MAP.put(normalCreatureNames.get(1), new String[]{"StaraptorAlly.png", "StaraptorEnemy.png"});
+    }
+
+    /**
+     * Private method to add all the moves the {@link ElectricCreature} class can do into the dictionary
+     */
+    private void addElectricCreatureActions(){
+        CREATURE_MOVE_MAP.put(ElectricCreature.class, new ArrayList<>());
+        ArrayList<Move> electricCreatureMoves = CREATURE_MOVE_MAP.get(ElectricCreature.class);
+
+        // now add all the Moves to the relevant list
+        electricCreatureMoves.add(Moves.Electroball);
+        electricCreatureMoves.add(Moves.Thunderbolt);
+        electricCreatureMoves.add(Moves.Tackle);
+        electricCreatureMoves.add(Moves.Agility);
+    }
+
+    /**
+     * Private method to add all the names and sprites of the {@link ElectricCreature} Pokémon
+     */
+    private void addElectricCreatureNames(){
+        CREATURE_NAME_MAP.put(ElectricCreature.class, new ArrayList<>());
+        ArrayList<String> electricCreatureNames = CREATURE_NAME_MAP.get(ElectricCreature.class);
+
+        electricCreatureNames.add("Electivire");
+        electricCreatureNames.add("Galvantula");
+
+        CREATURE_SPRITE_MAP.put(electricCreatureNames.get(0), new String[]{"ElectivireAlly.png", "ElectivireEnemy.png"});
+        CREATURE_SPRITE_MAP.put(electricCreatureNames.get(1), new String[]{"GalvantulaAlly.png", "GalvantulaEnemy.png"});
     }
 
     /**
@@ -210,10 +242,10 @@ public abstract class Creature {
      */
     public String move(int i){
         // let's make this VERY clear - first get the Move from the list of moves this particular Creatures most specific class is allowed
-        Move functionalInterfaseMove = CREATURE_MOVE_MAP.get(this.getClass()).get(i);
+        Move functionalInterfaceMove = CREATURE_MOVE_MAP.get(this.getClass()).get(i);
 
         // now call that Move's actOn method on 'this' and 'target' - at least one of those two Creatures will be changed
-        return functionalInterfaseMove.actOn(this, this.target);
+        return functionalInterfaceMove.actOn(this, this.target);
     }
 
     /**
