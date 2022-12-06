@@ -25,6 +25,7 @@ import org.Fearsome_Foursome.Moves.Moves;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * An abstract class which has attributes and methods shared by all different types of creatures
@@ -358,4 +359,12 @@ public abstract class Creature {
         return false;
     }
 
+    /**
+     * So that {@link Creature}s can be keys in maps
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name);
+    }
 }
