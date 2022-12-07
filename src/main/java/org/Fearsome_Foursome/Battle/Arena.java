@@ -195,12 +195,12 @@ public class Arena {
      * @return boolean
      */
     private boolean smartToSwitchEnemy() {
-        if (playerCreatureUpFront.hasStrongMoveAgainst(enemyCreatureUpFront.getClass())){
+        if (playerCreatureUpFront.hasStrongMoveAgainst(enemyCreatureUpFront.getClass()) && enemy.hasNonWeakAgainstCreature(playerCreatureUpFront.getClass())){
             // then holy shit the enemy had better switch Pokémon
             return true;
         }
         // otherwise
-        if (enemyCreatureUpFront.hasWeakMoveAgainst(playerCreatureUpFront.getClass())){
+        if (enemyCreatureUpFront.hasWeakMoveAgainst(playerCreatureUpFront.getClass()) && enemy.hasNonWeakMoveAgainstCreature(playerCreatureUpFront.getClass())){
             // then the enemy does not have effective attacks against the player - worth switching for the enemy
             return true;
         }

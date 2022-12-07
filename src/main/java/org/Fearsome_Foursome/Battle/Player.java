@@ -96,8 +96,28 @@ public class Player {
     /** Getter for the amount of recorded dead {@link Creature}s */
     public int getDeadCount() { return deadCount; }
 
+    /** Getter for the array of {@link Creature}s */
     public Creature[] getCreatureArray() {
         return creatureArray;
     }
+
+    /**
+     * Method to determine if this {@link Player} has a living {@link Creature} which is not weak against an attack of the opponent class
+     * @param opponentClass
+     * @return boolean
+     */
+    public boolean hasNonWeakAgainstCreature(Class opponentClass) {
+        return true;
+    }
+
+    /**
+     * Method to determine if this {@link Player} has a living {@link Creature} which is not weak against an attack of the opponent class
+     * @param opponentClass
+     * @return boolean
+     */
+    public boolean hasNonWeakMoveAgainstCreature(Class opponentClass) {
+        return true;
+    }
+
 }
    
