@@ -33,9 +33,9 @@ import java.util.Objects;
 public abstract class Creature {
 
     /** Default attribute values */
-    protected static final int DEFAULT_MAX_HEALTH = 500;
-    protected static final int DEFAULT_HEALTH = 500;
-    protected static final int DEFAULT_SPEED = 100;
+    public static final int DEFAULT_MAX_HEALTH = 500;
+    public static final int DEFAULT_HEALTH = 500;
+    public static final int DEFAULT_SPEED = 100;
 
     /** We need a map of functional interfaces denoting 4 moves to a certain {@link Creature} class */
     public static final HashMap<Class, ArrayList<Move>> CREATURE_MOVE_MAP = new HashMap<>();

@@ -232,7 +232,6 @@ public class ArenaController {
             // the player CHOSE to switch Pokémon
             battleTextLog.setText(HelloPokemon.globalModel.getArena().performEnemyAttack());
             if (HelloPokemon.globalModel.getArena().playerCreatureUpFront.isDead()) {
-                HelloPokemon.globalModel.getPlayer().incrementDead();
                 this.handlePlayerCreatureDeath(mouseEvent);
             }
         } else {
@@ -240,7 +239,6 @@ public class ArenaController {
             if (HelloPokemon.globalModel.getArena().playerCreatureUpFront.getSpeed() < HelloPokemon.globalModel.getArena().enemyCreatureUpFront.getSpeed()) {
                 battleTextLog.setText(HelloPokemon.globalModel.getArena().performEnemyAttack());
                 if (HelloPokemon.globalModel.getArena().playerCreatureUpFront.isDead()) {
-                    HelloPokemon.globalModel.getPlayer().incrementDead();
                     this.handlePlayerCreatureDeath(mouseEvent);
                 }
             }
@@ -273,6 +271,10 @@ public class ArenaController {
                     this.handlePlayerCreatureDeath(mouseEvent);
                 }
             }
+
+            System.out.println(HelloPokemon.globalModel.getPlayer().getDeadCount());
+            System.out.println(HelloPokemon.globalModel.getEnemy().getDeadCount());
+            System.out.println();
 
             // explain what happens in the battle log to the user
             battleTextLog.setText(battleText);

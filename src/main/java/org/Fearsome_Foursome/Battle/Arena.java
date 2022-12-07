@@ -38,9 +38,6 @@ public class Arena {
     /** Current Enemy Creature in play */
     public Creature enemyCreatureUpFront;
 
-    /** Whether the combat is over or not */
-    private boolean combatOver = false;
-
     /** Corresponding indices of the two {@link Creature}s for the player who are up front to move */
     private int playerCreatureUpFrontIndex;
 
@@ -88,26 +85,8 @@ public class Arena {
     }
 
     /**
-     * A method that checks the speed of each Creature and has them move successively.
-     * If either team is dead combat over becomes true.
-     * @param playerMoveIndex A move picked by the user
-     */
-    private String turn(int playerMoveIndex){
-        String battleTextLog;
-
-        // checking the speed to see who moves first and return an appropriate
-        battleTextLog = performExchangeOfAttacks(playerMoveIndex);
-
-        // Check if either team is dead, if so combatOver is true
-        if(this.player.getDeadCount() == 6 || this.enemy.getDeadCount() == 6 )
-            combatOver = true;
-
-        return battleTextLog;
-    }
-
-    /**
      * Method to record the {@link String} for the player moving first
-     * @param playerMoveIndex
+     * @param playerMoveIndex - int
      * @return {@link String}
      */
     private String performExchangeOfAttacks(int playerMoveIndex) {
@@ -207,13 +186,9 @@ public class Arena {
             // then holy shit the enemy had better switch Pokémon
             return true;
         }
-        // otherwise
-        if (enemyCreatureUpFront.hasWeakMoveAgainst(playerCreatureUpFront.getClass()) && enemy.hasNonWeakMoveAgainstCreature(playerCreatureUpFront.getClass())){
-            // then the enemy does not have effective attacks against the player - worth switching for the enemy
-            return true;
-        }
+        // otherwise, if the enemy does not have effective attacks against the player - worth switching for the enemy
+        return enemyCreatureUpFront.hasWeakMoveAgainst(playerCreatureUpFront.getClass()) && enemy.hasNonWeakMoveAgainstCreature(playerCreatureUpFront.getClass());
         // else
-        return false;
     }
 
     /**
@@ -221,13 +196,12 @@ public class Arena {
      * @param playerMoveIndex Move for a Pokémon chosen by user
      */
     public String playRound(int playerMoveIndex){
-        if(combatOver){
-            throw new IllegalStateException();
-        }
-        else{
-           // sets up combatants and if true you can call turn
-            return turn(playerMoveIndex);
-        }
+        String battleTextLog;
+
+        // checking the speed to see who moves first and return an appropriate
+        battleTextLog = performExchangeOfAttacks(playerMoveIndex);
+
+        return battleTextLog;
     }
 
     /**
@@ -260,7 +234,6 @@ public class Arena {
     public void refreshAll() {
         this.player = new Player();
         this.enemy = new Player();
-        this.combatOver = false;
     }
 
     /**
@@ -284,7 +257,7 @@ public class Arena {
      * @return boolean
      */
     public boolean isCombatOver() {
-        return combatOver;
+        return player.getDeadCount() == 6 || enemy.getDeadCount() == 6;
     }
 
     /**
@@ -298,10 +271,11 @@ public class Arena {
 
     /**
      * Given an array of creatures, return the index of a randomly alive one
-     * @param creatures
+     * @param creatures - an array of {@link Creature}s
      * @return int
      */
     private int getAliveIndex(Creature[] creatures) {
+        // we do not need to worry about selecting the Pokémon which was already up to bat for the enemy, because this method is only called when an enemy Pokémon dies and must be replaced
         ArrayList<Integer> alive = new ArrayList<>();
         for (int i=0; i<creatures.length; i++){
             if (!creatures[i].isDead()){
@@ -352,21 +326,7 @@ public class Arena {
                     hyperbeam = i;
                 }
             }
-            if (this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
-                // if the enemy is high on health, go for a hyperbeam attack
-                return hyperbeam;
-            } else if (this.enemyCreatureUpFront.getMaxHealth() / 3 <= this.enemyCreatureUpFront.getHealth() && this.enemyCreatureUpFront.getHealth() <= this.enemyCreatureUpFront.getMaxHealth() / 2) {
-                // if we are in a productive window to heal, then heal
-                // too low? then we're going to be dead soon so just deal some damage
-                // too high? then we don't need to heal so do something else instead
-                return heal;
-            } else if (this.playerCreatureUpFront.getSpeed() > this.enemyCreatureUpFront.getSpeed()) {
-                // the enemy has been procrastinating speed - it should get more speed
-                return speed;
-            } else {
-                // final move decision
-                return tackle;
-            }
+            return makeNormalCreatureDecision(heal, speed, tackle, hyperbeam);
         } else {
             // map the different indices
             int strong = -1;
@@ -388,26 +348,65 @@ public class Arena {
                     agility = i;
                 }
             }
-            // is the target weak against the strong/accurateAttacks?
-            if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
-                // if target it at more than half health, go for the big damage with the elemental strong attack
-                return strong;
-            } else if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass())) {
-                // if target is not at more than half health, go with guaranteed hits with the elemental accurate attack
-                return accurate;
-            } else if (!strongAttack.isWeakAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
-                // it will at least be neutrally effective
-                return strong;
-            } else if (!strongAttack.isWeakAgainst(this.playerCreatureUpFront.getClass())) {
-                // still, the accurate attack will at least be neutrally effective
-                return accurate;
-            } else if (this.playerCreatureUpFront.getSpeed() > 1.3 * this.enemyCreatureUpFront.getSpeed()) {
-                // if this happens, the creature has not bumped up its speed in a while - may be worth doing
-                return agility;
-            } else {
-                // if we are here, any elemental attacks are weak against the target, so we should tackle
-                return tackle;
-            }
+            return makeElementalCreatureDecision(strong, accurate, tackle, agility, strongAttack);
+        }
+    }
+
+    /**
+     * Method to determine which choice would be smart for the enemy {@link Creature} to make when said {@link Creature} is NOT a {@link NormalCreature}.
+     * @param strong - int
+     * @param accurate - int
+     * @param tackle - int
+     * @param agility - int
+     * @param strongAttack - {@link AttackMove}
+     * @return int
+     */
+    private int makeElementalCreatureDecision(int strong, int accurate, int tackle, int agility, AttackMove strongAttack) {
+        // is the target weak against the strong/accurateAttacks?
+        if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
+            // if target it at more than half health, go for the big damage with the elemental strong attack
+            return strong;
+        } else if (strongAttack.isStrongAgainst(this.playerCreatureUpFront.getClass())) {
+            // if target is not at more than half health, go with guaranteed hits with the elemental accurate attack
+            return accurate;
+        } else if (this.enemyCreatureUpFront.getSpeed() == Creature.DEFAULT_SPEED) {
+            // if this happens, the creature has not bumped up its speed yet and attacks are not urgent - may be worth doing
+            return agility;
+        } else if (!strongAttack.isWeakAgainst(this.playerCreatureUpFront.getClass()) && this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
+            // it will at least be neutrally effective
+            return strong;
+        } else if (!strongAttack.isWeakAgainst(this.playerCreatureUpFront.getClass())) {
+            // still, the accurate attack will at least be neutrally effective
+            return accurate;
+        } else {
+            // if we are here, any elemental attacks are weak against the target, so we should tackle
+            return tackle;
+        }
+    }
+
+    /**
+     * Method to determine which choice would be smart for the enemy {@link Creature} to make when said {@link Creature} IS a {@link NormalCreature}.
+     * @param heal - int
+     * @param speed - int
+     * @param tackle - int
+     * @param hyperbeam - int
+     * @return int
+     */
+    private int makeNormalCreatureDecision(int heal, int speed, int tackle, int hyperbeam) {
+        if (this.playerCreatureUpFront.getHealth() >= this.playerCreatureUpFront.getMaxHealth() / 2) {
+            // if the enemy is high on health, go for a hyperbeam attack
+            return hyperbeam;
+        } else if (this.enemyCreatureUpFront.getMaxHealth() / 3 <= this.enemyCreatureUpFront.getHealth() && this.enemyCreatureUpFront.getHealth() <= this.enemyCreatureUpFront.getMaxHealth() / 2) {
+            // if we are in a productive window to heal, then heal
+            // too low? then we're going to be dead soon so just deal some damage
+            // too high? then we don't need to heal so do something else instead
+            return heal;
+        } else if (this.enemyCreatureUpFront.getSpeed() == Creature.DEFAULT_SPEED) {
+            // the enemy has been procrastinating speed - it should get more speed
+            return speed;
+        } else {
+            // final move decision
+            return tackle;
         }
     }
 }
