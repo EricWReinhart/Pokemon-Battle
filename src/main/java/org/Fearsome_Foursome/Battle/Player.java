@@ -16,6 +16,8 @@ package org.Fearsome_Foursome.Battle;/* ****************************************
  */
 
 import org.Fearsome_Foursome.Creatures.*;
+import org.Fearsome_Foursome.Moves.AttackMove;
+import org.Fearsome_Foursome.Moves.Move;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -26,7 +28,7 @@ public class Player {
     /**
      * An ArrayList of Creatures
      */
-    private Creature[] creatureArray = new Creature[6];
+    private final Creature[] creatureArray = new Creature[6];
 
     /**
      * Keeps track of how many of the {@link Player}'s {@link Creature}s are dead
@@ -35,20 +37,20 @@ public class Player {
 
 
     /**
-     * Creates a team of random Pokemon
+     * Creates a team of random Pokémon
      */
     public Player(){
-        // Create an Array of all possible Pokemon
+        // Create an Array of all possible Pokémon
         Creature[] creatureOptions = {new FireCreature(0), new FireCreature(1), new FireCreature(2), new WaterCreature(0),
                                       new WaterCreature(1),  new WaterCreature(2), new GrassCreature(0), new GrassCreature(1),
                                       new NormalCreature(0), new NormalCreature(1), new ElectricCreature(0), new ElectricCreature(1)};
-        // Create a HashSet of the indices of Pokemon have already been chosen
+        // Create a HashSet of the indices of Pokémon have already been chosen
         HashSet<Integer> picked = new HashSet<>();
 
         int randIndex;
         int currentCreatureArrayIndex = 0;
 
-        // While the array of the player's Pokemon still has an empty slot, obtain a random Pokemon's index
+        // While the array of the player's Pokémon still has an empty slot, obtain a random Pokémon's index
         // and add it to the player's team but do not allow repeats
         while (Arrays.asList(creatureArray).contains(null)) {
             randIndex = (int) (Math.random() * creatureOptions.length);
@@ -58,34 +60,21 @@ public class Player {
                 currentCreatureArrayIndex++;
             }
         }
-
-        // TODO: TEMP FOR TESTING ONLY
-//        creatureArray[0] = creatureOptions[10];
-//        creatureArray[1] = creatureOptions[11];
-//        creatureArray[2] = creatureOptions[10];
-//        creatureArray[3] = creatureOptions[11];
-//        creatureArray[4] = creatureOptions[8];
-//        creatureArray[5] = creatureOptions[8];
-
-
     }
 
-    /** Allows user to get a Pokemon at an index in the array */
+    /** Allows user to get a Pokémon at an index in the array */
     public Creature getPokeCreature(int i){
-        Creature potentialCreature = creatureArray[i];
-
-        // the creature is alive - that's fine
-        return potentialCreature;
+        return creatureArray[i];
     }
 
     /**
-     * Check if a Pokemon is dead
-     * @param i
-     * @return true if the Pokemon is dead, false otherwise
+     * Check if a Pokémon is dead
+     * @param i - index of the creature
+     * @return true if the Pokémon is dead, false otherwise
      */
     public boolean potentialCreatureIsDead(int i) {
         Creature potentialCreature = creatureArray[i];
-        return potentialCreature.isDead();
+        return !potentialCreature.isDead();
     }
 
     /** Allows incrementation of the number of dead {@link Creature}s */
@@ -103,20 +92,56 @@ public class Player {
 
     /**
      * Method to determine if this {@link Player} has a living {@link Creature} which is not weak against an attack of the opponent class
-     * @param opponentClass
+     * @param opponentClass - the class of the opponent {@link Creature}
      * @return boolean
      */
     public boolean hasNonWeakAgainstCreature(Class opponentClass) {
-        return true;
+        for (Creature creature : this.creatureArray) {
+            int countOfMovesChecked;
+            // look at all the living Creatures
+            if (!creature.isDead()) {
+                countOfMovesChecked = 0;
+                for (Move move : Creature.CREATURE_MOVE_MAP.get(opponentClass)) {
+                    if (move instanceof AttackMove && ((AttackMove) move).isStrongAgainst(creature.getClass())) {
+                        // the opponent definitely has a strong move against this creature
+                        break;
+                    } else {
+                        countOfMovesChecked++;
+                    }
+                }
+                if (countOfMovesChecked == 4) {
+                    // then we found a creature against which the opponent has no strong attack!
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
-     * Method to determine if this {@link Player} has a living {@link Creature} which is not weak against an attack of the opponent class
-     * @param opponentClass
+     * Method to determine if this {@link Player} has a living {@link Creature} which has moves that are not weak against an attack of the opponent class
+     * @param opponentClass - the class of an opponent {@link Creature}
      * @return boolean
      */
     public boolean hasNonWeakMoveAgainstCreature(Class opponentClass) {
-        return true;
+        for (Creature creature : this.creatureArray) {
+            if (!creature.isDead()) {
+                int countOfNonWeakMoves = 0;
+                // look at all the living Creatures
+                for (Move move : Creature.CREATURE_MOVE_MAP.get(creature.getClass())) {
+                    if (!(move instanceof AttackMove) || !((AttackMove) move).isWeakAgainst(opponentClass)) {
+                        // then the move is not weak against the opponent
+                        countOfNonWeakMoves++;
+                    }
+                }
+                if (countOfNonWeakMoves == 4) {
+                    // then we found a creature which does not have weak attacks against the opponent!
+                    return true;
+                }
+            }
+        }
+        // all living creature have a weak attack against the opponent
+        return false;
     }
 
 }

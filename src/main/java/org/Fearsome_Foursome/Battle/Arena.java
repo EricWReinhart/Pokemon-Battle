@@ -63,13 +63,13 @@ public class Arena {
      */
     public boolean setUpCombatants(int playerTeamIdx, int enemyTeamIdx){
         // set up the enemy creature Pokémon
-        if(!this.enemy.potentialCreatureIsDead(enemyTeamIdx)){
+        if(this.enemy.potentialCreatureIsDead(enemyTeamIdx)){
             this.enemyCreatureUpFront = this.enemy.getPokeCreature(enemyTeamIdx);
             this.enemyCreatureUpFrontIndex = enemyTeamIdx;
         }
 
         // setting up the current Pokémon at a specific index making sure the creature is alive
-        if(!this.player.potentialCreatureIsDead(playerTeamIdx)){
+        if(this.player.potentialCreatureIsDead(playerTeamIdx)){
             this.playerCreatureUpFront = this.player.getPokeCreature(playerTeamIdx);
             this.playerCreatureUpFrontIndex = playerTeamIdx;
 
@@ -149,13 +149,24 @@ public class Arena {
     }
 
     /**
+     * Method to switch out the enemy Pokémon
+     */
+    public void switchEnemyPokemon() {
+        if (ArenaController.hardMode) {
+            this.makeEnemyBestChoice();
+        } else {
+            this.enemyCreatureUpFront = this.enemy.getPokeCreature(this.getRandomNotDeadFromEnemy());
+            this.enemyCreatureUpFront.setTarget(this.playerCreatureUpFront);
+            this.playerCreatureUpFront.setTarget(this.enemyCreatureUpFront);
+        }
+    }
+
+    /**
      * Look through the enemy's Pokémon - depending on the player's Pokémon one of them is a better choice
      */
     private void makeEnemyBestChoice() {
         // this method will only run if the enemy has Pokémon left which are alive
-        Comparator<Creature> creatureComparator = (creature1, creature2) -> {
-            return creature2.getHealth() - creature1.getHealth();
-        };
+        Comparator<Creature> creatureComparator = (creature1, creature2) -> (creature2.getHealth() - creature1.getHealth());
         TreeSet<Creature> strongAgainstCreatures = new TreeSet<>(creatureComparator);
         TreeSet<Creature> nonVulnerableCreatures = new TreeSet<>(creatureComparator);
         TreeSet<Creature> allCreatures = new TreeSet<>(creatureComparator);
@@ -187,6 +198,8 @@ public class Arena {
         } else {
             enemyCreatureUpFront = allCreatures.iterator().next();
         }
+        enemyCreatureUpFront.setTarget(playerCreatureUpFront);
+        playerCreatureUpFront.setTarget(enemyCreatureUpFront);
         enemyCreatureUpFrontIndex = indices.get(enemyCreatureUpFront);
     }
 

@@ -226,7 +226,7 @@ public class ArenaController {
                 handlePlayerCreatureDeath(mouseEvent);
             } else if (HelloPokemon.globalModel.getArena().enemyCreatureUpFront.isDead()) {
                 // then the enemy died
-                handleEnemyCreatureDeath();
+                handleEnemyCreatureDeath(mouseEvent);
             }
         } else {
             // the player just switched Pokémon
@@ -247,16 +247,26 @@ public class ArenaController {
 
     /**
      * How should the controller respond when an enemy {@link Creature} dies?
+     * @param mouseEvent - necessary in case a player {@link Creature} dies within this handling
      */
-    private void handleEnemyCreatureDeath(){
+    private void handleEnemyCreatureDeath(MouseEvent mouseEvent){
         if (HelloPokemon.globalModel.getArena().isCombatOver()) {
             // player must have won
             this.loadWinnerScreen();
         } else {
-            // enemy randomly switches Pokémon
+            // enemy switches Pokémon
             battleText = "The opponent's " + HelloPokemon.globalModel.getArena().enemyCreatureUpFront.getName() + " fainted!";
-            HelloPokemon.globalModel.getArena().setUpCombatants(HelloPokemon.globalModel.getArena().getPlayerUpFrontIndex(),HelloPokemon.globalModel.getArena().getRandomNotDeadFromEnemy());
+            HelloPokemon.globalModel.getArena().switchEnemyPokemon();
+            this.setUpNameSpriteHealth(HelloPokemon.globalModel.getArena().playerCreatureUpFront, HelloPokemon.globalModel.getArena().enemyCreatureUpFront);
             battleText += "\nThe opponent sent out " + HelloPokemon.globalModel.getArena().enemyCreatureUpFront.getName() + "!";
+
+            // now the enemy gets to go!
+            battleText += HelloPokemon.globalModel.getArena().performEnemyAttack();
+            // check for player death
+            if (HelloPokemon.globalModel.getArena().getPlayerCreatureUpFront().isDead()){
+                this.handlePlayerCreatureDeath(mouseEvent);
+            }
+
             // explain what happens in the battle log to the user
             battleTextLog.setText(battleText);
         }
