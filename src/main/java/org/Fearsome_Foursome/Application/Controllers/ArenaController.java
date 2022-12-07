@@ -228,16 +228,21 @@ public class ArenaController {
                 // then the enemy died
                 handleEnemyCreatureDeath(mouseEvent);
             }
+        } else if (playerMoveIndex == -1){
+            // the player CHOSE to switch Pokémon
+            battleTextLog.setText(HelloPokemon.globalModel.getArena().performEnemyAttack());
+            if (HelloPokemon.globalModel.getArena().playerCreatureUpFront.isDead()) {
+                HelloPokemon.globalModel.getPlayer().incrementDead();
+                this.handlePlayerCreatureDeath(mouseEvent);
+            }
         } else {
-            // the player just switched Pokémon
-            if (!justDied &&HelloPokemon.globalModel.getArena().enemyCreatureUpFront.getSpeed() >=HelloPokemon.globalModel.getArena().playerCreatureUpFront.getSpeed()) {
+            // the player had to switch Pokémon - enemy only moves if greater speed because that simulates the beginning of the next round
+            if (HelloPokemon.globalModel.getArena().playerCreatureUpFront.getSpeed() < HelloPokemon.globalModel.getArena().enemyCreatureUpFront.getSpeed()) {
                 battleTextLog.setText(HelloPokemon.globalModel.getArena().performEnemyAttack());
                 if (HelloPokemon.globalModel.getArena().playerCreatureUpFront.isDead()) {
+                    HelloPokemon.globalModel.getPlayer().incrementDead();
                     this.handlePlayerCreatureDeath(mouseEvent);
                 }
-            } else {
-                // if the Pokémon was switched by the player because one of their Pokémon DIED, the enemy does not get to attack regardless of their speed
-                justDied = false;
             }
         }
 
@@ -260,11 +265,13 @@ public class ArenaController {
             this.setUpNameSpriteHealth(HelloPokemon.globalModel.getArena().playerCreatureUpFront, HelloPokemon.globalModel.getArena().enemyCreatureUpFront);
             battleText += "\nThe opponent sent out " + HelloPokemon.globalModel.getArena().enemyCreatureUpFront.getName() + "!";
 
-            // now the enemy gets to go!
-            battleText += HelloPokemon.globalModel.getArena().performEnemyAttack();
-            // check for player death
-            if (HelloPokemon.globalModel.getArena().getPlayerCreatureUpFront().isDead()){
-                this.handlePlayerCreatureDeath(mouseEvent);
+            // now the enemy gets to go if they are fast enough - this simulates a new round of combat starting
+            if (HelloPokemon.globalModel.getEnemyCreatureUpFront().getSpeed() > HelloPokemon.globalModel.getPlayerCreatureUpFront().getSpeed()) {
+                battleText += HelloPokemon.globalModel.getArena().performEnemyAttack();
+                // check for player death
+                if (HelloPokemon.globalModel.getArena().getPlayerCreatureUpFront().isDead()) {
+                    this.handlePlayerCreatureDeath(mouseEvent);
+                }
             }
 
             // explain what happens in the battle log to the user

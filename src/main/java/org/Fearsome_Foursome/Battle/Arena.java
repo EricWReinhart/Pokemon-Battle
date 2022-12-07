@@ -127,11 +127,6 @@ public class Arena {
                     battleTextLog += "\nThe opponent sent out " + enemyCreatureUpFront.getName() + "!";
                     // update the view
                     HelloPokemon.arenaController.setUpPokemon(playerCreatureUpFrontIndex, enemyCreatureUpFrontIndex);
-                    // now, the new Pokémon may be allowed to attack
-                    if (enemyCreatureUpFront.getSpeed() > playerCreatureUpFront.getSpeed()) {
-                        // if the enemy is fast enough, they get to attack
-                        battleTextLog += performEnemyAttack();
-                    }
                 } else {
                     // then the enemy could not make a change even though it would have been nice to - just attack
                     battleTextLog += performEnemyAttack();
@@ -298,15 +293,6 @@ public class Arena {
      */
     public int getRandomNotDeadFromEnemy() {
         Creature[] creatures = enemy.getCreatureArray();
-        return getAliveIndex(creatures);
-    }
-
-    /**
-     * Return a random index of a Pokémon from the Player which is alive
-     * @return int
-     */
-    public int getRandomNotDeadFromPlayer() {
-        Creature[] creatures = player.getCreatureArray();
         return getAliveIndex(creatures);
     }
 
