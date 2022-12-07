@@ -181,20 +181,18 @@ public class SelectionController {
      * @param mouseEvent
      */
     public void switchToArena(javafx.scene.input.MouseEvent mouseEvent) {
-        this.checkIfPressedCancelWithDeadPokemon();
-
-        Stage stage = (Stage)background.getScene().getWindow();
+        Stage stage = (Stage) background.getScene().getWindow();
         HelloPokemon.loadScene(stage, HelloPokemon.GameScenes.POKEMON_ARENA);
         HelloPokemon.arenaController.setUpPokemon(HelloPokemon.globalModel.getArena().getPlayerUpFrontIndex(), HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex());
     }
 
     /**
-     * Did the user get forced to the selection screen, and pressed cancel? Then give them a random alive Pokémon
+     * Called when the Cancel button is pressed
+     * @param mouseEvent
      */
-    private void checkIfPressedCancelWithDeadPokemon() {
-        if (ArenaController.justDied){
-            int newPlayerIndex = HelloPokemon.globalModel.getArena().getRandomNotDeadFromPlayer();
-            HelloPokemon.arenaController.setUpPokemon(newPlayerIndex, HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex());
+    public void switchIfAllowed(MouseEvent mouseEvent) {
+        if (!ArenaController.justDied){
+            this.switchToArena(mouseEvent);
         }
     }
 
@@ -252,14 +250,21 @@ public class SelectionController {
      * @param mouseEvent
      */
     private void pickCreature(int creatureNumber, MouseEvent mouseEvent) {
-        int enemyIdx = HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex();
         int playerIndex = creatureNumber - 1;
-        if (HelloPokemon.globalModel.getArena().getPlayer().getPokeCreature(playerIndex) != HelloPokemon.globalModel.getArena().getPlayerCreatureUpFront() && HelloPokemon.arenaController.setUpPokemon(playerIndex, enemyIdx)){
+        Creature newCreature = HelloPokemon.globalModel.getArena().getPlayer().getPokeCreature(playerIndex);
+        if (newCreature != HelloPokemon.globalModel.getArena().getPlayerCreatureUpFront() && HelloPokemon.arenaController.setUpPokemon(playerIndex, HelloPokemon.globalModel.getArena().getEnemyUpFrontIndex())){
             // they did not try to pick a dead Pokémon or the one that they already had
             this.switchToArena(mouseEvent);
-            // the enemy needs to move now
+            HelloPokemon.arenaController.setUpNameSpriteHealth(HelloPokemon.globalModel.getPlayerCreatureUpFront(), HelloPokemon.globalModel.getEnemyCreatureUpFront());
             HelloPokemon.arenaController.setPokemonSwapBattleLog();
-            HelloPokemon.arenaController.playARound(mouseEvent, -1);
+            if (!ArenaController.justDied) {
+                // the enemy needs to move now
+                HelloPokemon.arenaController.playARound(mouseEvent, -1);
+            } else {
+                // MAYBE the enemy needs to move now if their speed is great enough - simulates starting a new round
+                ArenaController.justDied = false;
+                HelloPokemon.arenaController.playARound(mouseEvent, -2);
+            }
         }
     }
 

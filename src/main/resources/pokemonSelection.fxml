@@ -31,7 +31,7 @@
             </DropShadow>
          </effect>
       </Text>
-      <Button fx:id="btnCancel" layoutX="365.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#switchToArena" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="365.0" />
+      <Button fx:id="btnCancel" layoutX="365.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#switchIfAllowed" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="365.0" />
       <HBox fx:id="pokemon1" layoutX="8.0" layoutY="33.0" maxHeight="150.0" maxWidth="500.0" minHeight="150.0" minWidth="500.0" prefHeight="150.0" prefWidth="500.0" spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0">
          <children>
             <Button fx:id="btnSelect1" maxHeight="120.0" maxWidth="100.0" minHeight="120.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#pick1" prefHeight="120.0" prefWidth="100.0" style="-fx-background-color: GREEN;" text="Select" textFill="WHITE">
