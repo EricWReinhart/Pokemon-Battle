@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -103,10 +102,21 @@ public class MenuController {
     }
 
     /**
-     * Go to the arena
-     * @param mouseEvent
+     * Set normal difficulty and switch to arena
+     * @param ignoredMouseEvent
      */
-    public void showArena(javafx.scene.input.MouseEvent mouseEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void setNormal(MouseEvent ignoredMouseEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        ArenaController.hardMode = false;
+        showArena();
+    }
+
+    /**
+     * Method to switch to the arena screen
+     * @throws UnsupportedAudioFileException - possibly thrown by music
+     * @throws LineUnavailableException - possibly thrown by music
+     * @throws IOException - possibly thrown by music
+     */
+    public void showArena() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         // Randomize the teams and play battle music
         HelloPokemon.globalModel.getArena().refreshAll();
         HelloPokemon.playMusic("BattleMusic.wav");
@@ -129,14 +139,14 @@ public class MenuController {
 
     /**
      * Set the {@link ArenaController} static hard mode boolean
-     * @param mouseEvent
+     * @param ignoredMouseEvent - necessary parameter
      * @throws UnsupportedAudioFileException
      * @throws LineUnavailableException
      * @throws IOException
      */
-    public void setHard(MouseEvent mouseEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void setHard(MouseEvent ignoredMouseEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         ArenaController.hardMode = true;
-        showArena(mouseEvent);
+        showArena();
     }
 
 }

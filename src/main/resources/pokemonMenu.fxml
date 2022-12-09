@@ -77,7 +77,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnNormalMode" layoutX="408.0" layoutY="227.0" mnemonicParsing="false" onMouseClicked="#showArena" prefHeight="57.0" prefWidth="224.0" text="Normal Mode" textAlignment="CENTER" textFill="#141414">
+      <Button fx:id="btnNormalMode" layoutX="408.0" layoutY="227.0" mnemonicParsing="false" onMouseClicked="#setNormal" prefHeight="57.0" prefWidth="224.0" text="Normal Mode" textAlignment="CENTER" textFill="#141414">
          <font>
             <Font size="30.0" />
          </font>
