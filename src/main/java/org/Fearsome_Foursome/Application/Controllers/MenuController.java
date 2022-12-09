@@ -135,7 +135,7 @@ public class MenuController {
      * @throws IOException
      */
     public void setHard(MouseEvent mouseEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        ArenaController.hardMode = !ArenaController.hardMode;
+        ArenaController.hardMode = true;
         showArena(mouseEvent);
     }
 
