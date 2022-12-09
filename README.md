@@ -63,7 +63,7 @@ pikachu.png – https://vsbattles.fandom.com/wiki/Pikachu_%28Anime%29 <br>
 sad_pikachu – https://www.syfy.com/syfy-wire/the-10-saddest-moments-in-pokemon-history-ranked <br>
 Ash_Ketchum_World_Champion.jpg – https://www.theverge.com/2022/11/11/23451915/pokemon-ash-ketchum-ultimate-journeys-champion <br>
 <br>
-We made extensive use of the JavaFX library to create our application. Other than that, no third party libraries not already included in the Java API were used.
+We made extensive use of the JavaFX library to create our application. Further, JUnit was used to implement our unit testing, and the SceneBuilder application was helpful when creating all of our scenes, which are the '.fxml' files in the resources folder. Other than that, no third party libraries not already included in the Java API were used.
 <br>
 <br>
 The package structure of this project breaks down the code into different components of the project. The four main packages under the main package org.Fearsome_Foursome are Application, Battle, Creatures, and Moves.<br><br>
