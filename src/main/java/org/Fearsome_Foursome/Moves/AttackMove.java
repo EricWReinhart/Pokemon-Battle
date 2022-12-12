@@ -213,11 +213,8 @@ public class AttackMove implements Move{
                 this.createTimeLineTackle(HelloPokemon.arenaController.playerTackleSprite, creatureImage);
             }
         } else {
-            // tackling
+            // not tackling - an actual attack move
             // first make the image visible
-            moveImage.setImage(new Image(this.imagePath));
-            moveImage.setVisible(true);
-
             // show for a limited amount of time
             this.createTimeLineNonTackle(moveImage);
 
