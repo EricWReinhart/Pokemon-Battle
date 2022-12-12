@@ -16,6 +16,8 @@
  */
 package org.Fearsome_Foursome.Application.Controllers;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -272,12 +274,28 @@ public class SelectionController {
      * Method to show the correct Pokémon for the given team
      */
     public void showPokemon() {
-        sprite1.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[0].getName())[1]));
-        sprite2.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[1].getName())[1]));
-        sprite3.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[2].getName())[1]));
-        sprite4.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[3].getName())[1]));
-        sprite5.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[4].getName())[1]));
-        sprite6.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[5].getName())[1]));
+        try {
+            File fileForSprite1 = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[0].getName())[1]);
+            sprite1.setImage(new Image(fileForSprite1.toURI().toURL().toExternalForm()));
+
+            File fileForSprite2 = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[1].getName())[1]);
+            sprite2.setImage(new Image(fileForSprite2.toURI().toURL().toExternalForm()));
+
+            File fileForSprite3 = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[2].getName())[1]);
+            sprite3.setImage(new Image(fileForSprite3.toURI().toURL().toExternalForm()));
+
+            File fileForSprite4 = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[3].getName())[1]);
+            sprite4.setImage(new Image(fileForSprite4.toURI().toURL().toExternalForm()));
+
+            File fileForSprite5 = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[4].getName())[1]);
+            sprite5.setImage(new Image(fileForSprite5.toURI().toURL().toExternalForm()));
+
+            File fileForSprite6 = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(HelloPokemon.globalModel.getPlayer().getCreatureArray()[5].getName())[1]);
+            sprite6.setImage(new Image(fileForSprite6.toURI().toURL().toExternalForm()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.showProgressBars();
     }
 

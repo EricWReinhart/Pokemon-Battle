@@ -27,6 +27,9 @@ import javafx.util.Duration;
 import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Creatures.Creature;
 
+import java.io.File;
+import java.io.IOException;
+
 public class SupportMove implements Move {
 
     /** What attribute will this Move modify? */
@@ -61,7 +64,7 @@ public class SupportMove implements Move {
         this.name = name;
         this.description = description;
         this.color = color;
-        this.imagePath = "Sprites/" + name + ".png";
+        this.imagePath = "src/main/resources/Sprites/" + name + ".png";
     }
 
     /**
@@ -161,11 +164,16 @@ public class SupportMove implements Move {
     @Override
     public void showAnimation(ImageView moveImage, ImageView creatureImage) {
         // just make the supporting move visible for a certain amount of time
-        moveImage.setImage(new Image(this.imagePath));
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(moveImage.visibleProperty(), true)),
-                new KeyFrame(Duration.seconds(1), new KeyValue(moveImage.visibleProperty(), false))
-        );
-        timeline.play();
+        try {
+            File fileForMoveSprite = new File(this.imagePath);
+            moveImage.setImage(new Image(fileForMoveSprite.toURI().toURL().toExternalForm()));
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(moveImage.visibleProperty(), true)),
+                    new KeyFrame(Duration.seconds(1), new KeyValue(moveImage.visibleProperty(), false))
+            );
+            timeline.play();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

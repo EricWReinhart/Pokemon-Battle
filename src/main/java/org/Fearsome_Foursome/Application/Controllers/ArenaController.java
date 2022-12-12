@@ -27,6 +27,9 @@ import javafx.stage.Stage;
 import org.Fearsome_Foursome.Application.HelloPokemon;
 import org.Fearsome_Foursome.Creatures.Creature;
 
+import java.io.File;
+import java.io.IOException;
+
 public class ArenaController {
 
     @FXML
@@ -170,8 +173,16 @@ public class ArenaController {
         enemyName.setEditable(false);
 
         // Display the sprite for both Pokémon
-        playerSprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(playerCreatureUpFront.getName())[0]));
-        enemySprite.setImage(new Image("Sprites/" + Creature.CREATURE_SPRITE_MAP.get(enemyCreatureUpFront.getName())[1]));
+        // source: https://stackoverflow.com/questions/37521378/how-to-create-a-javafx-image-from-an-absolute-path
+        try {
+            File fileForPlayerSprite = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(playerCreatureUpFront.getName())[0]);
+            playerSprite.setImage(new Image(fileForPlayerSprite.toURI().toURL().toExternalForm()));
+
+            File fileForEnemySprite = new File("src/main/resources/Sprites/" + Creature.CREATURE_SPRITE_MAP.get(enemyCreatureUpFront.getName())[1]);
+            enemySprite.setImage(new Image(fileForEnemySprite.toURI().toURL().toExternalForm()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Adjust the progress bar to the remaining health for both Pokémon
         playerHealthProgressBar.setProgress(1.0 * playerCreatureUpFront.getHealth() / playerCreatureUpFront.getMaxHealth());
