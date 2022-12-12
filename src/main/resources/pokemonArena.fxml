@@ -17,7 +17,7 @@
                 <Image url="@Images/forestBackGround.jpg" />
             </image>
         </ImageView>
-      <ImageView fx:id="supportMoveEnemy" fitHeight="500.0" fitWidth="500.0" layoutX="420.0" layoutY="-70.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" scaleZ="0.75">
+      <ImageView fx:id="supportMoveEnemy" fitHeight="600.0" fitWidth="600.0" layoutX="370.0" layoutY="-150.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75" scaleZ="0.75">
          <image>
             <Image url="@Sprites/AGILITY.png" />
          </image>
@@ -52,7 +52,7 @@
                 <Image url="@Sprites/StaraptorAlly.png" />
             </image>
         </ImageView>
-      <ImageView fx:id="supportMovePlayer" fitHeight="500.0" fitWidth="500.0" layoutX="108.0" layoutY="-32.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="supportMovePlayer" fitHeight="500.0" fitWidth="500.0" layoutX="120.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Sprites/RECOVER.png" />
          </image>
