@@ -85,5 +85,6 @@
             <DropShadow />
          </effect>
       </Button>
+      <Text fx:id="author1" layoutX="363.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mikey Ferguson, Eric Reinhart, Connor Coles, Jiasong Zhu" />
    </children>
 </AnchorPane>
