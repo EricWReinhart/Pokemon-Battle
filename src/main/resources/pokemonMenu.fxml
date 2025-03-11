@@ -17,7 +17,7 @@
             <Image url="@Images/background.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="title" alignment="CENTER" layoutX="377.0" layoutY="60.0" text="Pokémon" textAlignment="CENTER" textFill="#d9440d" textOverrun="LEADING_WORD_ELLIPSIS">
+      <Label fx:id="title" alignment="CENTER" layoutX="390.0" layoutY="60.0" text="Pokémon" textAlignment="CENTER" textFill="#FF8C00" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
             <Font name="DejaVu Sans Bold" size="67.0" />
          </font>
@@ -25,8 +25,8 @@
             <ColorAdjust brightness="0.4" saturation="0.95" />
          </effect>
       </Label>
-      <Text fx:id="author" layoutX="415.0" layoutY="581.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@2022 CSCI205 Fearsome Foursome" AnchorPane.bottomAnchor="15.0" />
-      <Text fx:id="version" fill="#161617" layoutX="397.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gale of Darkness" textAlignment="CENTER" wrappingWidth="224.07763671875">
+      <Text fx:id="author" layoutX="415.0" layoutY="581.0" strokeType="OUTSIDE" strokeWidth="0.0"  AnchorPane.bottomAnchor="15.0" />
+      <Text fx:id="version" fill="#161617" layoutX="397.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="224.07763671875">
          <font>
             <Font name="Carlito" size="23.0" />
          </font>
